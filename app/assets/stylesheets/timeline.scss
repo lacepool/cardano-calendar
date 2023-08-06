@@ -1,0 +1,17 @@
+.timeline {
+  .time time {
+    max-width: 120px;
+  }
+
+  .col.event {
+    background-color: rgba(var(--bs-primary-rgb), 0.09);
+  }
+
+  .row:first-of-type .col.event {
+    background: linear-gradient(0deg, rgba(var(--bs-primary-rgb), 0.09), rgba(transparent, 0));
+  }
+
+  .row:last-of-type .col.event {
+    background: linear-gradient(180deg, rgba(var(--bs-primary-rgb), 0.09), rgba(transparent, 0));
+  }
+}

@@ -31,7 +31,6 @@ class Events::Epoch < OpenStruct
         e.name = "Epoch #{e.epoch_number}"
         e.start_time = timestamp_from_epoch(e.epoch_number)
         e.end_time = e.start_time + SLOTS_PER_EPOCH.seconds
-        e.description = "#{e.epoch_name} from #{e.start_time} to #{e.end_time}"
       end
     end
   end

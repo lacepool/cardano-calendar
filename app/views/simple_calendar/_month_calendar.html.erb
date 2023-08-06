@@ -1,65 +1,25 @@
-<div class="simple-calendar">
-  <div class="calendar-heading fs-3 mt-5 mb-3 text-center">
-    <time datetime="<%= start_date.strftime('%Y-%m') %>" class="calendar-title px-3"><%= t('date.month_names')[start_date.month] %> <%= start_date.year %></time>
+<%= render "navigation", calendar: calendar %>
 
-    <nav class="btn-group" role="group">
-      <%= link_to t('simple_calendar.previous', default: 'Previous'), calendar.url_for_previous_view, class: "btn btn-md btn-primary" %>
-      <%= link_to t('simple_calendar.today', default: 'Today'), calendar.url_for_today_view, class: "btn btn-md btn-primary" %>
-      <%= link_to t('simple_calendar.next', default: 'Next'), calendar.url_for_next_view, class: "btn btn-md btn-primary" %>
+<div class="table-responsive-xxl">
+  <table class="table table-borderless">
+    <thead class="sticky-top">
+      <tr>
+        <% date_range.slice(0, 7).each do |day| %>
+          <th><%= t('date.abbr_day_names')[day.wday] %></th>
+        <% end %>
+      </tr>
+    </thead>
 
-      <div class="filter dropdown btn-group">
-        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-          Filter
-        </button>
-        <ul class="dropdown-menu">
-          <li>
-            <% if @filter[:epochs] == "false" %>
-              <%= link_to request.params.deep_merge(filter: {epochs: true}), class: "dropdown-item" do %>
-                <i class="bi-toggle-off"></i> Epochs
-              <% end %>
-            <% else %>
-              <%= link_to request.params.deep_merge(filter: {epochs: false}), class: "dropdown-item" do %>
-                <i class="bi-toggle-on"></i> Epochs
-              <% end %>
-            <% end %>
-          </li>
-          <li>
-            <% if @filter[:hardforks] == "false" %>
-              <%= link_to request.params.deep_merge(filter: {hardforks: true}), class: "dropdown-item" do %>
-                <i class="bi-toggle-off"></i> Hard forks
-              <% end %>
-            <% else %>
-              <%= link_to request.params.deep_merge(filter: {hardforks: false}), class: "dropdown-item" do %>
-                <i class="bi-toggle-on"></i> Hard forks
-              <% end %>
-            <% end %>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </div>
-
-  <div class="table-responsive-xxl">
-    <table class="table">
-      <thead class="sticky-top">
+    <tbody>
+      <% date_range.each_slice(7) do |week| %>
         <tr>
-          <% date_range.slice(0, 7).each do |day| %>
-            <th><%= t('date.abbr_day_names')[day.wday] %></th>
+          <% week.each do |day| %>
+            <%= content_tag :td, class: calendar.td_classes_for(day) do %>
+              <% instance_exec(day, calendar.sorted_events_for(day), &passed_block) %>
+            <% end %>
           <% end %>
         </tr>
-      </thead>
-
-      <tbody class="table-group-divider">
-        <% date_range.each_slice(7) do |week| %>
-          <tr>
-            <% week.each do |day| %>
-              <%= content_tag :td, class: calendar.td_classes_for(day) do %>
-                <% instance_exec(day, calendar.sorted_events_for(day), &passed_block) %>
-              <% end %>
-            <% end %>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+      <% end %>
+    </tbody>
+  </table>
 </div>

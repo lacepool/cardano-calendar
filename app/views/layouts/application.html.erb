@@ -29,9 +29,9 @@
       <% end %>
     </div>
 
-    <header class="navbar navbar-expand-lg bg-body-tertiary">
+    <header class="navbar navbar-expand bg-body-tertiary">
 
-      <div class="container">
+      <div class="container-fluid">
         <a class="navbar-brand primary" href="/">
           <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" class="bi me-2" fill="currentColor" viewBox="0 0 360 360">
             <path class="st0" d="M102.8,172c-0.8,13.9,9.9,25.8,23.8,26.6c0.5,0,1,0,1.5,0c14,0,25.3-11.3,25.2-25.3c0-14-11.3-25.3-25.3-25.2 C114.6,148.1,103.5,158.6,102.8,172z"></path>
@@ -68,29 +68,54 @@
         </a>
 
         <div class="d-flex">
-          <ul class="navbar-nav flex-row flex-wrap me-auto">
-            <li class="nav-item">
-              <div class="form-check form-switch ms-auto me-3">
-                <label class="form-check-label ms-1" for="themeSwitcher">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-brightness-high" viewBox="0 0 21 30">
-                    <path xmlns="http://www.w3.org/2000/svg" d="M12 21.8a9.796 9.796 0 0 1-1.245-19.513l1.286-.163-.843.984a8.285 8.285 0 0 0 8.519 13.383l1.252-.347-.696 1.096A9.755 9.755 0 0 1 12 21.8zM9.647 3.526a8.796 8.796 0 1 0 9.031 14.196 9.048 9.048 0 0 1-1.178.078A9.293 9.293 0 0 1 9.647 3.526z"></path>
-                  </svg>
+          <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav ms-auto d-lg-flex align-items-center">
+              <li class="nav-item dropdown">
+                <a class="btn btn-sm dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <%= current_view_icon %> <%= current_view.capitalize %>
+                </a>
 
-                  <input class="form-check-input mx-1 float-none" type="checkbox" id="themeSwitcher" data-bs-theme-value="light" />
-
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-brightness-high" viewBox="0 0 20 20">
-                      <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"></path>
+                <ul class="dropdown-menu">
+                  <li>
+                    <%= link_to events_path(permitted_params.merge(view: :month)), class: "dropdown-item #{'active' if current_view == 'month'}" do %>
+                      <i class="bi-calendar-month"></i> Month
+                    <% end %>
+                  </li>
+                  <li>
+                    <%= link_to events_path(permitted_params.merge(view: :week)), class: "dropdown-item #{'active' if current_view == 'week'}" do %>
+                      <i class="bi-calendar-week"></i> Week
+                    <% end %>
+                  </li>
+                  <li>
+                    <%= link_to events_path(permitted_params.merge(view: :list)), class: "dropdown-item #{'active' if current_view == 'list'}" do %>
+                      <i class="bi-list"></i> List
+                    <% end %>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <div class="form-switch ms-auto me-3">
+                  <label for="themeSwitcher">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-brightness-high" viewBox="0 0 21 30">
+                      <path xmlns="http://www.w3.org/2000/svg" d="M12 21.8a9.796 9.796 0 0 1-1.245-19.513l1.286-.163-.843.984a8.285 8.285 0 0 0 8.519 13.383l1.252-.347-.696 1.096A9.755 9.755 0 0 1 12 21.8zM9.647 3.526a8.796 8.796 0 1 0 9.031 14.196 9.048 9.048 0 0 1-1.178.078A9.293 9.293 0 0 1 9.647 3.526z"></path>
                     </svg>
-                  </label>
-              </div>
-            </li>
-          </ul>
+
+                    <input class="form-check-input mx-1 float-none" type="checkbox" id="themeSwitcher" data-bs-theme-value="light" />
+
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-brightness-high" viewBox="0 0 20 20">
+                        <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"></path>
+                      </svg>
+                    </label>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
 
       </div>
     </header>
 
-    <div class="container">
+    <div class="container-fluid py-5">
       <%= yield %>
     </div>
 

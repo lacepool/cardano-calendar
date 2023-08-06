@@ -1,4 +1,6 @@
 class EventsController < ApplicationController
+  helper_method :permitted_params
+
   def index
     @events = []
     off_filters = filter.select {|_, value| value == "false" }.keys
@@ -11,7 +13,7 @@ class EventsController < ApplicationController
   end
 
   def start_date
-    params.fetch(:start_date, Date.today).to_date
+    permitted_params.fetch(:start_date, Date.today).to_date
   end
 
   def date_range
@@ -19,6 +21,12 @@ class EventsController < ApplicationController
   end
 
   def filter
-    @filter ||= params.fetch(:filter, {}).permit!
+    @filter ||= permitted_params.fetch(:filter, {})
+  end
+
+  def permitted_params
+    @params ||= params.permit(
+      :view, :start_date, :tz, filter: {}
+    ).to_h.with_indifferent_access.symbolize_keys
   end
 end

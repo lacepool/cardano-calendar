@@ -1,0 +1,22 @@
+<%= render "navigation", calendar: self %>
+
+<div class="timeline">
+  <% @events.each_with_index do |event, index| %>
+    <div class="row <%= index %>">
+      <div class="col-4 col-sm-3 col-md-2 border-primary border-1 border-end time py-5 position-relative text-end">
+        <time class="d-inline-block me-3"><%= event.start_time %></time>
+        <span class="position-absolute start-100 translate-middle-x p-2 bg-light border border-3 border-primary rounded-circle">
+          <span class="visually-hidden"></span>
+        </span>
+      </div>
+
+      <div class="col event p-5">
+        <h4 class="mb-3"><%= event.name %></h4>
+        <time class="fs-sm"><%= "#{l(event.start_time)} – #{l(event.end_time)}" %></time>
+        <% unless event.description.blank? %>
+          <p><%= event.description %></p>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

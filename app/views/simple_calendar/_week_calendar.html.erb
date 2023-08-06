@@ -1,22 +1,9 @@
-<div class="simple-calendar">
-  <div class="calendar-heading">
-    <span class="calendar-title">
-      <%= t('simple_calendar.week', default: 'Week') %>
-      <%= calendar.week_number %>
-      <% if calendar.number_of_weeks > 1 %>
-        - <%= calendar.end_week %>
-      <% end %>
-    </span>
+<%= render "navigation", calendar: calendar %>
 
-    <nav>
-      <%= link_to t('simple_calendar.previous', default: 'Previous'), calendar.url_for_previous_view %>
-      <%= link_to t('simple_calendar.today', default: 'Today'), calendar.url_for_today_view %>
-      <%= link_to t('simple_calendar.next', default: 'Next'), calendar.url_for_next_view %>
-    </nav>
-  </div>
+<div class="table-responsive-xxl">
+  <table class="table table-borderless">
+    <thead class="sticky-top">
 
-  <table class="table table-striped">
-    <thead>
       <tr>
         <% date_range.slice(0, 7).each do |day| %>
           <th><%= t('date.abbr_day_names')[day.wday] %></th>

@@ -1,5 +1,5 @@
-@import 'bootstrap/scss/bootstrap';
-@import 'bootstrap-icons/font/bootstrap-icons';
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
 
 $container-max-widths: (
   sm: 540px,
@@ -8,3 +8,6 @@ $container-max-widths: (
   xl: 1160px,
   xxl: 1400px
 );
+
+@import 'bootstrap/scss/bootstrap';
+@import 'bootstrap-icons/font/bootstrap-icons';
