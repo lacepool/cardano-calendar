@@ -1,0 +1,26 @@
+@import 'bootstrap/scss/bootstrap';
+
+.simple-calendar td {
+  border: 0 none;
+}
+
+.simple-calendar td .card {
+  min-width: 8em;
+}
+
+td.today .card {
+  border-color: $primary;
+}
+
+td.today .card .card-header {
+  background: $primary !important;
+  color: $light;
+}
+
+td.current-month .date {
+  color: var(--bs-primary-text-emphasis);
+}
+
+td.prev-month, td.next-month {
+  opacity: 40%;
+}

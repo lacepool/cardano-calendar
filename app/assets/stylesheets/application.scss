@@ -1,0 +1,16 @@
+@import 'application.bootstrap';
+@import 'simple_calendar';
+
+html[data-bs-theme="light"] {
+  path.st0 {
+    color: #0033AD;
+  }
+}
+
+.bi-toggle-on {
+  color: $primary;
+}
+
+ul.dropdown-menu.show {
+  z-index: 99999;
+}
