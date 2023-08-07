@@ -12,23 +12,23 @@
       </button>
       <ul class="dropdown-menu">
         <li>
-          <% if @filter[:epochs] == "false" %>
-            <%= link_to events_path(permitted_params.deep_merge(filter: {epochs: true})), class: "dropdown-item" do %>
+          <% if @filter["epochs"] == "false" %>
+            <%= link_to events_path(permitted_params.deep_merge(filter: {"epochs" => true})), class: "dropdown-item" do %>
               <i class="bi-toggle-off"></i> Epochs
             <% end %>
           <% else %>
-            <%= link_to events_path(permitted_params.deep_merge(filter: {epochs: false})), class: "dropdown-item" do %>
+            <%= link_to events_path(permitted_params.deep_merge(filter: {"epochs" => false})), class: "dropdown-item" do %>
               <i class="bi-toggle-on"></i> Epochs
             <% end %>
           <% end %>
         </li>
         <li>
-          <% if @filter[:hardforks] == "false" %>
-            <%= link_to events_path(permitted_params.deep_merge(filter: {hardforks: true})), class: "dropdown-item" do %>
+          <% if @filter["hardforks"] == "false" %>
+            <%= link_to events_path(permitted_params.deep_merge(filter: {"hardforks" => true})), class: "dropdown-item" do %>
               <i class="bi-toggle-off"></i> Hard forks
             <% end %>
           <% else %>
-            <%= link_to events_path(permitted_params.deep_merge(filter: {hardforks: false})), class: "dropdown-item" do %>
+            <%= link_to events_path(permitted_params.deep_merge(filter: {"hardforks" => false})), class: "dropdown-item" do %>
               <i class="bi-toggle-on"></i> Hard forks
             <% end %>
           <% end %>
