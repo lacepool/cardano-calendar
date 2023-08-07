@@ -24,8 +24,17 @@ class Events::Epoch < OpenStruct
     Time.at(SHELLY_UNIX + seconds).in_time_zone
   end
 
-  def self.all(between: Time.at(SHELLY_UNIX).utc..Time.current.utc)
-    Montrose.every(SLOTS_PER_EPOCH.seconds, between: between).events.map do |date|
+  # extend the given time range by the time from the beginning of the range
+  # and the start of the first epoch within that range to never cut off any epochs.
+  def self.epoch_range_from_time_range(time_range)
+    first_epoch = epoch_from_timestamp(time_range.first.to_i)
+    last_epoch = epoch_from_timestamp(time_range.last.to_i)
+
+    timestamp_from_epoch(first_epoch)..timestamp_from_epoch(last_epoch + 1)
+  end
+
+  def self.all(between: Time.at(SHELLY_UNIX).utc..Time.current.utc, with_events: [])
+    Montrose.every(SLOTS_PER_EPOCH.seconds, between: epoch_range_from_time_range(between)).events.map do |date|
       new.tap do |e|
         e.epoch_number = epoch_from_timestamp(date.to_i)
         e.name = "Epoch #{e.epoch_number}"
