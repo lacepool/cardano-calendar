@@ -7,14 +7,12 @@ module EventsHelper
     params.fetch(:view, "month")
   end
 
-  def current_view_icon
+  def current_view_icon_class
     if list_view?
       css_class = "bi-#{current_view}"
     else
       css_class = "bi-calendar-#{current_view}"
     end
-
-    tag.i class: css_class
   end
 
   def list_view?
