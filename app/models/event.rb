@@ -1,4 +1,4 @@
-class Events::Custom < OpenStruct
+class Event < OpenStruct
   FILE_PATH = Rails.root.join("config", "events.json").freeze
   ALL = JSON.parse(File.read(FILE_PATH))
 

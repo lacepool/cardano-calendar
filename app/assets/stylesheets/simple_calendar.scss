@@ -1,10 +1,6 @@
 @import 'bootstrap/scss/bootstrap';
 
-.simple-calendar td {
-  border: 0 none;
-}
-
-.simple-calendar td .card {
+.calendar.calendar-month.card {
   min-width: 8em;
 }
 
@@ -23,4 +19,8 @@ td.current-month .date {
 
 td.prev-month, td.next-month {
   opacity: 40%;
+}
+
+.bi.epoch-transition {
+  color: var(--bs-list-group-border-color);
 }

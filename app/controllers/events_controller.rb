@@ -2,14 +2,10 @@ class EventsController < ApplicationController
   helper_method :permitted_params
 
   def index
-    @events = []
     off_filters = filter.select {|_, value| value == "false" }.keys
 
-    unless off_filters.include?("epochs")
-      @events = Events::Epoch.all(between: date_range)
-    end
-
-    @events += Events::Custom.all(except: off_filters, between: date_range)
+    events = Event.all(except: off_filters, between: date_range)
+    @epochs = Epoch.all(between: date_range, with_events: events)
   end
 
   def start_date
@@ -17,7 +13,11 @@ class EventsController < ApplicationController
   end
 
   def date_range
-    start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week.end_of_day
+    if permitted_params[:view] == "list"
+      start_date.beginning_of_month..start_date.end_of_month
+    else
+      start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week.end_of_day
+    end
   end
 
   def filter

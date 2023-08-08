@@ -1,21 +1,37 @@
 <%= render "navigation", calendar: self %>
 
 <div class="timeline">
-  <% @events.each_with_index do |event, index| %>
-    <div class="row <%= index %>">
+  <% @epochs.each do |epoch| %>
+    <div class="row" id="<%= 'today' if epoch.current? %>">
       <div class="col-4 col-sm-3 col-md-2 border-primary border-1 border-end time py-5 position-relative text-end">
-        <time class="d-inline-block me-3"><%= event.start_time %></time>
-        <span class="position-absolute start-100 translate-middle-x p-2 bg-light border border-3 border-primary rounded-circle">
+        <time class="d-inline-block me-3"><%= l(epoch.start_time, format: :short) %></time>
+        <span class="position-absolute start-100 translate-middle-x p-2 border border-3 border-primary rounded-circle <%= epoch.current? ? 'bg-primary' : 'bg-light' %>">
           <span class="visually-hidden"></span>
         </span>
       </div>
 
       <div class="col event p-5">
-        <h4 class="mb-3"><%= event.name %></h4>
-        <time class="fs-sm"><%= "#{l(event.start_time)} – #{l(event.end_time)}" %></time>
-        <% unless event.description.blank? %>
-          <p><%= event.description %></p>
-        <% end %>
+        <h4 class="mb-3 <%= 'text-primary' if epoch.current? %>"><%= epoch.name %></h4>
+        <p>
+          Slot <small class="font-monospace"><%= epoch.start_slot %>..<%= epoch.end_slot %></small>
+        </p>
+
+        <ul class="list-group list-group-flush mt-2">
+          <% epoch.events.each do |event| %>
+            <li class="list-group-item bg-transparent ps-0">
+              <time class="me-2 text-muted font-monospace d-inline-block"><%= l(event.start_time.to_time, format: :without_date) %></time>
+              <span><%= event.name %></span>
+              <% unless event.description.blank? %>
+                <a href="javascript:void()" class="ps-1" data-bs-toggle="popover" data-bs-title="<%= event.name %>" data-bs-content="<%= event.description %>">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                  </svg>
+                </a>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
       </div>
     </div>
   <% end %>

@@ -1,11 +1,11 @@
-class Events::Epoch < OpenStruct
+class Epoch < OpenStruct
   SHELLY_UNIX = 1596491091
   SHELLY_SLOT = 4924800
   SHELLEY_EPOCH = 209
   SLOTS_PER_EPOCH = 432000
 
   def self.slot_from_timestamp(timestamp)
-    timestamp - SHELLY_UNIX + SHELLY_SLOT
+    (timestamp - SHELLY_UNIX + SHELLY_SLOT).to_i
   end
 
   def self.epoch_from_slot(slot)
@@ -39,8 +39,23 @@ class Events::Epoch < OpenStruct
         e.epoch_number = epoch_from_timestamp(date.to_i)
         e.name = "Epoch #{e.epoch_number}"
         e.start_time = timestamp_from_epoch(e.epoch_number)
-        e.end_time = e.start_time + SLOTS_PER_EPOCH.seconds
+        e.end_time = e.start_time + (SLOTS_PER_EPOCH-1).seconds
+        e.start_slot = slot_from_timestamp(e.start_time)
+        e.end_slot = slot_from_timestamp(e.end_time)
+
+        e.events = with_events.select do |event|
+          (e.start_time..e.end_time).overlaps?(event[:start_time]..event[:end_time])
+        end
       end
     end
+  end
+
+  def slot_range
+    start_slot..end_slot
+  end
+
+  def current?
+    current_slot = self.class.slot_from_timestamp(Time.current.to_i)
+    slot_range.include?(current_slot)
   end
 end

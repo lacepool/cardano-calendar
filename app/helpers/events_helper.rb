@@ -1,4 +1,8 @@
 module EventsHelper
+  def epoch_description(epoch)
+    "#{l(epoch.start_time, format: :short)} – #{l(epoch.end_time, format: :short)}, Slots: #{epoch.start_slot} – #{epoch.end_slot}"
+  end
+
   def current_view
     params.fetch(:view, "month")
   end
@@ -38,6 +42,12 @@ module EventsHelper
   end
 
   def url_for_today_view
-    url_for(permitted_params.merge(:start_date => Time.current.to_date.iso8601).merge(view: current_view))
+    url_for(
+      permitted_params.merge(
+        :start_date => Time.current.to_date.iso8601,
+        view: current_view,
+        anchor: "today"
+      )
+    )
   end
 end
