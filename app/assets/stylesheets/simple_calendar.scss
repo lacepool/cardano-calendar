@@ -24,3 +24,8 @@ td.prev-month, td.next-month {
 .bi.epoch-transition {
   color: var(--bs-list-group-border-color);
 }
+
+.tz-dropdown {
+  max-height: 80vh;
+  overflow-y: auto;
+}
