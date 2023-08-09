@@ -2,7 +2,7 @@ class EventsController < ApplicationController
   helper_method :permitted_params
 
   def index
-    off_filters = filter.select {|_, value| value == "false" }.keys
+    off_filters = filter.select {|_, value| value == "off" }.keys
 
     events = Event.all(except: off_filters, between: date_range)
     @epochs = Epoch.all(between: date_range, with_events: events)

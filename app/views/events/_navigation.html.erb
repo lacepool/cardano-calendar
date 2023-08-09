@@ -6,23 +6,10 @@
     <%= link_to t('simple_calendar.today', default: 'Today'), calendar.url_for_today_view, class: "btn btn-md btn-primary" %>
     <%= link_to t('simple_calendar.next', default: 'Next'), calendar.url_for_next_view, class: "btn btn-md btn-primary" %>
 
-    <div class="filter dropdown btn-group">
-      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-        Filter
-      </button>
-      <ul class="dropdown-menu">
-        <li>
-          <% if @filter["hardforks"] == "false" %>
-            <%= link_to events_path(permitted_params.deep_merge(filter: {"hardforks" => true})), class: "dropdown-item" do %>
-              <i class="bi-toggle-off"></i> Hard forks
-            <% end %>
-          <% else %>
-            <%= link_to events_path(permitted_params.deep_merge(filter: {"hardforks" => false})), class: "dropdown-item" do %>
-              <i class="bi-toggle-on"></i> Hard forks
-            <% end %>
-          <% end %>
-        </li>
-      </ul>
-    </div>
+    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
+      <i class="bi bi-toggles2"></i>
+    </button>
   </nav>
 </div>
+
+<%= render "offcanvas" %>

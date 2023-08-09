@@ -3,6 +3,10 @@ module EventsHelper
     "#{l(epoch.start_time, format: :short)} – #{l(epoch.end_time, format: :short)}, Slots: #{epoch.start_slot} – #{epoch.end_slot}"
   end
 
+  def views
+    ["month", "week", "list"]
+  end
+
   def current_view
     params.fetch(:view, "month")
   end

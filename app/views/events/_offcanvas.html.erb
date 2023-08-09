@@ -1,0 +1,47 @@
+<div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasScrollingLabel"></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+
+    <div class="container">
+      <div class="row align-items-start">
+        <div class="col">
+          <div class="list-group list-group-flush">
+            <li class="list-group-item disabled" aria-disabled="true">View</li>
+
+            <%= link_to events_path(permitted_params.merge(view: :month)), class: "list-group-item list-group-item-action #{'active rounded' if current_view == 'month'}" do %>
+              <i class="bi-calendar-month me-1"></i> Month
+            <% end %>
+            <%= link_to events_path(permitted_params.merge(view: :week)), class: "list-group-item list-group-item-action #{'active' if current_view == 'week'}" do %>
+              <i class="bi-calendar-week me-1"></i> Week
+            <% end %>
+            <%= link_to events_path(permitted_params.merge(view: :list)), class: "list-group-item list-group-item-action #{'active' if current_view == 'list'}" do %>
+              <i class="bi-list-ul me-1"></i> List
+            <% end %>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="list-group list-group-flush">
+            <li class="list-group-item disabled" aria-disabled="true">Filter</li>
+
+            <% if @filter["hardforks"] %>
+              <%= link_to events_path(permitted_params.fetch(:filter, {}).except("hardforks")), class: "list-group-item list-group-item-action" do %>
+                <i class="bi-toggle2-off me-1"></i> Hard forks
+              <% end %>
+            <% else %>
+              <%= link_to events_path(permitted_params.deep_merge(filter: {"hardforks" => "off"})), class: "list-group-item list-group-item-action active" do %>
+                <i class="bi-toggle2-on me-1"></i> Hard forks
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+

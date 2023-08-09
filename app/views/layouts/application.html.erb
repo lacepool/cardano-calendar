@@ -90,30 +90,6 @@
               </ul>
             </li>
 
-            <li class="nav-item dropdown me-3">
-              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="<%= current_view_icon_class %> me-1"></i> <%= current_view.capitalize %>
-              </a>
-
-              <ul class="dropdown-menu">
-                <li>
-                  <%= link_to events_path(permitted_params.merge(view: :month)), class: "dropdown-item #{'active' if current_view == 'month'}" do %>
-                    <i class="bi-calendar-month"></i> Month
-                  <% end %>
-                </li>
-                <li>
-                  <%= link_to events_path(permitted_params.merge(view: :week)), class: "dropdown-item #{'active' if current_view == 'week'}" do %>
-                    <i class="bi-calendar-week"></i> Week
-                  <% end %>
-                </li>
-                <li>
-                  <%= link_to events_path(permitted_params.merge(view: :list)), class: "dropdown-item #{'active' if current_view == 'list'}" do %>
-                    <i class="bi-list"></i> List
-                  <% end %>
-                </li>
-              </ul>
-            </li>
-
             <li class="nav-item">
               <div class="form-switch p-0">
                 <label for="themeSwitcher">
