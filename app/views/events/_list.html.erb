@@ -5,15 +5,15 @@
     <div class="row" id="<%= 'today' if epoch.current? %>">
       <div class="col-4 col-sm-3 col-md-2 border-primary border-1 border-end time py-5 position-relative text-end">
         <time class="d-inline-block me-3"><%= l(epoch.start_time, format: :short) %></time>
-        <span class="position-absolute start-100 translate-middle-x p-2 border border-3 border-primary rounded-circle <%= epoch.current? ? 'bg-primary' : 'bg-light' %>">
+        <span class="position-absolute start-100 translate-middle-x p-2 mt-1 border border-3 border-primary rounded-circle <%= epoch.current? ? 'bg-primary' : 'bg-light' %>">
           <span class="visually-hidden"></span>
         </span>
       </div>
 
-      <div class="col event p-5">
+      <div class="col event py-5 px-4 px-sm-5">
         <h4 class="mb-3 <%= 'text-primary' if epoch.current? %>"><%= epoch.name %></h4>
         <p>
-          Slot <small class="font-monospace"><%= epoch.start_slot %>..<%= epoch.end_slot %></small>
+          Slots <small class="font-monospace"><%= epoch.start_slot %>..<%= epoch.end_slot %></small>
         </p>
 
         <ul class="list-group list-group-flush mt-2">
