@@ -16,6 +16,10 @@ class Event < OpenStruct
     @categories ||= all(except: except).keys
   end
 
+  def id
+    Digest::MD5.hexdigest(name)
+  end
+
   private
 
     def self.between_dates(data, date_range)

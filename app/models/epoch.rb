@@ -54,6 +54,10 @@ class Epoch < OpenStruct
     start_slot..end_slot
   end
 
+  def id
+    Digest::MD5.hexdigest(name)
+  end
+
   def current?
     current_slot = self.class.slot_from_timestamp(Time.current.to_i)
     slot_range.include?(current_slot)

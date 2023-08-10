@@ -83,6 +83,9 @@ GEM
       activesupport (>= 5.0)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
+    icalendar (2.8.0)
+      ice_cube (~> 0.16)
+    ice_cube (0.16.4)
     io-console (0.6.0)
     irb (1.6.2)
       reline (>= 0.3.0)
@@ -196,6 +199,7 @@ DEPENDENCIES
   bootsnap
   cssbundling-rails
   debug
+  icalendar
   jbuilder
   jsbundling-rails
   montrose
