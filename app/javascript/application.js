@@ -4,6 +4,15 @@ Turbo.session.drive = true
 
 import * as bootstrap from "bootstrap"
 
+document.addEventListener("turbo:before-fetch-request", function(e){
+    const logo = document.querySelector('#cardano-logo');
+    logo.classList.add('spinning');
+})
+document.addEventListener("turbo:frame-render", function(e) { //
+    const logo = document.querySelector('#cardano-logo');
+    logo.classList.remove('spinning');
+})
+
 function ready(callback){
     // in case the document is already rendered
     if (document.readyState!='loading') callback();
