@@ -8,10 +8,9 @@
     <div class="container">
 
       <div class="row align-items-start">
-        <div class="col">
-          <div class="list-group list-group-flush">
-            <li class="list-group-item disabled" aria-disabled="true">View</li>
 
+        <div class="col">
+          <div class="list-group list-group-horizontal text-center">
             <%= link_to events_path(permitted_params.merge(view: :month)), class: "list-group-item list-group-item-action #{'active bg-secondary border-secondary' if current_view == 'month'}" do %>
               <i class="bi-calendar-month me-1"></i> Month
             <% end %>
@@ -24,29 +23,33 @@
           </div>
         </div>
 
-        <div class="col">
-          <div class="list-group list-group-flush">
-            <li class="list-group-item disabled" aria-disabled="true">Filter</li>
+        <div class="col-12 pt-5">
+          <div class="card-group">
+            <div class="card border-0">
+              <div class="card-header">Filter</div>
 
-            <% if @filter["hardforks"] %>
-              <%= link_to events_path(permitted_params.fetch(:filter, {}).except("hardforks")), class: "list-group-item list-group-item-action" do %>
-                <i class="bi-toggle2-off me-1"></i> Hard forks
-              <% end %>
-            <% else %>
-              <%= link_to events_path(permitted_params.deep_merge(filter: {"hardforks" => "off"})), class: "list-group-item list-group-item-action active bg-secondary border-secondary" do %>
-                <i class="bi-toggle2-on me-1"></i> Hard forks
-              <% end %>
-            <% end %>
+              <div class="list-group list-group-flush">
+                <% if @filter["hardforks"] %>
+                  <%= link_to events_path(permitted_params.fetch(:filter, {}).except("hardforks")), class: "list-group-item list-group-item-action" do %>
+                    <i class="bi-toggle2-off me-1"></i> Hard forks
+                  <% end %>
+                <% else %>
+                  <%= link_to events_path(permitted_params.deep_merge(filter: {"hardforks" => "off"})), class: "list-group-item list-group-item-action active bg-secondary border-secondary" do %>
+                    <i class="bi-toggle2-on me-1"></i> Hard forks
+                  <% end %>
+                <% end %>
 
-            <% if @filter["leaderlog-check"].blank? || @filter["leaderlog-check"] == "off" %>
-              <%= link_to events_path(permitted_params.deep_merge(filter: {"leaderlog-check" => "on"})), class: "list-group-item list-group-item-action" do %>
-                <i class="bi-toggle2-off me-1"></i> Leaderlogs
-              <% end %>
-            <% else %>
-              <%= link_to events_path(permitted_params.deep_merge(filter: {"leaderlog-check" => "off"})), class: "list-group-item list-group-item-action active bg-secondary border-secondary" do %>
-                <i class="bi-toggle2-on me-1"></i> Leaderlogs
-              <% end %>
-            <% end %>
+                <% if @filter["leaderlog-check"].blank? || @filter["leaderlog-check"] == "off" %>
+                  <%= link_to events_path(permitted_params.deep_merge(filter: {"leaderlog-check" => "on"})), class: "list-group-item list-group-item-action" do %>
+                    <i class="bi-toggle2-off me-1"></i> Leaderlogs
+                  <% end %>
+                <% else %>
+                  <%= link_to events_path(permitted_params.deep_merge(filter: {"leaderlog-check" => "off"})), class: "list-group-item list-group-item-action active bg-secondary border-secondary" do %>
+                    <i class="bi-toggle2-on me-1"></i> Leaderlogs
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -65,7 +68,6 @@
       </div>
 
     </div>
-
   </div>
 </div>
 
