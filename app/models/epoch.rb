@@ -47,7 +47,7 @@ class Epoch < OpenStruct
           (e.start_time..e.end_time).overlaps?(event[:start_time]..event[:end_time])
         end
       end
-    end
+    end.reverse
   end
 
   def slot_range
