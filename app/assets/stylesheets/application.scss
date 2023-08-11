@@ -16,18 +16,6 @@ ul.dropdown-menu.show {
   z-index: 99999;
 }
 
-#cardano-logo.spinning {
-  animation-name: spinning;
-  animation-duration: 1.5s;
-  animation-iteration-count: infinite;
-  transform-origin: 50% 50%;
-}
-
-@keyframes spinning {
-  0% {
-      transform: rotate(0deg);
-  }
-  100% {
-      transform: rotate(360deg);
-  }
+.turbo-progress-bar {
+  background: $primary;
 }

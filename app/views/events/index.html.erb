@@ -1,3 +1,2 @@
-<%= turbo_frame_tag "events", data: { "turbo-action" => "advance" } do %>
-  <%= render current_view if views.include?(current_view) %>
-<% end %>
+<%= render current_view if views.include?(current_view) %>
+<%= render "offcanvas" %>
