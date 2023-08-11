@@ -1,1 +1,3 @@
-<%= render current_view if views.include?(current_view) %>
+<%= turbo_frame_tag "events" do %>
+  <%= render current_view if views.include?(current_view) %>
+<% end %>
