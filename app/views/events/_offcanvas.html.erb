@@ -6,18 +6,18 @@
   <div class="offcanvas-body">
 
     <div class="container">
-      <%= turbo_frame_tag "calendar_preferences" do %>
+      <%= turbo_frame_tag "calendar_preferences", data: { "turbo-action" => "advance" } do %>
         <div class="row align-items-start">
 
           <div class="col">
             <div class="list-group list-group-horizontal text-center">
-              <%= link_to events_path(permitted_params.merge(view: :month)), data: { turbo_frame: "events", "turbo-action": "advance" }, class: "list-group-item list-group-item-action #{'active bg-secondary border-secondary' if current_view == 'month'}" do %>
+              <%= link_to events_path(permitted_params.merge(view: :month)), data: { turbo_frame: "events" }, class: "list-group-item list-group-item-action #{'active bg-secondary border-secondary' if current_view == 'month'}" do %>
                 <i class="bi-calendar-month me-1"></i> Month
               <% end %>
-              <%= link_to events_path(permitted_params.merge(view: :week)), data: { turbo_frame: "events", "turbo-action": "advance" }, class: "list-group-item list-group-item-action #{'active bg-secondary border-secondary' if current_view == 'week'}" do %>
+              <%= link_to events_path(permitted_params.merge(view: :week)), data: { turbo_frame: "events" }, class: "list-group-item list-group-item-action #{'active bg-secondary border-secondary' if current_view == 'week'}" do %>
                 <i class="bi-calendar-week me-1"></i> Week
               <% end %>
-              <%= link_to events_path(permitted_params.merge(view: :list)), data: { turbo_frame: "events", "turbo-action": "advance" }, class: "list-group-item list-group-item-action #{'active bg-secondary border-secondary' if current_view == 'list'}" do %>
+              <%= link_to events_path(permitted_params.merge(view: :list)), data: { turbo_frame: "events" }, class: "list-group-item list-group-item-action #{'active bg-secondary border-secondary' if current_view == 'list'}" do %>
                 <i class="bi-list-ul me-1"></i> List
               <% end %>
             </div>
@@ -30,21 +30,21 @@
 
                 <div class="list-group list-group-flush">
                   <% if @filter["hardforks"] %>
-                    <%= link_to events_path(permitted_params.fetch(:filter, {}).except("hardforks")), data: { turbo_frame: "events", "turbo-action": "advance" }, class: "list-group-item list-group-item-action" do %>
+                    <%= link_to events_path(permitted_params.fetch(:filter, {}).except("hardforks")), data: { turbo_frame: "events" }, class: "list-group-item list-group-item-action" do %>
                       <i class="bi-toggle2-off me-1"></i> Hard forks
                     <% end %>
                   <% else %>
-                    <%= link_to events_path(permitted_params.deep_merge(filter: {"hardforks" => "off"})), data: { turbo_frame: "events", "turbo-action": "advance" }, class: "list-group-item list-group-item-action active bg-secondary border-secondary" do %>
+                    <%= link_to events_path(permitted_params.deep_merge(filter: {"hardforks" => "off"})), data: { turbo_frame: "events" }, class: "list-group-item list-group-item-action active bg-secondary border-secondary" do %>
                       <i class="bi-toggle2-on me-1"></i> Hard forks
                     <% end %>
                   <% end %>
 
                   <% if @filter["leaderlog-check"].blank? || @filter["leaderlog-check"] == "off" %>
-                    <%= link_to events_path(permitted_params.deep_merge(filter: {"leaderlog-check" => "on"})), data: { turbo_frame: "events", "turbo-action": "advance" }, class: "list-group-item list-group-item-action" do %>
+                    <%= link_to events_path(permitted_params.deep_merge(filter: {"leaderlog-check" => "on"})), data: { turbo_frame: "events" }, class: "list-group-item list-group-item-action" do %>
                       <i class="bi-toggle2-off me-1"></i> Leaderlogs
                     <% end %>
                   <% else %>
-                    <%= link_to events_path(permitted_params.deep_merge(filter: {"leaderlog-check" => "off"})), data: { turbo_frame: "events", "turbo-action": "advance" }, class: "list-group-item list-group-item-action active bg-secondary border-secondary" do %>
+                    <%= link_to events_path(permitted_params.deep_merge(filter: {"leaderlog-check" => "off"})), data: { turbo_frame: "events" }, class: "list-group-item list-group-item-action active bg-secondary border-secondary" do %>
                       <i class="bi-toggle2-on me-1"></i> Leaderlogs
                     <% end %>
                   <% end %>
