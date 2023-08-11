@@ -19,7 +19,7 @@
         <ul class="list-group list-group-flush mt-2">
           <% epoch.events.each do |event| %>
             <li class="list-group-item bg-transparent ps-0">
-              <time class="me-2 text-muted font-monospace d-inline-block"><%= l(event.start_time.to_time, format: :without_date) %></time>
+              <time class="me-2 text-muted font-monospace d-inline-block"><%= l(event.start_time.to_time, format: :short) %></time>
               <span><%= event.name %></span>
               <% unless event.description.blank? %>
                 <a href="javascript:void()" class="ps-1" data-bs-toggle="popover" data-bs-title="<%= event.name %>" data-bs-content="<%= event.description %>">

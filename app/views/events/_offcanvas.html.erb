@@ -37,6 +37,16 @@
                 <i class="bi-toggle2-on me-1"></i> Hard forks
               <% end %>
             <% end %>
+
+            <% if @filter["leaderlog-check"].blank? || @filter["leaderlog-check"] == "off" %>
+              <%= link_to events_path(permitted_params.deep_merge(filter: {"leaderlog-check" => "on"})), class: "list-group-item list-group-item-action" do %>
+                <i class="bi-toggle2-off me-1"></i> Leaderlogs
+              <% end %>
+            <% else %>
+              <%= link_to events_path(permitted_params.deep_merge(filter: {"leaderlog-check" => "off"})), class: "list-group-item list-group-item-action active bg-secondary border-secondary" do %>
+                <i class="bi-toggle2-on me-1"></i> Leaderlogs
+              <% end %>
+            <% end %>
           </div>
         </div>
 

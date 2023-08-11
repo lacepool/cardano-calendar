@@ -3,15 +3,18 @@ class EventsController < ApplicationController
 
   def index
     off_filters = filter.select {|_, value| value == "off" }.keys
+    on_filters = filter.select {|_, value| value == "on" }.keys
 
     respond_to do |f|
       f.html do
-        events = Event.all(except: off_filters, between: date_range)
+        events = Events::SimpleEvent.all(except: off_filters, between: date_range)
+        events += Events::LeaderlogCheck.all(between: date_range) if on_filters.include?("leaderlog-check")
         @epochs = Epoch.all(between: date_range, with_events: events)
       end
 
       f.ics do
-        events = Event.all(except: off_filters, between: ics_date_range)
+        events = Events::SimpleEvent.all(except: off_filters, between: ics_date_range)
+        events += Events::LeaderlogCheck.all(between: date_range) if on_filters.include?("leaderlog-check")
         @epochs = Epoch.all(between: ics_date_range, with_events: events)
 
         render plain: ics_calendar.to_ical
