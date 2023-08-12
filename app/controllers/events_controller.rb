@@ -35,6 +35,7 @@ class EventsController < ApplicationController
 
     Icalendar::Calendar.new.tap do |cal|
       cal.x_wr_calname = "cardano-calendar.com"
+      cal.refresh_interval = "P4H"
 
       @epochs.each do |epoch|
         cal.event do |ce|
