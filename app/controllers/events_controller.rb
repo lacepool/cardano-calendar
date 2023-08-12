@@ -50,6 +50,7 @@ class EventsController < ApplicationController
               ce.summary = event.name
               ce.description = event.description
               ce.dtstart = event.start_time.utc
+              ce.categories = event.category
               ce.dtend = event.end_time.utc
               ce.uid = event.id
               ce.sequence = current_timestamp

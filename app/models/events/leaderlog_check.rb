@@ -6,7 +6,7 @@ class Events::LeaderlogCheck < OpenStruct
         e.for_epoch = e.current_epoch + 1
         e.name = "Leaderlogs for epoch #{e.for_epoch}"
         e.description = "As a stake pool operator, it is possible to run queries to determine whether your pool is scheduled to mint blocks. Leaderlog information for the next epoch is available within 1.5 days from the end of the current epoch."
-        e.categories = ["Stake Pool Operator"]
+        e.category = ["Stake Pool Operator"]
         e.start_time = Epoch::timestamp_from_epoch(e.current_epoch) + 3.5.days
         e.end_time = e.start_time
       end
