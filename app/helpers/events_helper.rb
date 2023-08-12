@@ -3,6 +3,33 @@ module EventsHelper
     "#{l(epoch.start_time, format: :short)} – #{l(epoch.end_time, format: :short)}, Slots: #{epoch.start_slot} – #{epoch.end_slot}"
   end
 
+  def simple_event_filters
+    Events::SimpleEvent.filters.map do |f|
+      if f["default_value"] == "off"
+        if @filter[f["param"]] == "on"
+          path = events_path(permitted_params.merge(filter: permitted_params.fetch(:filter, {}).except(f["param"])))
+          link_css = "active bg-secondary border-secondary"
+          icon_state = "on"
+        else
+          path = events_path(permitted_params.deep_merge(filter: {f["param"] => "on"}))
+          icon_state = "off"
+        end
+      else
+        if @filter[f["param"]] == "off"
+          path = events_path(permitted_params.merge(filter: permitted_params.fetch(:filter, {}).except(f["param"])))
+          icon_state = "off"
+        else
+          path = events_path(permitted_params.deep_merge(filter: {f["param"] => "off"}))
+          icon_state = "on"
+        end
+      end
+
+      link_to path, class: "list-group-item list-group-item-action" do
+        tag.i(class: "bi-toggle-#{icon_state} me-2") + f["name"]
+      end
+    end.join.html_safe
+  end
+
   def views
     ["month", "week", "list"]
   end

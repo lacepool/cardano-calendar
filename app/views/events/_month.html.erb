@@ -25,7 +25,9 @@
             <% epoch.events.select { |e| (e.start_time.to_date..e.end_time.to_date).include?(date) }.each do |event| %>
               <li class="list-group-item px-0 py-1">
                 <small>
-                  <time class="me-2 text-muted font-monospace d-inline-block"><%= l(event.start_time.to_time, format: :without_date) %></time>
+                  <% if event.start_time > date.beginning_of_day || event.end_time < date.end_of_day %>
+                    <time class="me-1 text-muted font-monospace d-inline-block"><%= l(event.start_time.to_time, format: :without_date) %></time>
+                  <% end %>
                   <span><%= event.name %></span>
                 </small>
                 <% unless event.description.blank? %>

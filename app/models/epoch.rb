@@ -54,6 +54,10 @@ class Epoch < OpenStruct
     start_slot..end_slot
   end
 
+  def time_range
+    start_time..end_time
+  end
+
   def id
     Digest::MD5.hexdigest(name)
   end
