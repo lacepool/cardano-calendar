@@ -34,13 +34,15 @@ class EventsController < ApplicationController
     current_timestamp = Time.current.utc.to_i
 
     Icalendar::Calendar.new.tap do |cal|
-      cal.x_wr_calname = "cardano-calendar.com"
+      cal.ip_name = "cardano-calendar.com"
+      ca.description = "My Customized Cardano Events"
       cal.refresh_interval = "P4H"
 
       @epochs.each do |epoch|
         cal.event do |ce|
           ce.summary = epoch.name
           ce.description = "Slots #{epoch.start_slot} – #{epoch.end_slot}"
+          ce.categories = "Epoch"
           ce.dtstart = epoch.start_time.utc
           ce.dtend = epoch.end_time.utc
           ce.uid = epoch.id
