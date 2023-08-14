@@ -3,6 +3,23 @@ module EventsHelper
     "#{l(epoch.start_time, format: :short)} – #{l(epoch.end_time, format: :short)}, Slots: #{epoch.start_slot} – #{epoch.end_slot}"
   end
 
+  def meetup_event_filters
+    Events::Meetup::GROUPS.map do |name, url_name|
+      if @filter[url_name] == "on"
+        path = events_path(permitted_params.merge(filter: permitted_params.fetch(:filter, {}).except(url_name)))
+        link_css = "active bg-secondary border-secondary"
+        icon_state = "on"
+      else
+        path = events_path(permitted_params.deep_merge(filter: {url_name => "on"}))
+        icon_state = "off"
+      end
+
+      link_to path, class: "list-group-item list-group-item-action" do
+        tag.i(class: "bi-toggle-#{icon_state} me-2") + name
+      end
+    end.join.html_safe
+  end
+
   def simple_event_filters
     Events::SimpleEvent.filters.map do |f|
       if f["default_value"] == "off"

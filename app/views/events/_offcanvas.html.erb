@@ -23,27 +23,55 @@
         </div>
 
         <div class="col-12 pt-5">
-          <div class="card-group">
-            <div class="card border-0">
-              <div class="card-header">Filter</div>
 
-              <div class="list-group list-group-flush">
-                <%= simple_event_filters %>
-
-                <% if @filter["leaderlog-check"].blank? || @filter["leaderlog-check"] == "off" %>
-                  <%= link_to events_path(permitted_params.deep_merge(filter: {"leaderlog-check" => "on"})), class: "list-group-item list-group-item-action" do %>
-                    <i class="bi-toggle-off me-2"></i> Leaderlogs
+          <div class="accordion accordion-flush" id="event_filter">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#filter_chain_events" aria-expanded="false" aria-controls="filter_chain_events">
+                  Chain Events
+                </button>
+              </h2>
+              <div id="filter_chain_events" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#event_filter">
+                <div class="accordion-body">
+                  <%= simple_event_filters %>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#filter_meetup_events" aria-expanded="false" aria-controls="filter_meetup_events">
+                  Meetups
+                </button>
+              </h2>
+              <div id="filter_meetup_events" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#event_filter">
+                <div class="accordion-body">
+                  <%= meetup_event_filters %>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#filter_stake_pool_operators" aria-expanded="false" aria-controls="filter_stake_pool_operators">
+                  Stake Pool Operators
+                </button>
+              </h2>
+              <div id="filter_stake_pool_operators" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#event_filter">
+                <div class="accordion-body">
+                  <% if @filter["leaderlog-check"].blank? || @filter["leaderlog-check"] == "off" %>
+                    <%= link_to events_path(permitted_params.deep_merge(filter: {"leaderlog-check" => "on"})), class: "list-group-item list-group-item-action" do %>
+                      <i class="bi-toggle-off me-2"></i> Leaderlogs
+                    <% end %>
+                  <% else %>
+                    <%= link_to events_path(permitted_params.deep_merge(filter: {"leaderlog-check" => "off"})), class: "list-group-item list-group-item-action" do %>
+                      <i class="bi-toggle-on me-2"></i> Leaderlogs
+                    <% end %>
                   <% end %>
-                <% else %>
-                  <%= link_to events_path(permitted_params.deep_merge(filter: {"leaderlog-check" => "off"})), class: "list-group-item list-group-item-action" do %>
-                    <i class="bi-toggle-on me-2"></i> Leaderlogs
-                  <% end %>
-                <% end %>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
+        </div>
       </div>
 
       <div class="row pt-5">
