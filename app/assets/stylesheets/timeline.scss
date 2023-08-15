@@ -1,6 +1,10 @@
 .timeline {
-  .time time {
+  .epoch_time_info {
     max-width: 120px;
+  }
+
+  .slot {
+    font-size: 0.8em;
   }
 
   .event time {

@@ -3,18 +3,16 @@
 <div class="timeline">
   <% @epochs.reverse.each do |epoch| %>
     <div class="row" id="<%= 'today' if epoch.current? %>">
-      <div class="col-4 col-sm-3 col-md-2 border-primary border-1 border-end time py-5 position-relative text-end">
-        <time class="d-inline-block me-3"><%= l(epoch.start_time, format: :short) %></time>
-        <span class="position-absolute start-100 translate-middle-x p-2 mt-1 border border-3 border-primary rounded-circle <%= epoch.current? ? 'bg-primary' : 'bg-light' %>">
-          <span class="visually-hidden"></span>
-        </span>
+      <div class="col-4 col-sm-3 col-md-2 border-primary border-1 border-end py-5 position-relative text-end">
+        <span class="position-absolute start-100 translate-middle-x p-2 mt-1 border border-3 border-primary rounded-circle <%= epoch.current? ? 'bg-primary' : 'bg-light' %>"><span class="visually-hidden"></span></span>
+        <div class="epoch_time_info d-inline-block pe-3">
+          <time><%= l(epoch.start_time, format: :short) %></time>
+          <p class="slot">Slot <%= epoch.start_slot %></p>
+        </div>
       </div>
 
       <div class="col event py-5 px-4 px-sm-5">
         <h4 class="mb-3 <%= 'text-primary' if epoch.current? %>"><%= epoch.name %></h4>
-        <p>
-          Slots <small class="font-monospace"><%= epoch.start_slot %>..<%= epoch.end_slot %></small>
-        </p>
 
         <ul class="list-group list-group-flush mt-2">
           <% epoch.events.each do |event| %>
