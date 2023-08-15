@@ -2,13 +2,12 @@ class EventsController < ApplicationController
   helper_method :permitted_params
 
   def index
-    off_filters = filter.select {|_, value| value == "off" }.keys
     on_filters = filter.select {|_, value| value == "on" }.keys
+    off_filters = filter.select {|_, value| value == "off" }.keys + Events::SimpleEvent.default_off_filter - on_filters
 
     respond_to do |f|
       f.html do
         events = Events::SimpleEvent.all(except: off_filters, between: date_range)
-        events += Events::LeaderlogCheck.all(between: date_range) if on_filters.include?("leaderlog-check")
         events += Events::Meetup.where("extras->'group_urlname' ?| array[:names]", names: on_filters).between(date_range)
         @epochs = Epoch.all(between: date_range, with_events: events.sort_by(&:start_time))
       end

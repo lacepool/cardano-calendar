@@ -4,47 +4,86 @@ module EventsHelper
   end
 
   def meetup_event_filters
-    Events::Meetup::GROUPS.map do |name, url_name|
+    html_id = "filter_meetups"
+
+    links = Events::Meetup::GROUPS.map do |name, url_name|
       if @filter[url_name] == "on"
         path = events_path(permitted_params.merge(filter: permitted_params.fetch(:filter, {}).except(url_name)))
-        link_css = "active bg-secondary border-secondary"
         icon_state = "on"
       else
         path = events_path(permitted_params.deep_merge(filter: {url_name => "on"}))
         icon_state = "off"
       end
 
-      link_to path, class: "list-group-item list-group-item-action" do
-        tag.i(class: "bi-toggle-#{icon_state} me-2") + name
+      link_to path, class: "list-group-item list-group-item" do
+        tag.i(class: "bi-toggle-#{icon_state} me-2") + tag.span(name, class: "small")
+      end
+    end.join.html_safe
+
+    tag.div class: "accordion-item" do
+      filter_accordion_heading("Meetups", html_id) + filter_accordion_body(links, html_id)
+    end
+  end
+
+  def simple_event_filters
+    filters = Events::SimpleEvent::ALL.map do |k, v|
+      { category: k, filters: v }
+    end
+
+    filters.map do |f|
+      category = f[:category]
+      html_id = "filter_#{category.parameterize}"
+
+      links = f[:filters].map do |filter_param, filter|
+        if filter["filter_default_value"] == "off"
+          if @filter[filter_param] == "on"
+            path = events_path(permitted_params.merge(filter: permitted_params.fetch(:filter, {}).except(filter_param)))
+            icon_state = "on"
+          else
+            path = events_path(permitted_params.deep_merge(filter: {filter_param => "on"}))
+            icon_state = "off"
+          end
+        else
+          if @filter[filter_param] == "off"
+            path = events_path(permitted_params.merge(filter: permitted_params.fetch(:filter, {}).except(filter_param)))
+            icon_state = "off"
+          else
+            path = events_path(permitted_params.deep_merge(filter: {filter_param => "off"}))
+            icon_state = "on"
+          end
+        end
+
+        link_to path, class: "list-group-item list-group-item" do
+          tag.i(class: "bi-toggle-#{icon_state} me-2") + tag.span(filter["filter_label"], class: "small")
+        end
+      end.join.html_safe
+
+      tag.div class: "accordion-item" do
+        filter_accordion_heading(category, html_id) + filter_accordion_body(links, html_id)
       end
     end.join.html_safe
   end
 
-  def simple_event_filters
-    Events::SimpleEvent.filters.map do |f|
-      if f["default_value"] == "off"
-        if @filter[f["param"]] == "on"
-          path = events_path(permitted_params.merge(filter: permitted_params.fetch(:filter, {}).except(f["param"])))
-          link_css = "active bg-secondary border-secondary"
-          icon_state = "on"
-        else
-          path = events_path(permitted_params.deep_merge(filter: {f["param"] => "on"}))
-          icon_state = "off"
-        end
-      else
-        if @filter[f["param"]] == "off"
-          path = events_path(permitted_params.merge(filter: permitted_params.fetch(:filter, {}).except(f["param"])))
-          icon_state = "off"
-        else
-          path = events_path(permitted_params.deep_merge(filter: {f["param"] => "off"}))
-          icon_state = "on"
-        end
-      end
+  def filter_list(links)
+    tag.ul class: "list-group list-group-flush mb-4" do
+      links
+    end
+  end
 
-      link_to path, class: "list-group-item list-group-item-action" do
-        tag.i(class: "bi-toggle-#{icon_state} me-2") + f["name"]
+  def filter_accordion_heading(title, html_id)
+    tag.h2 class: "accordion-header", id: "heading_#{html_id}" do
+      tag.button class: "accordion-button collapsed", type: "button", data: { "bs-toggle" => "collapse", "bs-target" => "##{html_id}" }, "aria-expanded" => "false", "aria-controls" => html_id do
+        title
       end
-    end.join.html_safe
+    end
+  end
+
+  def filter_accordion_body(links, html_id)
+    tag.div id: html_id, class: "accordion-collapse collapse", "aria-labelledby" => "heading_#{html_id}", "data-bs-parent" => "#event_filter" do
+      tag.div class: "accordion-body p-0" do
+        filter_list(links)
+      end
+    end
   end
 
   def views

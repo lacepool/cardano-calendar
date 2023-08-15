@@ -1,60 +1,122 @@
 {
-  "hardforks": {
-    "name": "Hard forks",
-    "filter": {
-      "default_value": "on"
+  "Chain Events": {
+    "hardforks": {
+      "filter_label": "Hard forks",
+      "filter_default_value": "on",
+      "events": [
+        {
+          "name": "Shelley hard fork",
+          "description": "The main objectives of the Shelley upgrade were to increase network decentralization, enhance security, and enable stakeholder participation through staking and delegation.",
+          "start_time": 1596491091,
+          "end_time": 1596491091
+        },
+        {
+          "name": "Mary hard fork",
+          "description": "With the Mary upgrade, the blockchain became capable of hosting and handling native assets on its network.",
+          "start_time": 1614635091,
+          "end_time": 1614635091
+        },
+        {
+          "name": "Alonzo hard fork",
+          "description": "The upgrade was named after Alonzo Church, a renowned logician and mathematician. It introduced the Plutus platform v1.0, which is a smart contract development platform.",
+          "start_time": 1631483091,
+          "end_time": 1631483091
+        },
+        {
+          "name": "Vasil hard fork",
+          "description": "The upgrade enhances Cardano's smart contract capabilities through Plutus v2. The main additions that Vasil unlocks are: Reference inputs (CIP 31), Inline datums (CIP-32), Reference scripts (CIP-33), Datums and redeemers, Data Serialisation primitive (CIP 42)",
+          "start_time": 1663883091,
+          "end_time": 1663883091
+        }
+      ]
     },
-    "events": [
-      {
-        "name": "Shelley hard fork",
-        "description": "The main objectives of the Shelley upgrade were to increase network decentralization, enhance security, and enable stakeholder participation through staking and delegation.",
-        "start_time": 1596491091,
-        "end_time": 1596491091
-      },
-      {
-        "name": "Mary hard fork",
-        "description": "With the Mary upgrade, the blockchain became capable of hosting and handling native assets on its network.",
-        "start_time": 1614635091,
-        "end_time": 1614635091
-      },
-      {
-        "name": "Alonzo hard fork",
-        "description": "The upgrade was named after Alonzo Church, a renowned logician and mathematician. It introduced the Plutus platform v1.0, which is a smart contract development platform.",
-        "start_time": 1631483091,
-        "end_time": 1631483091
-      },
-      {
-        "name": "Vasil hard fork",
-        "description": "The upgrade enhances Cardano's smart contract capabilities through Plutus v2. The main additions that Vasil unlocks are: Reference inputs (CIP 31), Inline datums (CIP-32), Reference scripts (CIP-33), Datums and redeemers, Data Serialisation primitive (CIP 42)",
-        "start_time": 1663883091,
-        "end_time": 1663883091
-      }
-    ]
+    "governance": {
+      "filter_label": "Governance",
+      "filter_default_value": "on",
+      "events": [
+        {
+          "name": "Poll experiment (ballot casts)",
+          "description": "Cardano Foundation's poll experiment empowered stake pool operators to actively participate in decentralized governance. They played a crucial role in voting on key parameters of the Cardano blockchain.",
+          "start_time": 1684187091,
+          "end_time": 1685051090
+        },
+        {
+          "name": "Poll experiment (re-delegation)",
+          "description": "During the re-delegation phase, users were given the chance to make use of the ADA they owned as stake. By delegating their ADA to a stake pool, they guaranteed that the amount they delegated would contribute to the overall voting power of that pool. This meant that the more ADA users delegated to the pool, the more weight it carried in the voting process.",
+          "start_time": 1685051091,
+          "end_time": 1686347090
+        },
+        {
+          "name": "Poll experiment (snapshot)",
+          "description": "In the end of the Cardano Foundation's poll experiment, the foundation will snapshot the stake delegated to the stake pools and draft a report of the voting.",
+          "start_time": 1686347091,
+          "end_time": 1686347090
+        }
+      ]
+    }
   },
-  "governance": {
-    "name": "Governance",
-    "filter": {
-      "default_value": "on"
-    },
-    "events": [
-      {
-        "name": "Poll experiment (ballot casts)",
-        "description": "Cardano Foundation's poll experiment empowered stake pool operators to actively participate in decentralized governance. They played a crucial role in voting on key parameters of the Cardano blockchain.",
-        "start_time": 1684187091,
-        "end_time": 1685051090
-      },
-      {
-        "name": "Poll experiment (re-delegation)",
-        "description": "During the re-delegation phase, users were given the chance to make use of the ADA they owned as stake. By delegating their ADA to a stake pool, they guaranteed that the amount they delegated would contribute to the overall voting power of that pool. This meant that the more ADA users delegated to the pool, the more weight it carried in the voting process.",
-        "start_time": 1685051091,
-        "end_time": 1686347090
-      },
-      {
-        "name": "Poll experiment (snapshot)",
-        "description": "In the end of the Cardano Foundation's poll experiment, the foundation will snapshot the stake delegated to the stake pools and draft a report of the voting.",
-        "start_time": 1686347091,
-        "end_time": 1686347090
+  "Project Catalyst": {
+    "townhalls": {
+      "filter_label": "Town Hall Meetings",
+      "filter_default_value": "off",
+      "recurring": {
+        "frequency": "P7D",
+        "schedule_start_time": 1671645600,
+        "schedule_end_time": null,
+        "duration": "PT1H",
+        "event_name": "Town Hall Meeting",
+        "event_description": "Join Project Catalyst team and community for our weekly town hall followed by an open space with break out rooms. https://zoom.us/meeting/register/tJEtduyupzMvHNUczCQwfFJGcXzmw2lDwkIf#/registration"
       }
-    ]
+    },
+    "vote-registrations": {
+      "filter_label": "Vote Registrations",
+      "filter_default_value": "on",
+      "events": [
+        {
+          "name": "Catalyst F10 – Vote Registration",
+          "description": null,
+          "start_time": 1688036400,
+          "end_time": 1692392400
+        }
+      ]
+    },
+    "voting-power-snapshots": {
+      "filter_label": "Voting Power Snapshots",
+      "filter_default_value": "on",
+      "events": [
+        {
+          "name": "Catalyst F10 – Voting Power Snapshot",
+          "description": null,
+          "start_time": 1692392400,
+          "end_time": 1692392400
+        }
+      ]
+    },
+    "voting": {
+      "filter_label": "Voting",
+      "filter_default_value": "on",
+      "events": [
+        {
+          "name": "Catalyst F10 – Voting",
+          "description": null,
+          "start_time": 1693440000,
+          "end_time": 1694649600
+        }
+      ]
+    }
+  },
+  "Stake Pool Operators": {
+    "leaderlogs": {
+      "filter_label": "Leaderlogs",
+      "filter_default_value": "off",
+      "recurring": {
+        "frequency": "P5D",
+        "schedule_start_time": 1596793491,
+        "schedule_end_time": null,
+        "duration": null,
+        "event_name": "Leaderlogs for next epoch",
+        "event_description": "As a stake pool operator, it is possible to run queries to determine whether your pool is scheduled to mint blocks. Leaderlog information for the next epoch is available within 1.5 days from the end of the current epoch."
+      }
+    }
   }
 }
