@@ -10,7 +10,7 @@ class EventsController < ApplicationController
         events = Events::SimpleEvent.all(except: off_filters, between: date_range)
         events += Events::LeaderlogCheck.all(between: date_range) if on_filters.include?("leaderlog-check")
         events += Events::Meetup.where("extras->'group_urlname' ?| array[:names]", names: on_filters).between(date_range)
-        @epochs = Epoch.all(between: date_range, with_events: events)
+        @epochs = Epoch.all(between: date_range, with_events: events.sort_by(&:start_time))
       end
 
       f.ics do
