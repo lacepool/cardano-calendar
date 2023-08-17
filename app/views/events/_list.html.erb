@@ -20,7 +20,7 @@
               <% if event.start_time == event.end_time %>
                 <time class="me-2 text-muted font-monospace d-inline-block"><%= l(event.start_time.to_time, format: :short) %></time>
               <% elsif event.start_time.day == event.end_time.day %>
-                <time class="me-2 text-muted font-monospace d-inline-block"><%= l(event.start_time.to_time, format: :short) %> – <%= l(event.end_time.to_time, format: :without_date) %></time>
+                <time class="me-2 text-muted font-monospace d-inline-block"><%= l(event.start_time.to_time, format: :short) %> – <%= l(event.end_time.to_time, format: :time) %></time>
               <% else %>
                 <time class="me-2 text-muted font-monospace d-inline-block"><%= l(event.start_time.to_time, format: :short) %> – <%= l(event.end_time.to_time, format: :short) %></time>
               <% end %>

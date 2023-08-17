@@ -1,12 +1,12 @@
 <%= week_calendar(events: @epochs) do |date, epochs| %>
   <div class="calendar calendar-week card shadow bg-gradient-secondary">
-    <div class="card-header position-relative">
-      <time datetime="<%= date %>" class="font-monospace"><%= date %></time>
+    <div class="card-header position-relative px-2">
+      <time datetime="<%= date %>" class="font-monospace"><%= l(date, format: :short) %></time>
     </div>
 
     <ul class="list-group list-group-flush">
       <% epochs.each_with_index do |epoch, idx| %>
-        <%= tag.li class: "list-group-item position-relative", data: { start_time: epoch.start_time.to_i, end_time: epoch.end_time.to_i } do %>
+        <%= tag.li class: "list-group-item position-relative p-2", data: { start_time: epoch.start_time.to_i, end_time: epoch.end_time.to_i } do %>
           <% if idx > 0 %>
             <i class="bi bi-chevron-double-down epoch-transition position-absolute start-50 top-0 bg-body translate-middle px-3"></i>
           <% end %>
@@ -21,12 +21,16 @@
             </a>
           </span>
 
-          <ul class="list-group list-group-flush mt-2">
+          <ul class="list-group list-group-flush">
             <% epoch.events.select { |e| (e.start_time.to_date..e.end_time.to_date).include?(date) }.each do |event| %>
-              <li class="list-group-item px-0 py-1">
+              <li class="event list-group-item px-0 py-3">
                 <small>
-                  <% if event.start_time > date.beginning_of_day || event.end_time < date.end_of_day %>
-                    <time class="me-1 text-muted font-monospace d-inline-block"><%= l(event.start_time.to_time, format: :without_date) %></time>
+                  <% if event.start_time == event.end_time %>
+                    <time class="me-2 text-muted font-monospace d-block"><%= l(event.start_time.to_time, format: :short) %></time>
+                  <% elsif event.start_time.day == event.end_time.day %>
+                    <time class="me-2 text-muted font-monospace d-block"><%= l(event.start_time.to_time, format: :short) %> – <%= l(event.end_time.to_time, format: :time) %></time>
+                  <% else %>
+                    <time class="me-2 text-muted font-monospace d-block"><%= l(event.start_time.to_time, format: :short) %> – <%= l(event.end_time.to_time, format: :short) %></time>
                   <% end %>
                   <span><%= event.name %></span>
                 </small>

@@ -30,6 +30,10 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  date:
+    formats:
+      short: '%d/%m'
   time:
     formats:
-      without_date: '%H:%M'
+      time: '%H:%M'
+      short: '%d/%m %H:%M'

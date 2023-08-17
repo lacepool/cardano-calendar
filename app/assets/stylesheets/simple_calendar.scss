@@ -1,5 +1,9 @@
 @import 'bootstrap/scss/bootstrap';
 
+.event time {
+  font-size: 0.75em;
+}
+
 .calendar.calendar-month.card {
   min-width: 10em;
 }
