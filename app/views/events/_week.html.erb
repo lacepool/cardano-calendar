@@ -25,15 +25,10 @@
             <% epoch.events.select { |e| (e.start_time.to_date..e.end_time.to_date).include?(date) }.each do |event| %>
               <li class="event list-group-item px-0 py-3">
                 <small>
-                  <% if event.momentary? || event.open_end? %>
-                    <time class="me-2 text-muted font-monospace d-block"><%= l(event.start_time.to_time, format: event.time_format&.to_sym || :short) %></time>
-                  <% elsif event.one_day? %>
-                    <time class="me-2 text-muted font-monospace d-block"><%= l(event.start_time.to_time, format: :short) %> – <%= l(event.end_time.to_time, format: :time) %></time>
-                  <% else %>
-                    <time class="me-2 text-muted font-monospace d-block"><%= l(event.start_time.to_time, format: event.time_format&.to_sym || :short) %> – <%= l(event.end_time.to_time, format: event.time_format&.to_sym || :short) %></time>
-                  <% end %>
+                  <time class="me-2 text-muted font-monospace d-block"><%= event_time(event) %></time>
                   <span><%= event.name %></span>
                 </small>
+
                 <% unless event.description.blank? %>
                   <a href="javascript:void()" class="ps-1" data-bs-toggle="popover" data-bs-title="<%= event.name %>" data-bs-content="<%= event.description %>">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">

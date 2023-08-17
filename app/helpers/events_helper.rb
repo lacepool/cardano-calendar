@@ -3,6 +3,16 @@ module EventsHelper
     "#{l(epoch.start_time, format: :short)} – #{l(epoch.end_time, format: :short)}, Slots: #{epoch.start_slot} – #{epoch.end_slot}"
   end
 
+  def event_time(event)
+    if event.momentary? || event.open_end?
+      l(event.start_time.to_time, format: event.time_format&.to_sym || :short)
+    elsif event.one_day?
+      "#{l(event.start_time.to_time, format: :short)} – #{l(event.end_time.to_time, format: :time)}"
+    else
+      "#{l(event.start_time.to_time, format: event.time_format&.to_sym || :short)} – #{l(event.end_time.to_time, format: event.time_format&.to_sym || :short)}"
+    end
+  end
+
   def meetup_event_filters
     html_id = "filter_meetups"
 

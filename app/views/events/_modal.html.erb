@@ -1,0 +1,16 @@
+<div class="modal" id="<%= event.id %>" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <time class="text-muted font-monospace d-block"><%= event_time(event) %></time>
+          <h1 class="modal-title fs-4"><%= event.name %></h1>
+        </div>
+        <button type="button" class="btn-close align-self-start" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= event.description.html_safe %>
+      </div>
+    </div>
+  </div>
+</div>
