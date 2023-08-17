@@ -2,6 +2,8 @@ class Events::SimpleEvent < OpenStruct
   FILE_PATH = Rails.root.join("config", "simple_events.json").freeze
   ALL = JSON.parse(File.read(FILE_PATH))
 
+  include EventCharacteristics
+
   def self.default_off_filter
     ALL.values.map do |subcats|
       subcats.select { |k,v| v["filter_default_value"] == "off" }.keys
@@ -25,10 +27,6 @@ class Events::SimpleEvent < OpenStruct
 
   def id
     Digest::MD5.hexdigest(name)
-  end
-
-  def time_range
-    start_time..end_time
   end
 
   private
