@@ -35,5 +35,6 @@ en:
       short: '%d/%m'
   time:
     formats:
+      date: '%d/%m'
       time: '%H:%M'
       short: '%d/%m %H:%M'

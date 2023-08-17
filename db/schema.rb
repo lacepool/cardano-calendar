@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_14_120854) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_17_121734) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -24,6 +24,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_14_120854) do
     t.jsonb "extras"
     t.datetime "created_at", default: -> { "now()" }, null: false
     t.datetime "updated_at", default: -> { "now()" }, null: false
+    t.boolean "open_end", default: false, null: false
+    t.string "time_format"
     t.index ["category"], name: "index_events_on_category"
     t.index ["end_time"], name: "index_events_on_end_time"
     t.index ["extras"], name: "index_events_on_extras", using: :gin

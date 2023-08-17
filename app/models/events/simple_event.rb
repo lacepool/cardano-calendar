@@ -71,6 +71,8 @@ class Events::SimpleEvent < OpenStruct
               arr << new(
                 start_time: start_time,
                 end_time: end_time,
+                open_end: !!event["open_end"],
+                time_format: event["time_format"],
                 name: event["name"],
                 description: event["description"],
                 category: category

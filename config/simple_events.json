@@ -118,5 +118,326 @@
         "event_description": "As a stake pool operator, it is possible to run queries to determine whether your pool is scheduled to mint blocks. Leaderlog information for the next epoch is available within 1.5 days from the end of the current epoch."
       }
     }
+  },
+  "Cardano Summit": {
+    "main_cardanosummit": {
+      "filter_label": "Main Event",
+      "filter_default_value": "on",
+      "events": [
+        {
+          "name": "Main Cardano Summit 2022, Lausanne",
+          "description": "",
+          "time_format": "date",
+          "start_time": 1668816000,
+          "end_time": 1669075199
+        },
+        {
+          "name": "Main Cardano Summit 2023, Dubai",
+          "description": "",
+          "time_format": "date",
+          "start_time": 1698897600,
+          "end_time": 1699070399
+        }
+      ]
+    },
+    "community_cardanosummit_amsterdam": {
+      "filter_label": "Amsterdam Community",
+      "filter_default_value": "off",
+      "events": [
+        {
+          "name": "Cardano Summit 2023 (Amsterdam Community)",
+          "description": "For the third year in a row, experienced host Max von Rossem will organize the Amsterdam event, welcoming the community to join an exciting session. NFT ticketing sent closer to event.",
+          "open_end": true,
+          "start_time": 1699711200,
+          "end_time": 1699711200
+        }
+      ]
+    },
+    "community_cardanosummit_bangalore": {
+      "filter_label": "Bangalore Community",
+      "filter_default_value": "off",
+      "events": [
+        {
+          "name": "Cardano Summit 2023 (Bangalore Community)",
+          "description": "At the Bangalore event, the Nucast team will welcome the Indian community for an enjoyable evening of discussions and networking opportunities. NFT ticketing sent closer to event.",
+          "open_end": true,
+          "start_time": 1699050600,
+          "end_time": 1699050600
+        }
+      ]
+    },
+    "community_cardanosummit_bangkok": {
+      "filter_label": "Bangkok Community",
+      "filter_default_value": "off",
+      "events": [
+        {
+          "name": "Cardano Summit 2023 (Bangkok Community)",
+          "description": "Amidst the educational environment of the Srinakharinwirot University in Bangkok, Metinee Boonrattanaamorn will receive the Thai Cardano community for an afternoon of learning and networking. NFT ticketing sent closer to event.",
+          "open_end": true,
+          "start_time": 1699135200,
+          "end_time": 1699135200
+        }
+      ]
+    },
+    "community_cardanosummit_buenosaires": {
+      "filter_label": "Buenos Aires Community",
+      "filter_default_value": "off",
+      "events": [
+        {
+          "name": "Cardano Summit 2023 (Buenos Aires Community)",
+          "description": "Jose Iadicicco, hosting the Buenos Aires event for the third year in a row, will bring the wide Argentinian community together for a day of lively discussions and conversations. NFT ticketing sent closer to event.",
+          "open_end": true,
+          "start_time": 1699110000,
+          "end_time": 1699110000
+        }
+      ]
+    },
+    "community_cardanosummit_capetown": {
+      "filter_label": "Cape Town Community",
+      "filter_default_value": "off",
+      "events": [
+        {
+          "name": "Cardano Summit 2023 (Cape Town Community)",
+          "description": "Happening a few days before the main stage event in Dubai, the Cape Town event will take place at the recently opened Cardano Center and welcome everyone to a day of thrilling conversations. NFT ticketing sent closer to event.",
+          "open_end": true,
+          "start_time": 1698393600,
+          "end_time": 1698393600
+        }
+      ]
+    },
+    "community_cardanosummit_curitiba": {
+      "filter_label": "Curitiba Community",
+      "filter_default_value": "off",
+      "events": [
+        {
+          "name": "Cardano Summit 2023 (Curitiba Community)",
+          "description": "Two weeks after the main stage event in Dubai, Cardano Ambassador Thiago Nunes will host the Curitiba event and offer the Brazilian community a second chance to network and debate. NFT ticketing sent closer to event.",
+          "open_end": true,
+          "start_time": 1700308800,
+          "end_time": 1700308800
+        }
+      ]
+    },
+    "community_cardanosummit_dusseldorf": {
+      "filter_label": "Düsseldorf Community",
+      "filter_default_value": "off",
+      "events": [
+        {
+          "name": "Cardano Summit 2023 (Düsseldorf Community)",
+          "description": "Organized by the IAMX team, the Düsseldorf event will focus on building bridges between traditional businesses and the Cardano ecosystem.",
+          "open_end": true,
+          "start_time": 1699092000,
+          "end_time": 1699092000
+        }
+      ]
+    },
+    "community_cardanosummit_hanoi": {
+      "filter_label": "Hanoi Community",
+      "filter_default_value": "off",
+      "events": [
+        {
+          "name": "Cardano Summit 2023 (Hanoi Community)",
+          "description": "Organized by Cardano Ambassador and stake pool operator Tien Nguyen Anh, the Hanoi event will start early in the morning and last the majority of the day. NFT ticketing sent closer to event.",
+          "open_end": true,
+          "start_time": 1699111800,
+          "end_time": 1699111800
+        }
+      ]
+    },
+    "community_cardanosummit_hochiminhcity": {
+      "filter_label": "Ho Chi Minh City Community",
+      "filter_default_value": "off",
+      "events": [
+        {
+          "name": "Cardano Summit 2023 (Ho Chi Minh City Community)",
+          "description": "Mie Tran, Cardano Ambassador and Reddit moderator, will welcome all blockchain enthusiasts to the Ho Chi Minh event, which will begin in the early hours of the day. NFT ticketing sent closer to event.",
+          "open_end": true,
+          "start_time": 1699110000,
+          "end_time": 1699110000
+        }
+      ]
+    },
+    "community_cardanosummit_jakarta": {
+      "filter_label": "Jakarta Community",
+      "filter_default_value": "off",
+      "events": [
+        {
+          "name": "Cardano Summit 2023 (Jakarta Community)",
+          "description": "Fanny Wijaya will host the Jakarta event, giving the Indonesian community a full day of memorable moments and networking opportunities. NFT ticketing sent closer to event.",
+          "open_end": true,
+          "start_time": 1699117200,
+          "end_time": 1699117200
+        }
+      ]
+    },
+    "community_cardanosummit_kinshasa": {
+      "filter_label": "Kinshasa Community",
+      "filter_default_value": "off",
+      "events": [
+        {
+          "name": "Cardano Summit 2023 (Kinshasa Community)",
+          "description": "Hosted by Dan Baruka, founder of the group Uptodate Developers, the Kinshasa event will be held in French, offering the French-speaking Cardano community an opportunity to connect and network. NFT ticketing sent closer to event.",
+          "open_end": true,
+          "start_time": 1699099200,
+          "end_time": 1699099200
+        }
+      ]
+    },
+    "community_cardanosummit_kumasi": {
+      "filter_label": "Kumasi Community",
+      "filter_default_value": "off",
+      "events": [
+        {
+          "name": "Cardano Summit 2023 (Kumasi Community)",
+          "description": "Cardano Ambassadors Mohammed Mustapha Yakubu and Jeremiah Baani will bring together the Ghanaian community and welcome all blockchain enthusiasts as well as anyone curious about new technologies. NFT ticketing sent closer to event.",
+          "open_end": true,
+          "start_time": 1699088400,
+          "end_time": 1699088400
+        }
+      ]
+    },
+    "community_cardanosummit_london": {
+      "filter_label": "London Community",
+      "filter_default_value": "off",
+      "events": [
+        {
+          "name": "Cardano Summit 2023 (London Community)",
+          "description": "The Upstream Stake Pool team will welcome all blockchain enthusiasts to the London event for an afternoon of enjoyable conversations and discussions. NFT ticketing sent closer to event.",
+          "open_end": true,
+          "start_time": 1699099200,
+          "end_time": 1699099200
+        }
+      ]
+    },
+    "community_cardanosummit_losangeles": {
+      "filter_label": "Los Angeles Community",
+      "filter_default_value": "off",
+      "events": [
+        {
+          "name": "Cardano Summit 2023 (Los Angeles Community)",
+          "description": "Stake pool operators Nadeem Ahmed and Christian Hercules will welcome the Los Angeles Cardano community to an evening looking to highlight local projects and initiatives. NFT ticketing sent closer to event.",
+          "open_end": true,
+          "start_time": 1699092000,
+          "end_time": 1699092000
+        }
+      ]
+    },
+    "community_cardanosummit_mexicocity": {
+      "filter_label": "Mexico City Community",
+      "filter_default_value": "off",
+      "events": [
+        {
+          "name": "Cardano Summit 2023 (Mexico City Community)",
+          "description": "Two days before the main stage event in Dubai, Enrique Guasp will receive the Mexican community for an afternoon of networking and engaging conversations. NFT ticketing sent closer to event.",
+          "open_end": true,
+          "start_time": 1699092000,
+          "end_time": 1699092000
+        }
+      ]
+    },
+    "community_cardanosummit_miami": {
+      "filter_label": "Miami Community",
+      "filter_default_value": "off",
+      "events": [
+        {
+          "name": "Cardano Summit 2023 (Miami Community)",
+          "description": "Hosted by Cardano Ambassador Hassan Michael, the Miami event will provide educational content, business development mini-seminars, and networking opportunities, as well as a watch party. NFT ticketing sent closer to event.",
+          "open_end": true,
+          "start_time": 1699081200,
+          "end_time": 1699081200
+        }
+      ]
+    },
+    "community_cardanosummit_newyorkcity": {
+      "filter_label": "New York City Community",
+      "filter_default_value": "off",
+      "events": [
+        {
+          "name": "Cardano Summit 2023 (New York City Community)",
+          "description": "In cosmopolitan New York, Cardano Ambassador Mototsugu Oba will host an event focused on development on Cardano, giving all attendees several opportunities to debate and network. NFT ticketing sent closer to event.",
+          "open_end": true,
+          "start_time": 1698559200,
+          "end_time": 1698559200
+        }
+      ]
+    },
+    "community_cardanosummit_oslo": {
+      "filter_label": "Oslo Community",
+      "filter_default_value": "off",
+      "events": [
+        {
+          "name": "Cardano Summit 2023 (Oslo Community)",
+          "description": "Thomas Lindseth of Krypto Labs will host the Oslo event, which will happen a few days after the main stage event in Dubai. Keeping with the latest discussions, the Oslo event will focus on governance. NFT ticketing sent closer to event.",
+          "open_end": true,
+          "start_time": 1699704000,
+          "end_time": 1699704000
+        }
+      ]
+    },
+    "community_cardanosummit_sanantonio": {
+      "filter_label": "San Antonio Community",
+      "filter_default_value": "off",
+      "events": [
+        {
+          "name": "Cardano Summit 2023 (San Antonio Community)",
+          "description": "Beau Block will host the San Antonio event, starting with a watch party on 3 November and a full day of discussions and networking on 4 November. NFT ticketing sent closer to event.",
+          "open_end": true,
+          "start_time": 1698987600,
+          "end_time": 1698987600
+        }
+      ]
+    },
+    "community_cardanosummit_seoul": {
+      "filter_label": "Seoul Community",
+      "filter_default_value": "off",
+      "events": [
+        {
+          "name": "Cardano Summit 2023 (Seoul Community)",
+          "description": "Oscar Hong, Cardano Ambassador and often community educator, will host the Seoul event, with a particular emphasis on the latest developments on Cardano. NFT ticketing sent closer to event.",
+          "open_end": true,
+          "start_time": 1699138800,
+          "end_time": 1699138800
+        }
+      ]
+    },
+    "community_cardanosummit_tokyo": {
+      "filter_label": "Tokyo Community",
+      "filter_default_value": "off",
+      "events": [
+        {
+          "name": "Cardano Summit 2023 (Tokyo Community)",
+          "description": "In vibrant Tokyo, Cardano Ambassador YUTA, will welcome the Japanese blockchain enthusiasts to an evening full of exciting discussions. NFT ticketing sent closer to event.",
+          "open_end": true,
+          "start_time": 1699241400,
+          "end_time": 1699241400
+        }
+      ]
+    },
+    "community_cardanosummit_vancouver": {
+      "filter_label": "Vancouver Community",
+      "filter_default_value": "off",
+      "events": [
+        {
+          "name": "Cardano Summit 2023 (Vancouver Community)",
+          "description": "A week after the main stage event in Dubai, long-time participant in Project Catalyst Nori Nishigaya will give the Canadian community another opportunity to get together and discuss the latest in Cardano. NFT ticketing sent closer to event.",
+          "open_end": true,
+          "start_time": 1699678800,
+          "end_time": 1699678800
+        }
+      ]
+    },
+    "community_cardanosummit_vienna": {
+      "filter_label": "Vienna Community",
+      "filter_default_value": "off",
+      "events": [
+        {
+          "name": "Cardano Summit 2023 (Vienna Community)",
+          "description": "Elias Ring and Simon Fleck will host the Vienna event a week after the main stage event in Dubai. The Vienna event looks to showcase the unique projects being developed by the local community. NFT ticketing sent closer to event.",
+          "open_end": true,
+          "start_time": 1699700400,
+          "end_time": 1699700400
+        }
+      ]
+    }
   }
 }
