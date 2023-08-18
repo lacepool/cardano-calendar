@@ -11,6 +11,48 @@
       <div class="modal-body">
         <%= event.description.html_safe %>
       </div>
+      <div class="modal-footer">
+
+        <div class="btn-group">
+          <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-calendar2-plus me-2"></i> Add to Calendar
+          </button>
+
+          <ul class="dropdown-menu">
+            <li>
+              <%= link_to event.add_to_calendar.apple_url, class: "dropdown-item" do %>
+                <i class="bi bi-apple me-2"></i> Apple Calendar
+              <% end %>
+            </li>
+            <li>
+              <%= link_to event.add_to_calendar.google_url, class: "dropdown-item" do %>
+                <i class="bi bi-google me-2"></i> Google Calendar
+              <% end %>
+            </li>
+            <li>
+              <%= link_to event.add_to_calendar.android_url, class: "dropdown-item" do %>
+                <i class="bi bi-android me-2"></i> Android
+              <% end %>
+            </li>
+            <li>
+              <%= link_to event.add_to_calendar.outlook_url, class: "dropdown-item" do %>
+                <i class="bi bi-microsoft me-2"></i> Outlook Calendar
+              <% end %>
+            </li>
+            <li>
+              <%= link_to event.add_to_calendar.outlook_com_url, class: "dropdown-item" do %>
+                <i class="bi bi-microsoft me-2"></i> Outlook.com Calendar
+              <% end %>
+            </li>
+            <li>
+              <%= link_to event.add_to_calendar.office365_url, class: "dropdown-item" do %>
+                <i class="bi bi-microsoft me-2"></i> Office365 Calendar
+              <% end %>
+            </li>
+          </ul>
+        </div>
+
+      </div>
     </div>
   </div>
 </div>

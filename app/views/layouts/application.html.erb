@@ -76,13 +76,13 @@
 
             <li class="nav-item dropdown me-3">
               <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="bi-globe2 me-1"></i> <%= current_tz %>
+                <i class="bi-globe2 me-1"></i> <%= ActiveSupport::TimeZone[current_timezone] %>
               </a>
 
               <ul class="dropdown-menu tz-dropdown dropdown-menu-end">
                 <% ActiveSupport::TimeZone.all.sort.each do |tz| %>
                   <li>
-                    <%= link_to events_path(permitted_params.merge(tz: tz.name)), class: "dropdown-item #{'active' if current_tz == tz.name}" do %>
+                    <%= link_to events_path(permitted_params.merge(tz: tz.tzinfo.identifier)), class: "dropdown-item #{'active' if current_timezone == tz.name}" do %>
                       <%= tz %>
                     <% end %>
                   </li>

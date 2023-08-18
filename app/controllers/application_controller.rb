@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   private
 
   def set_time_zone(&block)
-    Time.use_zone(params.fetch(:tz, "UTC"), &block)
+    Time.use_zone(params.fetch(:tz, "Etc/UTC"), &block)
 
   rescue ArgumentError => e
     flash[:warning] = "#{e} – Falling back to UTC"

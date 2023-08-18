@@ -56,7 +56,7 @@ gem "bootsnap", require: false
 gem "gqli"
 
 gem "simple_calendar", "~> 3.0"
-
+gem "add_to_calendar", "~> 0.3"
 gem "montrose"
 
 group :development, :test do

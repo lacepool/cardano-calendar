@@ -1,5 +1,5 @@
 module ApplicationHelper
-  def current_tz
-    params.fetch(:tz, "UTC")
+  def current_timezone
+    @current_timezone ||= Time.zone.tzinfo.identifier
   end
 end
