@@ -2,9 +2,6 @@ class EventsController < ApplicationController
   helper_method :permitted_params
 
   def index
-    on_filters = filter.select {|_, value| value == "on" }.keys
-    off_filters = filter.select {|_, value| value == "off" }.keys + Events::SimpleEvent.default_off_filter - on_filters
-
     respond_to do |f|
       f.html do
         events = Events::SimpleEvent.all(except: off_filters, between: date_range)
@@ -72,6 +69,15 @@ class EventsController < ApplicationController
     else
       start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week.end_of_day
     end
+  end
+
+  def on_filters
+    @on_filters ||= filter.select {|_, value| value == "on" }.keys
+  end
+
+  def off_filters
+    @off_filters ||= filter.select {|_, value| value == "off" }.keys +
+      Events::SimpleEvent.default_off_filter - on_filters
   end
 
   def filter
