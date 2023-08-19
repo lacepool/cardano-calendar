@@ -5,16 +5,10 @@ Turbo.session.drive = true
 import * as bootstrap from "bootstrap"
 
 function ready(callback){
-    // in case the document is already rendered
-    if (document.readyState!='loading') callback();
-    // modern browsers
-    else if (document.addEventListener) document.addEventListener('DOMContentLoaded', callback);
-    // IE <= 8
-    else document.attachEvent('onreadystatechange', function(){
-        if (document.readyState=='complete') callback();
-    });
+  document.addEventListener('turbo:load', callback);
 }
 
+// Toasts
 ready(function(){
   const toastElList = document.querySelectorAll('.toast');
   const toastList = [...toastElList].map(toastEl => new bootstrap.Toast(toastEl, {animation: true}));
@@ -22,10 +16,24 @@ ready(function(){
   [...toastList].map(toast => toast.show())
 });
 
+// Popovers
 ready(function(){
   const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
   const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl, { trigger: 'focus' }))
 });
+
+// Modals
+ready(function(){
+  const modalTriggers = document.querySelectorAll('.modal-trigger');
+
+  [...modalTriggers].map(triggerEl => {
+    triggerEl.addEventListener('click', evt => {
+      eventId = evt.currentTarget.nextElementSibling.id
+      new bootstrap.Modal(document.getElementById(eventId), {}).show()
+    });
+  });
+});
+
 
 
 /*!
