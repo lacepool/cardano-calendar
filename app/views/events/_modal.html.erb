@@ -2,22 +2,14 @@
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <div>
-          <time class="text-muted font-monospace d-block"><%= event_time(event) %></time>
-          <h1 class="modal-title fs-4"><%= event.name %></h1>
-        </div>
-        <button type="button" class="btn-close align-self-start" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h1 class="modal-title fs-4"><%= event.name %></h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body modal-dialog-scrollable">
+        <time class="text-muted font-monospace d-block mb-3"><%= event_time(event) %></time>
         <%= event.description.html_safe %>
       </div>
       <div class="modal-footer">
-
-        <% if event.website %>
-          <%= link_to event.website, target: "_blank", class: "btn btn-secondary" do %>
-            <i class="bi bi-box-arrow-up-right me-2"></i> Website
-          <% end %>
-        <% end %>
 
         <div class="btn-group">
           <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -57,6 +49,12 @@
             </li>
           </ul>
         </div>
+
+        <% if event.website %>
+          <%= link_to event.website, target: "_blank", class: "btn btn-secondary" do %>
+            <i class="bi bi-box-arrow-up-right me-2"></i> Website
+          <% end %>
+        <% end %>
 
       </div>
     </div>
