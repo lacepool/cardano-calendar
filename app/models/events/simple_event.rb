@@ -74,6 +74,7 @@ class Events::SimpleEvent < OpenStruct
                 open_end: !!event["open_end"],
                 time_format: event["time_format"],
                 name: event["name"],
+                website: event["website"],
                 description: event["description"],
                 category: category
               )

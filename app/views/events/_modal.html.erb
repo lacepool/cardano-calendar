@@ -13,6 +13,12 @@
       </div>
       <div class="modal-footer">
 
+        <% if event.website %>
+          <%= link_to event.website, target: "_blank", class: "btn btn-secondary" do %>
+            <i class="bi bi-box-arrow-up-right me-2"></i> Website
+          <% end %>
+        <% end %>
+
         <div class="btn-group">
           <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="bi bi-calendar2-plus me-2"></i> Add to Calendar

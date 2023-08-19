@@ -127,13 +127,15 @@
         {
           "name": "Cardano Summit 2022, Lausanne",
           "description": "",
+          "website": "https://summit.cardano.org/",
           "time_format": "date",
           "start_time": 1668816000,
           "end_time": 1669075199
         },
         {
           "name": "Cardano Summit 2023, Dubai",
-          "description": "<p>The global Cardano event returns, bringing together industry leaders, businesses, and blockchain enthusiasts. It’s a hub to network and connect with a new generation of innovative projects.</p><p>In Dubai, attendees will enjoy not only thought-provoking discussions, masterclasses, and a fresh round of Cardano Summit Awards, but also a desert experience, hackathon, shark tank, and much more.</p><h5>Tickets</h5><p>The Cardano Summit brings together some of the brightest minds in blockchain. It’s a global celebration to learn, network, and collaborate with those leveraging Cardano to build the future around the world. Register for the events you will be attending.</p><a href='https://tickets.summit.cardano.org/#tickets' class='btn btn-primary' target='_blank'>Book Tickets</a>",
+          "description": "<p>The global Cardano event returns, bringing together industry leaders, businesses, and blockchain enthusiasts. It’s a hub to network and connect with a new generation of innovative projects.</p><p>In Dubai, attendees will enjoy not only thought-provoking discussions, masterclasses, and a fresh round of Cardano Summit Awards, but also a desert experience, hackathon, shark tank, and much more.</p><h5>Tickets</h5><p>The Cardano Summit brings together some of the brightest minds in blockchain. It’s a global celebration to learn, network, and collaborate with those leveraging Cardano to build the future around the world. Register for the events you will be attending.</p>",
+          "website": "https://summit.cardano.org/",
           "time_format": "date",
           "start_time": 1698897600,
           "end_time": 1699070399
@@ -436,6 +438,67 @@
           "open_end": true,
           "start_time": 1699700400,
           "end_time": 1699700400
+        }
+      ]
+    }
+  },
+  "Conferences & Hackathons": {
+    "futuristconference": {
+      "filter_label": "Futurist Conference",
+      "filter_default_value": "on",
+      "events": [
+        {
+          "name": "Futurist Conference 2022",
+          "description": "<p>Untraceable’s 4th annual Futurist Conference is the largest blockchain and emerging technologies event in Canada.</p><p>The event brings together leading experts from around the globe including developers, investors, startups, enterprise leaders, financial institutions, academics and emerging tech pioneers. World class thought leaders in Blockchain, Crypto, DeFi, AI, Gaming, FinTech, Privacy and other areas will discuss upcoming trends, new tech, partnerships, research and predictions within future defining sectors.</p>",
+          "website": "https://www.futuristconference.com",
+          "start_time": 1660003200,
+          "end_time": 1660168799
+        },
+        {
+          "name": "Futurist Conference 2023",
+          "description": "<p>Blockchain Futurist Conference is returning for its 5th year on August 15 & 16, 2023 in Toronto, Canada at Rebel Entertainment Complex and Cabana.</p><p>The conference focuses on exploring the future potential and direction of blockchain technology by bringing together the greatest minds of Web3, crypto, metaverse, DeFi, GameFi, NFTs, DAOs, and more Designed as a fully immersive crypto experience with crypto powered marketplaces, NFT Galleries, Crypto ATMs, and blockchain technology used throughout the event.</p>",
+          "website": "https://www.futuristconference.com",
+          "start_time": 1692057600,
+          "end_time": 1692223199
+        }
+      ]
+    },
+    "coinfestasia": {
+      "filter_label": "Coinfest Asia",
+      "filter_default_value": "on",
+      "events": [
+        {
+          "name": "Coinfest Asia 2023 - Bali",
+          "description": "<p>Explore real-world insights and valuable connections in Web2.5 where web2 and web3 industries converge through an immersive festival experience.</p>",
+          "website": "https://coinfest.asia",
+          "start_time": 1692878400,
+          "end_time": 1692986400
+        }
+      ]
+    },
+    "sbc": {
+      "filter_label": "The Science of Blockchain Conference",
+      "filter_default_value": "on",
+      "events": [
+        {
+          "name": "The Science of Blockchain Conference 2023",
+          "description": "<p>The conference focuses on technical innovations in the blockchain ecosystem, and brings together researchers and practioners working in the space. We are interested in the application of cryptography, decentralized protocols, formal methods, and empirical analysis, to improving the security and scalability of blockchain deployments. We aim to foster collaboration among practitioners and researchers working on blockchain protocol development, cryptography, distributed systems, secure computing, crypto-economics, and economic risk analysis.</p><p>The conference is co-organized by the <a href='https://cbr.stanford.edu'>Stanford Center for Blockchain Research</a> (CBR), <a href='https://www.initc3.org/''>IC3</a>, and <a href='https://rdi.berkeley.edu/'>Berkeley RDI</a>.</p><p><b>Venue:</b> Arrillaga Alumni Center (326 Galvez St), Stanford University. <a href='https://www.google.com/maps/place/Frances+C.+Arrillaga+Alumni+Center/@37.430725,-122.1648,15z/data=!4m5!3m4!1s0x0:0x778a60994d7a5e4c!8m2!3d37.430681!4d-122.1647035'>Map</a>.</p>",
+          "website": "https://cbr.stanford.edu/sbc23/",
+          "start_time": 1693188000,
+          "end_time": 1693391400
+        }
+      ]
+    },
+    "permissionless": {
+      "filter_label": "Permissionless",
+      "filter_default_value": "on",
+      "events": [
+        {
+          "name": "Permissionless 2023",
+          "description": "<p>Permissionless II is the world’s largest DeFi event.</p>Join 7000+ crypto enthusiasts and builders September 11-13th at the Austin Convention Center in Austin, TX.<p>This 3 day experience is filled with keynotes from Web3 leaders and thoughtfully curated panels, networking events, unforgettable parties, activations, and so much more.</p>",
+          "website": "https://blockworks.co/event/permissionless-2023",
+          "start_time": 1694401200,
+          "end_time": 1694604600
         }
       ]
     }
