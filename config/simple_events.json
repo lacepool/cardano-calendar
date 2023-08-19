@@ -443,6 +443,19 @@
     }
   },
   "Conferences & Hackathons": {
+    "rareevo": {
+      "filter_label": "Rare Evo",
+      "filter_default_value": "on",
+      "events": [
+        {
+          "name": "Rare Evo 2023",
+          "description": "<p>Rare Evo is a blockchain convention welcoming multi-chain projects, communities, industry leaders, investors, and enthusiasts to network, educate, and celebrate around the theme of interoperability and the convergence of traditional industry with Web3 technology. Our audience and programming cover all verticles of the space alongside an inclusive blockchain agnostic approach. The event offers a variety of networking opportunities and entertainment options daily and nightly through the course of a long weekend.</p><p>Beyond the expo hall, where blockchain professionals can network and gain brand exposure, education awaits in our main stage auditorium, hosting leaders of the space in panels, fireside chats, and keynote speeches. Our breakout rooms which contain workshops, hackathons, lectures, and shared co-working space, offer an intimate and collaborative setting throughout the event.</p><p>Attendees can take a break from business anytime and enjoy interactive experiences, such as art installations, web3/traditional gaming tournaments, three separate after party opportunities stacked with live entertainment, and a wide variety of dining options and resort amenities. VIP ticket holders will receive hot breakfast, lunch, and hors d'oeuvres alongside drink tickets conveniently within the event space, while GA can enjoy a wide selection of onsite dining options throughout the greater venue areas.</p><p>Thursday will consist of Industry day, including booth build out followed by an exclusive kick-off party for sponsors, VIP ticket holders, and exhibitor teams. Friday and Saturday will provide two full days of exhibition and programming, followed by after parties each night for all attendees. Rare Evo is hosted at a family and kid friendly venue with plenty of options for the whole crew to stay busy while certain members dedicate their attention to the event itself.</p>",
+          "website": "https://rareevo.io",
+          "start_time": 1692867600,
+          "end_time": 1693044000
+        }
+      ]
+    },
     "futuristconference": {
       "filter_label": "Futurist Conference",
       "filter_default_value": "on",
