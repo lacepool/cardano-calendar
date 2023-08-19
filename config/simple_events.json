@@ -65,7 +65,7 @@
         "schedule_end_time": null,
         "duration": "PT1H",
         "event_name": "Town Hall Meeting",
-        "event_description": "Join Project Catalyst team and community for our weekly town hall followed by an open space with break out rooms. https://zoom.us/meeting/register/tJEtduyupzMvHNUczCQwfFJGcXzmw2lDwkIf#/registration"
+        "event_description": "<p>Join Project Catalyst team and community for our weekly town hall followed by an open space with break out rooms.</p><a href='https://zoom.us/meeting/register/tJEtduyupzMvHNUczCQwfFJGcXzmw2lDwkIf#/registration' target='_blank' class='btn btn-primary'>Registration</a>"
       }
     },
     "vote-registrations": {
