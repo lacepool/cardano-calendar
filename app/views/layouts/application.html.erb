@@ -11,11 +11,11 @@
   </head>
 
   <body>
-    <div class="toast-container p-3 top-0 end-0">
+    <div class="toast-container p-3 top-0 end-0" data-controller="popper">
       <%- flash.each do |type, msg| %>
         <% if [:success, :warning].include?(type.to_sym) %>
 
-          <div class="toast text-bg-warning" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast text-bg-warning" data-popper-target="toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
               <strong class="me-auto"><%= type.capitalize %></strong>
               <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -68,7 +68,7 @@
         </a>
 
         <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
         </button>
 
         <div id="navbarCollapse" class="collapse navbar-collapse">
