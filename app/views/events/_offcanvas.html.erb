@@ -26,6 +26,7 @@
           <div class="accordion accordion-flush" id="event_filter">
             <%= simple_event_filters %>
             <%= meetup_event_filters %>
+            <%= wallet_event_filters if permitted_params.include?(:stake_address) %>
           </div>
         </div>
       </div>
@@ -45,5 +46,3 @@
     </div>
   </div>
 </div>
-
-

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_17_121734) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_21_084507) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -31,6 +31,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_17_121734) do
     t.index ["extras"], name: "index_events_on_extras", using: :gin
     t.index ["start_time"], name: "index_events_on_start_time"
     t.index ["type"], name: "index_events_on_type"
+  end
+
+  create_table "wallets", force: :cascade do |t|
+    t.string "stake_address"
+    t.datetime "last_connected_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["stake_address"], name: "index_wallets_on_stake_address"
   end
 
 end

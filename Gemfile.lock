@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/blockfrost/blockfrost-ruby
+  revision: 6ef8747163e0866f120055bcb7668e91b1de7cd4
+  specs:
+    blockfrost-ruby (0.1.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -235,6 +241,7 @@ PLATFORMS
 
 DEPENDENCIES
   add_to_calendar (~> 0.3)
+  blockfrost-ruby!
   bootsnap
   cssbundling-rails
   debug

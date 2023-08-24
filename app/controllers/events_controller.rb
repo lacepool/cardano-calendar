@@ -6,6 +6,11 @@ class EventsController < ApplicationController
       f.html do
         events = Events::SimpleEvent.all(except: off_filters, between: date_range)
         events += Events::Meetup.where("extras->'group_urlname' ?| array[:names]", names: on_filters).between(date_range)
+        if permitted_params[:stake_address] && Wallet.where(stake_address: permitted_params[:stake_address]).exists?
+          wallet_on_filters = Events::Wallet.filters.keys - off_filters
+          events += Events::Wallet.where(category: wallet_on_filters).where("extras @> ?", {stake_address: permitted_params[:stake_address]}.to_json).between(date_range)
+        end
+
         @epochs = Epoch.all(between: date_range, with_events: events.sort_by(&:start_time))
       end
 
@@ -86,7 +91,7 @@ class EventsController < ApplicationController
 
   def permitted_params
     @params ||= params.permit(
-      :format, :view, :start_date, :tz, filter: {}
+      :format, :view, :start_date, :tz, :stake_address, filter: {}
     ).to_h.with_indifferent_access.symbolize_keys
   end
 end

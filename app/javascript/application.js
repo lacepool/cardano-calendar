@@ -11,3 +11,4 @@ Stimulus.debug = true
 Stimulus.register("popper", PopperController)
 
 import "./theme";
+import "./wallet_connect"

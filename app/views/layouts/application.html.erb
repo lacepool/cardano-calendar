@@ -6,6 +6,14 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <script>
+      window.process = {
+        env: {
+          PUBLIC_BLOCKFROST_PROJECT_ID: '<%= ENV.fetch("PUBLIC_BLOCKFROST_PROJECT_ID") %>'
+        }
+      }
+    </script>
+
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
@@ -73,6 +81,16 @@
 
         <div id="navbarCollapse" class="collapse navbar-collapse">
           <ul class="nav navbar-nav ms-auto d-flex align-items-sm-center">
+
+            <li class="nav-item dropdown me-3" id="wallet-dropdown" data-turbo-permanent>
+              <a class="nav-link dropdown-toggle" id="wallet-dropdown-current" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                <span id="wallet-dropdown-spinner" class="d-none spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
+                <span id="wallet-dropdown-text">Connect Wallet</span>
+              </a>
+
+              <ul class="dropdown-menu" id="wallet-dropdown-list">
+              </ul>
+            </li>
 
             <li class="nav-item dropdown me-3">
               <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">

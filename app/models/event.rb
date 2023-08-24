@@ -1,7 +1,7 @@
 class Event < ApplicationRecord
   include EventCharacteristics
 
-  enum category: [:meetup]
+  enum category: [:meetup, :delegations]
 
   scope :between, ->(date_range) { where(start_time: date_range).or(where(end_time: date_range)) }
 
