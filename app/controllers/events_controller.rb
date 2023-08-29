@@ -1,22 +1,19 @@
 class EventsController < ApplicationController
-  helper_method :permitted_params
+  helper_method :permitted_params, :event_param_filters
 
   def index
     respond_to do |f|
       f.html do
-        events = Events::SimpleEvent.all(except: off_filters, between: date_range)
-        events += Events::Meetup.where("extras->'group_urlname' ?| array[:names]", names: on_filters).between(date_range)
-        if permitted_params[:stake_address] && Wallet.where(stake_address: permitted_params[:stake_address]).exists?
-          wallet_on_filters = Events::Wallet.filters.keys - off_filters
-          events += Events::Wallet.where(category: wallet_on_filters).where("extras @> ?", {stake_address: permitted_params[:stake_address]}.to_json).between(date_range)
-        end
+        events = Events::SimpleEvent.all(except: filters.off_filters, between: date_range)
+        events += Events::Meetup.where("extras->'group_urlname' ?| array[:names]", names: filters.on_filters).between(date_range)
 
         @epochs = Epoch.all(between: date_range, with_events: events.sort_by(&:start_time))
       end
 
       f.ics do
-        events = Events::SimpleEvent.all(except: off_filters, between: ics_date_range)
-        events += Events::LeaderlogCheck.all(between: date_range) if on_filters.include?("leaderlog-check")
+        events = Events::SimpleEvent.all(except: filters.off_filters, between: ics_date_range)
+        events += Events::LeaderlogCheck.all(between: date_range) if filters.on_filters.include?("leaderlog-check")
+        events += Events::Meetup.where("extras->'group_urlname' ?| array[:names]", names: filters.on_filters).between(ics_date_range)
         @epochs = Epoch.all(between: ics_date_range, with_events: events)
 
         render plain: ics_calendar.to_ical
@@ -76,18 +73,10 @@ class EventsController < ApplicationController
     end
   end
 
-  def on_filters
-    @on_filters ||= filter.select {|_, value| value == "on" }.keys
+  def filters
+    @filters ||= EventParamFilters.new(permitted_params.fetch(:filter, {}))
   end
-
-  def off_filters
-    @off_filters ||= filter.select {|_, value| value == "off" }.keys +
-      Events::SimpleEvent.default_off_filter - on_filters
-  end
-
-  def filter
-    @filter ||= permitted_params.fetch(:filter, {})
-  end
+  alias_method :event_param_filters, :filters
 
   def permitted_params
     @params ||= params.permit(

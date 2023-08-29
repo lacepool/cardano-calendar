@@ -3,11 +3,12 @@ class Events::SimpleEvent < OpenStruct
   ALL = JSON.parse(File.read(FILE_PATH))
 
   include EventCharacteristics
+  extend Filterable
 
-  def self.default_off_filter
-    ALL.values.map do |subcats|
-      subcats.select { |k,v| v["filter_default_value"] == "off" }.keys
-    end.flatten
+  ALL.map do |category, filters|
+    filters.each do |f|
+      filter category: category, param: f[0], label: f[1]["filter_label"], default: f[1]["filter_default_value"]
+    end
   end
 
   def self.all(between:, except: [])

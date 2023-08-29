@@ -1,11 +1,12 @@
 class Event < ApplicationRecord
   include EventCharacteristics
+  extend Filterable
 
-  enum category: [:meetup, :delegations]
+  enum category: %i(meetup)
 
   scope :between, ->(date_range) { where(start_time: date_range).or(where(end_time: date_range)) }
 
   def website
-    extras["website"] if extras
+    extras.try(:[], "website")
   end
 end
