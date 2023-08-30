@@ -37,10 +37,10 @@
       <% end %>
     </div>
 
-    <header class="navbar navbar-expand-sm bg-body-tertiary">
+    <header class="navbar navbar-expand-md bg-body-tertiary">
 
       <div class="container-fluid">
-        <a class="navbar-brand primary" href="/">
+        <a class="navbar-brand primary ms-2" href="/">
           <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" class="bi me-2" id="cardano-logo" fill="currentColor" viewBox="0 0 360 360">
             <path class="st0" d="M102.8,172c-0.8,13.9,9.9,25.8,23.8,26.6c0.5,0,1,0,1.5,0c14,0,25.3-11.3,25.2-25.3c0-14-11.3-25.3-25.3-25.2 C114.6,148.1,103.5,158.6,102.8,172z"></path>
             <path class="st0" d="M8.6,165.5c-4.5-0.3-8.4,3.2-8.6,7.7s3.2,8.4,7.7,8.6c4.5,0.3,8.3-3.2,8.6-7.7 C16.6,169.6,13.1,165.8,8.6,165.5C8.6,165.5,8.6,165.5,8.6,165.5z"></path>
@@ -82,17 +82,9 @@
         <div id="navbarCollapse" class="collapse navbar-collapse">
           <ul class="nav navbar-nav ms-auto d-flex align-items-sm-center">
 
-            <li class="nav-item dropdown me-3" id="wallet-dropdown" data-turbo-permanent>
-              <a class="nav-link dropdown-toggle" id="wallet-dropdown-current" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                <span id="wallet-dropdown-spinner" class="d-none spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
-                <span id="wallet-dropdown-text">Connect Wallet</span>
-              </a>
+            <li class="nav-item dropdown me-4" id="walletConnect" data-controller="wallet" data-wallet-target="connect" data-turbo-permanent></li>
 
-              <ul class="dropdown-menu" id="wallet-dropdown-list">
-              </ul>
-            </li>
-
-            <li class="nav-item dropdown me-3">
+            <li class="nav-item dropdown me-4">
               <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="bi-globe2 me-1"></i> <%= ActiveSupport::TimeZone[current_timezone] %>
               </a>
@@ -108,7 +100,7 @@
               </ul>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item me-2">
               <div class="form-switch p-0">
                 <label for="themeSwitcher">
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-brightness-high" viewBox="0 0 21 30">

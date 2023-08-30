@@ -1,11 +1,15 @@
 class EventsController < ApplicationController
-  helper_method :permitted_params, :event_param_filters
+  helper_method :permitted_params, :wallet_connected?, :event_param_filters
 
   def index
     respond_to do |f|
       f.html do
         events = Events::SimpleEvent.all(except: filters.off_filters, between: date_range)
         events += Events::Meetup.where("extras->'group_urlname' ?| array[:names]", names: filters.on_filters).between(date_range)
+        if wallet_connected?
+          wallet_on_filters = EventFilter.by_class("Events::Wallet") - filters.off_filters
+          events += Events::Wallet.where(category: wallet_on_filters).with_stake_address(permitted_params[:stake_address]).between(date_range)
+        end
 
         @epochs = Epoch.all(between: date_range, with_events: events.sort_by(&:start_time))
       end
@@ -19,6 +23,10 @@ class EventsController < ApplicationController
         render plain: ics_calendar.to_ical
       end
     end
+  end
+
+  def wallet_connected?
+    @wallet_connected ||= permitted_params[:stake_address] && Wallet.where(stake_address: permitted_params[:stake_address]).exists?
   end
 
   def start_date

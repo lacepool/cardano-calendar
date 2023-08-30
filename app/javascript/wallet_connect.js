@@ -1,122 +1,211 @@
-import CardanoWallets from '@koralabs/cardano-wallets';
-import numeral from "numeral";
+import CardanoWallets from '@koralabs/cardano-wallets'
+import numeral from "numeral"
+import * as bootstrap from "bootstrap"
 
 'use strict'
 
 var WalletConnect = {
   utils: {
-    dropDownList: function() { return document.getElementById('wallet-dropdown-list') },
-    spinner: function() { return document.getElementById('wallet-dropdown-spinner') },
-    cardano: window.cardano,
-    listLabel: function() { return document.getElementById('wallet-dropdown-text') },
-    supportedWallets: ['eternl', 'lace', 'typhon', 'yoroi', 'nami', 'nufi'],
+    dropDownContainer: function() { return document.getElementById('walletConnect') },
+    disconnectLink: function() { return document.getElementById('walletConnectDisconnect') },
+    dropDownToggle: function() { return document.getElementById('walletConnectToggle') },
+    walletList: function() { return document.getElementById('walletList') },
+    dropDownToggleLabel: function() { return document.getElementById('walletConnectToggleLabel') },
+    dropDownToggleLabelText: "Connect Wallet",
+    dropDowntoggleConnectingLabelText: "Connecting",
+    disconnectIcon: '<i class="bi bi-eject-fill"></i>',
+    spinner: function() { return document.getElementById('walletConnectSpinner') },
+    supportedWallets: ['eternl', 'lace', 'typhoncip30', 'nami'],
+    localStorageKey: "lastConnectedCardanoWallet",
   },
   init: function(){
     this.buildDropDown()
 
-    const lastConnectedWallet = this.getLastConnectedWallet();
+    const lastConnectedWallet = this.getLastConnectedWallet()
 
     if(lastConnectedWallet) {
+      debugger
       this.connectToWallet(lastConnectedWallet)
-      // this.handleActiveStates(lastConnectedWallet)
-      return
     }
   },
   enableSpinner: function(){ this.utils.spinner().classList.remove("d-none")},
   disableSpinner: function(){ this.utils.spinner().classList.add("d-none")},
-  getLastConnectedWallet: () => localStorage.getItem('lastConnectedCardanoWallet'),
-  setLastConnectedWallet: walletKey => localStorage.setItem('lastConnectedCardanoWallet', walletKey),
+  getLastConnectedWallet: function(){ return JSON.parse(localStorage.getItem(this.utils.localStorageKey)) },
+  removeLastConnectedWallet: function(){ localStorage.removeItem(this.utils.localStorageKey)},
+  setLastConnectedWallet: function(wallet){ localStorage.setItem(this.utils.localStorageKey, JSON.stringify(wallet))},
   availableWallets: function() {
-    return [...this.utils.supportedWallets].map(walletKey => (
-      {
-        walletKey: walletKey,
-        wallet: cardano[walletKey]
+    utils = this.utils
+    arr = []
+    return [...this.utils.supportedWallets].reduce((arr, walletKey) => {
+      if(window.cardano[walletKey]) {
+        arr.push(
+          {
+            walletKey: walletKey,
+            walletName: window.cardano[walletKey].name,
+            walletIcon: window.cardano[walletKey].icon
+          }
+        )
       }
-    )).filter(item => item['wallet'] != undefined)
+      return arr
+    }, [])
+  },
+  createWalletIcon: function(iconStr) {
+    const icon = document.createElement('img')
+    icon.setAttribute("src", iconStr)
+    icon.setAttribute("width", "20")
+    icon.classList.add('walletIcon', 'me-2')
+
+    return icon
   },
   buildDropDown: function() {
     let _this = this
     let utils = this.utils
 
-    this.availableWallets().forEach((item) => {
-      const walletKey = item['walletKey']
-      const walletName = item['wallet'].name
-      const li = document.createElement('li')
-      const link = document.createElement('a')
-      const linkText = document.createTextNode(walletName)
+    // makes sure we start with an empty dropDownContainer
+    const originalDropDownContainer = utils.dropDownContainer()
+    const dropDownContainer = originalDropDownContainer.cloneNode(false)
+    originalDropDownContainer.parentElement.replaceChild(dropDownContainer, originalDropDownContainer)
 
+    // delete dropDownContainer.dataset.turboPermanent
+
+    const dropDownToggle = document.createElement('a')
+    dropDownToggle.classList.add("btn", "dropdown-toggle")
+    dropDownToggle.dataset.bsToggle = "dropdown"
+    dropDownToggle.setAttribute("id", "walletConnectToggle")
+    dropDownToggle.setAttribute("aria-expanded", "false")
+
+    const walletConnectToggleLabel = document.createElement("span")
+    walletConnectToggleLabel.setAttribute("id", "walletConnectToggleLabel")
+    walletConnectToggleLabel.innerText = utils.dropDownToggleLabelText
+
+    dropDownToggle.append(walletConnectToggleLabel)
+    dropDownContainer.append(dropDownToggle)
+
+    const walletList = document.createElement('ul')
+    walletList.setAttribute("id", "walletList")
+
+    if (this.availableWallets().length > 0) {
+      walletList.classList.add("dropdown-menu")
+      dropDownToggle.after(walletList)
+    }
+
+    this.availableWallets().forEach((item) => {
+      const walletListItem = document.createElement('li')
+
+      const link = document.createElement('a')
+      link.setAttribute("href", "#")
+      link.classList.add('py-2')
+      const linkText = document.createTextNode(item['walletName'])
+
+      const icon = this.createWalletIcon(item['walletIcon'])
+
+      link.appendChild(icon)
       link.appendChild(linkText)
+
       link.classList.add('dropdown-item')
-      link.dataset.wallet = walletKey
-      li.appendChild(link)
-      utils.dropDownList().appendChild(li)
+      link.dataset.wallet = item['walletKey']
+
+      walletListItem.appendChild(link)
+      walletList.appendChild(walletListItem)
 
       link.addEventListener('click', (event) => {
-        _this.connectToWallet(walletKey)
-        // _this.handleActiveStates(walletKey)
-      });
-    });
+        _this.connectToWallet(item)
+        event.preventDefault()
+      })
+    })
+
+    new bootstrap.Dropdown(utils.dropDownToggle())
   },
-  // handleActiveStates: function(walletKey){
-  //   this.utils.walletLinks.filter(l => l.dataset.wallet !== walletKey).forEach((link) => link.classList.add('disabled'))
-  //   this.utils.walletLinks.filter(l => l.dataset.wallet === walletKey).forEach((link) => link.classList.add('active'))
-  // },
-  connectToWallet: function(walletKey){
+  disconnectWallet: async function() {
+    await CardanoWallets.disableWallet()
+    this.removeLastConnectedWallet()
+    this.utils.dropDownContainer().classList.remove("connected")
+    this.buildDropDown()
+
+    const url = new URL(document.location)
+    url.searchParams.delete("stake_address")
+    Turbo.visit(url.pathname + url.search)
+  },
+  connectToWallet: function(wallet){
     _this = this
     utils = this.utils
 
-    this.enableSpinner()
-    utils.listLabel.innerHTML = "Connecting Wallet"
+    const spinner = document.createElement("span")
+    spinner.classList.add("spinner-border", "spinner-border-sm", "me-2")
+    spinner.setAttribute("id", "walletConnectSpinner")
+    spinner.setAttribute("role", "status")
+    spinner.setAttribute("aria-hidden", "true")
+    utils.dropDownToggle().prepend(spinner)
 
-    debugger
-    CardanoWallets.connect(walletKey).then(
+    utils.dropDownContainer().dataset.turboPermanent = "" // set data-turbo-permanent without value
+    utils.walletList().remove()
+    utils.dropDownToggle().classList.remove("dropdown-toggle")
+    utils.dropDownToggle().classList.add("disabled", "border-0")
+
+    utils.dropDownToggleLabel().innerText = utils.dropDowntoggleConnectingLabelText
+
+    CardanoWallets.connect(wallet['walletKey']).then(
       async result => {
-        const isMainnet = await CardanoWallets.isMainnet();
+
+        const isMainnet = await CardanoWallets.isMainnet()
         if (!isMainnet) {
-          throw new Error('Wallet must be in Mainnet');
+          throw new Error('Wallet must be in Mainnet')
         }
 
-        _this.setLastConnectedWallet(walletKey)
+        _this.setLastConnectedWallet(wallet)
 
-        CardanoWallets.getRewardAddresses().then(
-          async result => {
-            const addr = result[0];
-            const short_addr = addr.substr(0, 9) + ".." + addr.substr(-3)
-            const balance = await CardanoWallets.getAdaBalance();
+        const disconnectLink = document.createElement("a")
+        disconnectLink.classList.add("btn", "btn-sm", "btn-outline-secondary")
+        disconnectLink.setAttribute("id", "walletConnectDisconnect")
+        disconnectLink.innerHTML = utils.disconnectIcon
+        disconnectLink.addEventListener('click', (event) => {
+          _this.disconnectWallet()
+          event.preventDefault()
+        })
 
-            utils.listLabel().innerHTML = short_addr + ' | ₳' + numeral(balance).format('(0.00 a)');
+        utils.dropDownToggle().after(disconnectLink)
 
-            this.disableSpinner()
+        const stakeAddresses = await CardanoWallets.getRewardAddresses()
+        const addr = stakeAddresses[0]
+        const short_addr = addr.substr(0, 9) + ".." + addr.substr(-4)
 
-            const headers = { "Content-Type": "application/json; charset=utf-8" };
-            const body = JSON.stringify({wallet: {stake_address: addr}});
+        const span = document.createElement("span")
+        span.innerText = short_addr
 
-            const response = await fetch("/wallets", { method: 'POST', body: body, headers: headers})
-              .then(response => {
-                if(!response.ok) {
-                  throw new Error("HTTP status code: " + response.status)
-                }
-              })
-              .catch(err => console.error("Error creating wallet"))
+        const icon = _this.createWalletIcon(wallet['walletIcon'])
+        utils.dropDownToggleLabel().replaceChildren(icon)
+        utils.dropDownToggleLabel().append(span)
 
-            const url = new URL(document.location)
-            if (url.searchParams.get("stake_address") != addr){
-              url.searchParams.append("stake_address", addr)
-              Turbo.visit(url.pathname + url.search)
+        this.disableSpinner()
+        utils.dropDownContainer().classList.add("connected")
+
+        const headers = { "Content-Type": "application/json; charset=utf-8" }
+        const body = JSON.stringify({wallet: {stake_address: addr}})
+
+        fetch("/wallets", { method: 'POST', body: body, headers: headers})
+          .then(response => {
+            if(!response.ok) {
+              throw new Error("HTTP status code: " + response.status)
             }
-          },
-          err => {
-            throw new Error('Error getting reward addresses');
-          }
-        )
+          })
+          .catch(err => console.error("Error creating wallet"))
+
+        const url = new URL(document.location)
+        if (url.searchParams.get("stake_address") != addr){
+          url.searchParams.append("stake_address", addr)
+          Turbo.visit(url.pathname + url.search)
+        }
+
       },
       err => {
-        throw new Error('Error connecting to wallet');
+        console.error(err)
+        _this.buildDropDown()
       }
     )
   }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  WalletConnect.init();
-});
+// document.addEventListener('turbo:load', () => {
+  WalletConnect.init()
+})
