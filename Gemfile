@@ -31,7 +31,7 @@ gem "cssbundling-rails"
 gem "jbuilder"
 
 # Use Redis adapter to run Action Cable in production
-gem "redis", "~> 4.0"
+gem "redis", "~> 5.0"
 
 gem "icalendar"
 
@@ -55,9 +55,13 @@ gem "bootsnap", require: false
 
 gem "gqli"
 
+gem "sidekiq", "~> 7.1"
+gem 'sinatra', require: nil # for sidekiq web gui
+
 gem "simple_calendar", "~> 3.0"
 gem "add_to_calendar", "~> 0.3"
 gem "montrose"
+
 
 gem "blockfrost-ruby", git: "https://github.com/blockfrost/blockfrost-ruby"
 

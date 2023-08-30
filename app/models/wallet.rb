@@ -1,7 +1,15 @@
 class Wallet < ApplicationRecord
   validates :stake_address, uniqueness: true
 
-  after_create :fetch_delegations, :fetch_rewards
+  after_create :fetch_all_events
+
+  def fetch_all_events
+    [:fetch_delegations, :fetch_rewards].each do |action|
+      args = { wallet_id: id, action: action.to_s }.stringify_keys
+      # WalletEventWorker.new.perform(args)
+      WalletEventWorker.perform_async(args)
+    end
+  end
 
   def fetch_rewards
     rewards = Events::Wallet.staking_rewards.with_stake_address(stake_address)

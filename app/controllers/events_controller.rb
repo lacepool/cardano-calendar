@@ -7,7 +7,7 @@ class EventsController < ApplicationController
         events = Events::SimpleEvent.all(except: filters.off_filters, between: date_range)
         events += Events::Meetup.where("extras->'group_urlname' ?| array[:names]", names: filters.on_filters).between(date_range)
         if wallet_connected?
-          wallet_on_filters = EventFilter.by_class("Events::Wallet") - filters.off_filters
+          wallet_on_filters = EventFilter.by_class("Events::Wallet").map(&:keys).flatten - filters.off_filters
           events += Events::Wallet.where(category: wallet_on_filters).with_stake_address(permitted_params[:stake_address]).between(date_range)
         end
 
