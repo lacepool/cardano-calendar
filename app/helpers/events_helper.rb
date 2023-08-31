@@ -13,20 +13,34 @@ module EventsHelper
     end
   end
 
+  def current_filters
+    @current_filters ||= permitted_params.fetch(:filter, {})
+  end
+
   def render_event_filters
     EventFilterRegistry.registered.map do |category, filters|
       html_id = category.parameterize
 
       links = filters.map do |filter_param, filter|
         if event_param_filters.is_on?(filter_param)
-          path = events_path(permitted_params.merge(filter: permitted_params.fetch(:filter, {}).except(filter_param)))
           icon_state = "on"
+
+          if filter[:default] == "off"
+            updated_params = permitted_params.merge(filter: current_filters.except(filter_param))
+          else
+            updated_params = permitted_params.deep_merge(filter: {filter_param => "off"})
+          end
         else
-          path = events_path(permitted_params.deep_merge(filter: {filter_param => "on"}))
           icon_state = "off"
+
+          if filter[:default] == "off"
+            updated_params = permitted_params.deep_merge(filter: {filter_param => "on"})
+          else
+            updated_params = permitted_params.merge(filter: current_filters.except(filter_param))
+          end
         end
 
-        link_to path, class: "list-group-item list-group-item" do
+        link_to events_path(updated_params), class: "list-group-item list-group-item" do
           tag.i(class: "bi-toggle-#{icon_state} me-2") + tag.span(filter[:label], class: "small")
         end
       end.join.html_safe
