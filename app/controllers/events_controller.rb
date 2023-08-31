@@ -4,24 +4,28 @@ class EventsController < ApplicationController
   def index
     respond_to do |f|
       f.html do
-        events = Events::SimpleEvent.all(except: filters.off_filters, between: date_range)
-        events += Events::Meetup.where("extras->'group_urlname' ?| array[:names]", names: filters.on_filters).between(date_range)
-        if wallet_connected?
-          wallet_on_filters = EventFilter.by_class("Events::Wallet").map(&:keys).flatten - filters.off_filters
-          events += Events::Wallet.where(category: wallet_on_filters).with_stake_address(permitted_params[:stake_address]).between(date_range)
-        end
-
-        @epochs = Epoch.all(between: date_range, with_events: events.sort_by(&:start_time))
+        @epochs = epochs_with_events(between: date_range, events_sorted: true)
       end
 
       f.ics do
-        events = Events::SimpleEvent.all(except: filters.off_filters, between: ics_date_range)
-        events += Events::Meetup.where("extras->'group_urlname' ?| array[:names]", names: filters.on_filters).between(ics_date_range)
-        @epochs = Epoch.all(between: ics_date_range, with_events: events)
-
+        @epochs = epochs_with_events(between: ics_date_range)
         render plain: ics_calendar.to_ical
       end
     end
+  end
+
+  def epochs_with_events(between:, events_sorted: false)
+    events = Events::SimpleEvent.all(except: filters.off_filters, between: between)
+    events += Events::Meetup.where("extras->'group_urlname' ?| array[:names]", names: filters.on_filters).between(between)
+
+    if wallet_connected?
+      wallet_on_filters = EventFilter.by_class("Events::Wallet").map(&:keys).flatten - filters.off_filters
+      events += Events::Wallet.where(category: wallet_on_filters).with_stake_address(permitted_params[:stake_address]).between(between)
+    end
+
+    events = events.sort_by(&:start_time) if events_sorted
+
+    Epoch.all(between: between, with_events: events)
   end
 
   def wallet_connected?
