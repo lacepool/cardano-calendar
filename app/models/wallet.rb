@@ -12,15 +12,18 @@ class Wallet < ApplicationRecord
   end
 
   def fetch_rewards
+    # unfortunately, blockfrost doesn't allow a filter so we calculate the page to start with.
+    # We still need to check and skip records we might already have from our start page.
     rewards = Events::Wallet.staking_rewards.with_stake_address(stake_address)
     page = rewards.count/Blockfrost::PER_PAGE+1
+    last_epoch = rewards.last_epoch
 
     response = Blockfrost.client.get_account_rewards(stake_address, from_page: page)
 
     case response[:status]
     when 200
       response.dig(:body).each do |reward|
-        # TODO: make sure not to create duplicates!
+        next if last_epoch >= reward[:epoch] # skip if we already have data for this epoch
 
         epoch = reward[:epoch]
         ada_amount = (reward[:amount].to_i/1000000).floor(2)
@@ -61,23 +64,31 @@ class Wallet < ApplicationRecord
   end
 
   def fetch_delegations
+    # unfortunately, blockfrost doesn't allow a filter so we calculate the page to start with.
+    # We still need to check and skip records we might already have from our start page.
+    delegations = Events::Wallet.delegations.with_stake_address(stake_address)
+    page = delegations.count/Blockfrost::PER_PAGE+1
+    last_epoch = delegations.last_epoch
+
     response = Blockfrost.client.get_account_delegations(stake_address, from_page: 1)
 
     case response[:status]
     when 200
       response.dig(:body).each do |delegation|
+        next if last_epoch >= delegation[:active_epoch] # skip if we already have data for this epoch
+
         pool_id = delegation.fetch(:pool_id)
         pool = Blockfrost.client.get_pool_metadata(pool_id).dig(:body)
         pool_name = pool[:name] || "N/A"
         pool_ticker = pool[:ticker] || "N/A"
 
         Events::Wallet.new.tap do |event|
-          event.name = "Delegation activates for pool #{pool_ticker}"
+          event.name = "Delegation activates for pool [#{pool_ticker}]"
           event.description = "Wallet delegation becomes active for Cardano Stake Pool [#{pool_ticker}] #{pool_name} with ID #{pool_id}"
           event.category = :delegations
           event.start_time = Epoch.timestamp_from_epoch(delegation[:active_epoch])
           event.end_time = event.start_time
-          event.extras = { stake_address: stake_address, stake_pool: pool }
+          event.extras = { stake_address: stake_address, stake_pool: pool, epoch: delegation[:active_epoch] }
 
           event.save
         end
