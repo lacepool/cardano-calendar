@@ -23,6 +23,8 @@ class EventsController < ApplicationController
       events += Events::Wallet.where(category: wallet_on_filters).with_stake_address(permitted_params[:stake_address]).between(between)
     end
 
+    events += Events::Software.where("extras->'filter_param' ?| array[:repos]", repos: filters.on_filters).between(between)
+
     events = events.sort_by(&:start_time) if events_sorted
 
     Epoch.all(between: between, with_events: events)

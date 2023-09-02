@@ -54,6 +54,7 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 gem "gqli"
+gem "octokit", "~> 5.0"
 
 gem "sidekiq", "~> 7.1"
 gem 'sinatra', require: nil # for sidekiq web gui
