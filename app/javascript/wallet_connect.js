@@ -24,7 +24,6 @@ var WalletConnect = {
     const lastConnectedWallet = this.getLastConnectedWallet()
 
     if(lastConnectedWallet) {
-      debugger
       this.connectToWallet(lastConnectedWallet)
     }
   },
