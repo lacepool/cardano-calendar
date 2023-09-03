@@ -1,6 +1,6 @@
-<div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+<div class="offcanvas offcanvas-end" data-controller="events" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="event_settings" aria-labelledby="event_settings_label" data-turbo-permanent>
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasScrollingLabel"></h5>
+    <h5 class="offcanvas-title" id="event_settings_label"></h5>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
@@ -9,21 +9,13 @@
       <div class="row align-items-start">
 
         <div class="col">
-          <div class="list-group list-group-horizontal text-center">
-            <%= link_to events_path(permitted_params.merge(view: :month)), class: "list-group-item list-group-item-action #{'active bg-secondary border-secondary' if current_view == 'month'}" do %>
-              <i class="bi-calendar-month me-1"></i> Month
-            <% end %>
-            <%= link_to events_path(permitted_params.merge(view: :week)), class: "list-group-item list-group-item-action #{'active bg-secondary border-secondary' if current_view == 'week'}" do %>
-              <i class="bi-calendar-week me-1"></i> Week
-            <% end %>
-            <%= link_to events_path(permitted_params.merge(view: :list)), class: "list-group-item list-group-item-action #{'active bg-secondary border-secondary' if current_view == 'list'}" do %>
-              <i class="bi-list-ul me-1"></i> List
-            <% end %>
+          <div class="list-group list-group-horizontal text-center" data-events-target="view">
+            <%= render_event_view_switches %>
           </div>
         </div>
 
         <div class="col-12 pt-5">
-          <div class="accordion accordion-flush" id="event_filter">
+          <div class="accordion accordion-flush">
             <%= render_event_filters %>
           </div>
         </div>

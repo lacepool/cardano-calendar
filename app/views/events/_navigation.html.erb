@@ -6,7 +6,7 @@
     <%= link_to t('simple_calendar.today', default: 'Today'), calendar.url_for_today_view, class: "btn btn-md btn-primary" %>
     <%= link_to t('simple_calendar.next', default: 'Next'), calendar.url_for_next_view, class: "btn btn-md btn-primary" %>
 
-    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
+    <button class="btn btn-primary" type="button" data-controller="filters" data-filters-target="events" data-bs-toggle="offcanvas" data-bs-target="#event_settings" aria-controls="event_settings">
       <i class="bi bi-sliders"></i>
     </button>
   </nav>

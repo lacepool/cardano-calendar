@@ -13,8 +13,25 @@ module EventsHelper
     end
   end
 
-  def current_filters
-    @current_filters ||= permitted_params.fetch(:filter, {})
+  def event_views
+    ["month", "week", "list"]
+  end
+
+  def event_view_icon(view)
+    view == "list" ? "bi-list-ul" : "bi-calendar-#{view}"
+  end
+
+  def render_event_view_switches
+    default_classes = "event_view list-group-item list-group-item-action"
+    active_classes = "active bg-secondary border-secondary"
+
+    event_views.map do |view|
+      classes = current_view == view ? [default_classes, active_classes].join(" ") : default_classes
+
+      link_to events_path(permitted_params.merge(view: view)), class: classes, data: { view: view } do
+        tag.i(nil, class: "#{event_view_icon(view)} me-1") + view.upcase_first
+      end
+    end.join.html_safe
   end
 
   def render_event_filters
@@ -22,26 +39,17 @@ module EventsHelper
       html_id = category.parameterize
 
       links = filters.map do |filter_param, filter|
-        if event_param_filters.is_on?(filter_param)
-          icon_state = "on"
+        dataset = {
+          "events-target": "filter",
+          "filter-param": filter_param,
+          "filter-default": filter[:default]
+        }
+        checked = event_param_filters.is_on?(filter_param)
+        checkbox_name = "filter_#{filter_param}"
 
-          if filter[:default] == "off"
-            updated_params = permitted_params.merge(filter: current_filters.except(filter_param))
-          else
-            updated_params = permitted_params.deep_merge(filter: {filter_param => "off"})
-          end
-        else
-          icon_state = "off"
-
-          if filter[:default] == "off"
-            updated_params = permitted_params.deep_merge(filter: {filter_param => "on"})
-          else
-            updated_params = permitted_params.merge(filter: current_filters.except(filter_param))
-          end
-        end
-
-        link_to events_path(updated_params), class: "list-group-item list-group-item" do
-          tag.i(class: "bi-toggle-#{icon_state} me-2") + tag.span(filter[:label], class: "small")
+        tag.div data: dataset, class: "event_filter form-switch list-group-item" do
+          check_box_tag(checkbox_name, nil, checked, class: "form-check-input me-2 float-none", role: "switch") +
+            tag.label(filter[:label], class: "form-check-label small", for: checkbox_name)
         end
       end.join.html_safe
 
@@ -73,24 +81,8 @@ module EventsHelper
     end
   end
 
-  def views
-    ["month", "week", "list"]
-  end
-
   def current_view
     params.fetch(:view, "month")
-  end
-
-  def current_view_icon_class
-    if list_view?
-      css_class = "bi-#{current_view}"
-    else
-      css_class = "bi-calendar-#{current_view}"
-    end
-  end
-
-  def list_view?
-    current_view == "list"
   end
 
   def start_date

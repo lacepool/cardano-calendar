@@ -4,11 +4,13 @@ Turbo.session.drive = true
 
 import { Application } from "@hotwired/stimulus"
 import PopperController from "./controllers/popper_controller"
+import EventsController from "./controllers/events_controller"
 
 window.Stimulus = Application.start()
 Stimulus.debug = true
 
 Stimulus.register("popper", PopperController)
+Stimulus.register("events", EventsController)
 
 import "./theme";
 import "./wallet_connect"
