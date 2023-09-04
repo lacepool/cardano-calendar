@@ -514,6 +514,104 @@
           "end_time": 1694604600
         }
       ]
+    },
+    "eblockchainconvention": {
+      "filter_label": "European Blockchain Convention",
+      "filter_default_value": "on",
+      "events": [
+        {
+          "name": "European Blockchain Convention 9",
+          "description": "<p>European Blockchain Convention was born with the mission to accelerate the blockchain ecosystem in Europe.</p><p>Since its inaugural conference in 2018 in Barcelona, EBC has hosted thousands of attendees, hundreds of leading speakers and the best startups in the blockchain & crypto space.</p><p>Its global audience of founders, investors, regulators, developers, corporations, and many more come together every year to learn, get inspired, and connect.</p>",
+          "start_time": 1698192000,
+          "end_time": 1698364799,
+          "time_format": "date",
+          "website": "https://eblockchainconvention.com"
+        }
+      ]
+    },
+    "nordicblockchainconference": {
+      "filter_label": "Nordic Blockchain Conference",
+      "filter_default_value": "on",
+      "events": [
+        {
+          "name": "Nordic Blockchain Conference Copenhagen",
+          "description": "<p>Nordic Blockchain Conference (NBC) unites the largest web3 network in the nordics with the global community. This year on September 6 + 7, where we bring together industry experts, thought leaders, educators, and professionals from around the world to explore the limitless potential of the web3 space.</p>",
+          "start_time": 1693958400,
+          "end_time": 1694131199,
+          "time_format": "date",
+          "website": "https://www.nordicblockchainconference.com"
+        }
+      ]
+    },
+    "token2049": {
+      "filter_label": "TOKEN 2049",
+      "filter_default_value": "on",
+      "events": [
+        {
+          "name": "TOKEN 2049 Singapore",
+          "description": "<p>TOKEN2049 is the premier crypto event, organised annually in Singapore, where founders and executives of the leading Web3 companies and projects share their view on the industry. We shine a light on the global developments, while taking a unique and widening perspective on the ecosystem and its vast opportunities.</p><p>​TOKEN2049 brings together the global Web3 industry, uniting entrepreneurs, investors, developers, industry insiders and global media - and creates unparalleled networking opportunities.</p><p>TOKEN2049 draws the most influential figures, projects and companies, spawning hundreds of meetups, workshops, and networking opportunities all around the two-day main event.</p><p>On 13-14 September 2023, TOKEN2049 will be the distinguished flagship event of <a href='https://week.token2049.com' target='_blank'>TOKEN2049 Week</a>, which features a week of various independently organised side events around TOKEN2049. Expect a wide range of meetups, workshops, hackathons, networking drinks, parties and Formula 1 Racing.</p><p>Singapore will be transformed into a vibrant crypto hub.</p>",
+          "start_time": 1694563200,
+          "end_time": 1694735999,
+          "time_format": "date",
+          "website": "https://www.token2049.com"
+        }
+      ]
+    },
+    "wtopublicforum": {
+      "filter_label": "WTO Public Forum",
+      "filter_default_value": "on",
+      "events": [
+        {
+          "name": "WTO Public Forum - It is time for action",
+          "description": "<p>The 2023 Public Forum will examine how trade can contribute to a greener and more sustainable future. The Forum will explore how trade can facilitate access to environmental goods, services and technologies, help achieving the Paris Agreement's Nationally Determined Contributions, and maintain the ambition to limit global warming to 1.5 degrees above pre-industrial levels.</p><p>The Forum has three subthemes:</p><ul><li>The role of the services sector in sustainable trade</li><li>Inclusive policies for the advancement of green trade</li><li>Digitalisation as a tool for the greening of supply chains</li></ul>",
+          "start_time": 1694476800,
+          "end_time": 1694822399,
+          "time_format": "date",
+          "website": "https://www.wto.org/english/forums_e/public_forum23_e/public_forum23_e.htm"
+        }
+      ]
+    },
+    "beconomy": {
+      "filter_label": "Blockchain Economy Dubai",
+      "filter_default_value": "on",
+      "events": [
+        {
+          "name": "Blockchain Economy Dubai Summit",
+          "description": "<p>Blockchain Economy Summit is the world's largest blockchain conference network bringing together the key players of crypto industry and experts to redefine the future of finance. The 8th edition of the Blockchain Economy Summit will take place during two days in Dubai on October 4-5, 2023 with the world's top crypto companies, blockchain entrepreneurs and AI innovators. Today, UAE, specifically Dubai is gearing up to become a global crypto hub, also embracing the AI technologies to boost efficiency and implementation across public services. Thus, Blockchain Economy Dubai Summit will be the Main gathering in the region on behalf of the world of blockchain, cryptocurrency and AI technologies, with a wide range of topics focused on the revolutional technologies of the future, extensive networking opportunities and participation from more than 85 countries.</p>",
+          "start_time": 1696377600,
+          "end_time": 1696550399,
+          "time_format": "date",
+          "website": "https://www.wto.org/english/forums_e/public_forum23_e/public_forum23_e.htm"
+        }
+      ]
+    },
+    "dcentralcon": {
+      "filter_label": "Dcentral",
+      "filter_default_value": "on",
+      "events": [
+        {
+          "name": "Dcentral Tokyo",
+          "description": "<p>DCENTRAL Tokyo is our first dedicated Web3 conference in Japan and starts our journey into Asia.</p><p>Held after Token2049 and right before Tokyo Game Show on September 19 and 20th in the heart of Shibuya, we partner with Web3BB Tokyo, one of the largest and most established Web3 communities builders and connectors in Japan.</p><p>Earlier this year, Japan’s ruling Liberal Democratic Party’s Web3 project team approved a whitepaper laying out recommendations for growing the country’s cryptocurrency industry, which has become part of the national strategy under Prime Minister Fumio Kishida’s administration.</p><p>Our goal is to bridge Japan and the world by providing a platform and bringing together people to learn and discuss the core ideas of Web3. E xpect major Japanese brands and key Web3 speakers from around the world to join us.</p><p>Featuring the best of NFTs, Gaming, Metaverses, DAOs and Web3 from around the world, DCENTRAL Tokyo will be an intimate gathering featuring curated keynotes and panel discussions, seminars, and networking that offers the latest of what's currently happening at the forefront of Web3.</p>",
+          "start_time": 1695081600,
+          "end_time": 1695254399,
+          "time_format": "date",
+          "website": "https://dcentralcon.com"
+        }
+      ]
+    },
+    "stateofcrypto": {
+      "filter_label": "State of Crypto",
+      "filter_default_value": "on",
+      "events": [
+        {
+          "name": "State of Crypto: Policy and Regulation",
+          "description": "<p>State of Crypto: Policy and Regulation is a one-day boutique event for 250 people that unites key policymakers, regulators and government officials with legal, policy and compliance executives representing the largest and most influential TradFi and DeFi leaders in asset management and financial services. This event is for GCs, CCOs, CLOs, COOs, heads of policy and government affairs who are evaluating or actively investing in digital assets.</p><p>The industry will meet to set industry standards and align on practical short-term and long-term objectives through pointed conversations with the best legal minds and Washington D.C.’s most important decision makers. The gathering provides an unprecedented opportunity to evaluate, dissect and ultimately shape crypto regulatory frameworks that support a vibrant, secure and healthy future for the digital economy.</p><h5>Agenda</h5><p>The State of Crypto: Policy and Regulation agenda will be updated frequently in the coming weeks. This one-day event consists of:</p><p><ul><li><b>Plenary sessions</b> featuring key policymakers, regulators, government officials and the most influential leaders in asset management and financial services</li><li><b>Breakout sessions</b> for participants to connect with industry experts and their peers to discuss and dissect the most pressing digital assets' regulatory, compliance and policy challenges</li><li><b>Interactive networking</b> breaks and a post-conference cocktail reception to continue the important conversations taking place throughout the day</li></ul></p>",
+          "start_time": 1698105600,
+          "end_time": 1698191999,
+          "time_format": "date",
+          "website": "https://state-of-crypto.coindesk.com"
+        }
+      ]
     }
   }
 }
