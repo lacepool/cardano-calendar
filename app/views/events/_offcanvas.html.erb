@@ -3,7 +3,7 @@
     <h5 class="offcanvas-title" id="event_settings_label"></h5>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
-  <div class="offcanvas-body">
+  <div class="offcanvas-body" data-events-target="offcanvasBody">
 
     <div class="container">
       <div class="row align-items-start">
@@ -27,7 +27,7 @@
 
           <p>With our customizable calendar subscription via the iCalendar (<a href="https://en.wikipedia.org/wiki/ICalendar", target="_blank">ICS</a>) format, you can effortlessly integrate and stay up-to-date with Cardano, for free!</p>
 
-          <%= link_to events_url(permitted_params.merge(protocol: :webcal, format: :ics)), class: "d-block btn btn-success", target: "_blank" do %>
+          <%= link_to events_url(permitted_params.except(:start_date).merge(protocol: :webcal, format: :ics)), data: { "controller" => "events", "events-target" => "subscribe" }, class: "d-block btn btn-success", target: "_blank" do %>
             <i class="bi-calendar2-plus me-1"></i> Subscribe
           <% end %>
         </div>

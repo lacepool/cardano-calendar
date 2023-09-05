@@ -2,7 +2,41 @@ import { Controller } from "@hotwired/stimulus"
 import * as bootstrap from "bootstrap"
 
 export default class extends Controller {
-  static targets = [ 'filter', 'view' ]
+  static targets = [ 'filter', 'view', 'offcanvasBody', 'subscribe' ]
+
+  subscribeTargetConnected(element) {
+    document.documentElement.addEventListener("turbo:before-visit", event => {
+      const currentUrl = new URL(event.detail.url)
+      const currentSearchParams = currentUrl.searchParams
+      const linkUrl = new URL(element.href)
+
+      // Not required, but removing start_date from params
+      currentSearchParams.delete('start_date')
+
+      // The link uses webcal protocol.
+      // It seems weird but `linkUrl.origin` is null and pathname contains the url
+      const newUrl = linkUrl.protocol + linkUrl.pathname + currentUrl.search
+
+      element.setAttribute('href', newUrl)
+    })
+  }
+
+  offcanvasBodyTargetConnected(element) {
+    const viewLinks = [...element.querySelectorAll('a.event_view')]
+    const filterToggle = [...element.querySelectorAll('.event_filter input')]
+
+    document.documentElement.addEventListener("turbo:visit", event => {
+      setTimeout(() => {
+        viewLinks.forEach(link => link.classList.add('disabled'))
+        filterToggle.forEach(toggle => toggle.setAttribute('disabled', ''))
+      }, "100")
+    })
+
+    document.documentElement.addEventListener("turbo:render", event => {
+      viewLinks.forEach(link => link.classList.remove('disabled'))
+      filterToggle.forEach(toggle => toggle.removeAttribute('disabled'))
+    })
+  }
 
   viewTargetConnected(element) {
     const defaultClasses = element.querySelector("a:not(.active)").className
@@ -44,32 +78,4 @@ export default class extends Controller {
       Turbo.visit(currentUrl)
     })
   }
-
-  // filtersTargetConnected(element) {
-  //   const toggleBtn = document.getElementById('filterToggle')
-  //   const offcanvas = new bootstrap.Offcanvas(element)
-
-  //   toggleBtn.addEventListener('click', event => {
-  //     if(element.classList.contains('show')) {
-  //       offcanvas.hide()
-  //     }
-  //     else {
-  //       offcanvas.show()
-  //     }
-  //   })
-
-  //   element.addEventListener('shown.bs.offcanvas', () => {
-  //     const url = new URL(location)
-  //     url.searchParams.set('filters', 'show')
-
-  //     Turbo.visit(url.pathname + url.search)
-  //   })
-
-  //   element.addEventListener('hidden.bs.offcanvas', () => {
-  //     const url = new URL(location)
-  //     url.searchParams.delete('filters')
-
-  //     Turbo.visit(url.pathname + url.search)
-  //   })
-  // }
 }
