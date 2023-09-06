@@ -39,7 +39,7 @@ class EventsController < ApplicationController
   end
 
   def ics_date_range
-    Time.at(Epoch::SHELLY_UNIX).utc..(Time.current.utc + 1.year)
+    Time.at(Epoch::SHELLY_UNIX).utc..(Time.current.utc + 6.months)
   end
 
   def ics_calendar
@@ -47,7 +47,7 @@ class EventsController < ApplicationController
 
     Icalendar::Calendar.new.tap do |cal|
       cal.ip_name = "cardano-calendar.com"
-      ca.description = "My Customized Cardano Events"
+      cal.description = "My Customized Cardano Events"
       cal.refresh_interval = "P4H"
 
       @epochs.each do |epoch|
@@ -63,11 +63,11 @@ class EventsController < ApplicationController
           epoch.events.each do |event|
             cal.event do |ce|
               ce.summary = event.name
-              ce.description = event.description
+              ce.description = nil
               ce.dtstart = event.start_time.utc
               ce.categories = event.category
               ce.dtend = event.end_time.utc
-              ce.uid = event.id
+              ce.uid = event.id.to_s
               ce.sequence = current_timestamp
             end
           end
