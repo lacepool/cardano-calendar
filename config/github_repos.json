@@ -17,6 +17,7 @@
   "input-output-hk/cardano-ledger",
   "input-output-hk/cardano-node",
   "input-output-hk/cardano-parts",
+  "input-output-hk/daedalus",
   "input-output-hk/ouroboros-network",
   "input-output-hk/ouroboros-consensus",
   "input-output-hk/hydra",
