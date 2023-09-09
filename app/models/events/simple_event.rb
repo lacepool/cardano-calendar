@@ -38,7 +38,7 @@ class Events::SimpleEvent
     @description = hsh["description"]
 
     @extras = {}
-    @extras.merge("website" => hsh["website"]) if hsh["website"]
+    @extras.merge!("website" => hsh["website"]) if hsh["website"]
   end
 
   def self.find(id)
