@@ -14,6 +14,27 @@ class EventsController < ApplicationController
     end
   end
 
+  def show
+    id = params.fetch(:id)
+
+    if is_active_record_event?(id)
+      @event = Event.find(id)
+    else
+      @event = Events::SimpleEvent.find(id)
+    end
+
+    respond_to do |f|
+      f.turbo_stream
+      f.html
+    end
+  end
+
+  def is_active_record_event?(str)
+    !!Integer(str)
+  rescue ArgumentError, TypeError
+    false
+  end
+
   def epochs_with_events(between:, events_sorted: false)
     events = Events::SimpleEvent.all(except: filters.off_filters, between: between)
     events += Events::Meetup.where("extras->'group_urlname' ?| array[:names]", names: filters.on_filters).between(between)
@@ -92,8 +113,6 @@ class EventsController < ApplicationController
   alias_method :event_param_filters, :filters
 
   def permitted_params
-    @params ||= params.permit(
-      :format, :view, :start_date, :tz, :stake_address, filter: {}
-    ).to_h.with_indifferent_access.symbolize_keys
+    params.permit!.to_h.with_indifferent_access
   end
 end

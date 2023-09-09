@@ -8,14 +8,6 @@ export default class extends Controller {
     new bootstrap.Popover(element, { trigger: 'focus' })
   }
 
-  modal(event) {
-    const eventId = event.currentTarget.nextElementSibling.id
-
-    new bootstrap.Modal(
-      document.getElementById(eventId), {}
-    ).show()
-  }
-
   toastTargetConnected(element) {
     new bootstrap.Toast(element, { animation: true }).show()
   }

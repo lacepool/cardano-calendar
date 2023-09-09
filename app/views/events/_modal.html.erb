@@ -1,5 +1,5 @@
-<div class="modal" id="<%= event.id %>" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
+<div class="modal" id="<%= event.id %>" tabindex="-1" data-filter-default="<%= event.filter_default %>" data-filter-param="<%= event.filter_param %>" data-format="<%= request.format.symbol %>" data-start-date="<%= event.start_time.to_date %>" data-controller="events" data-events-target="show">
+  <div class="modal-dialog modal-dialog-centered modal-<%= size %>">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-4"><%= event.name %></h1>

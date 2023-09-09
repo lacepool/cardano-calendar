@@ -44,7 +44,7 @@ class Epoch < OpenStruct
         e.end_slot = slot_from_timestamp(e.end_time)
 
         e.events = with_events.select do |event|
-          (e.start_time..e.end_time).overlaps?(event[:start_time]..event[:end_time])
+          (e.start_time..e.end_time).overlaps?(event.start_time..event.end_time)
         end
       end
     end.reverse

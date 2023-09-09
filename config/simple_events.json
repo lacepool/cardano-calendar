@@ -64,8 +64,8 @@
         "schedule_start_time": 1671645600,
         "schedule_end_time": null,
         "duration": "PT1H",
-        "event_name": "Town Hall Meeting",
-        "event_description": "<p>Join Project Catalyst team and community for our weekly town hall followed by an open space with break out rooms.</p><a href='https://zoom.us/meeting/register/tJEtduyupzMvHNUczCQwfFJGcXzmw2lDwkIf#/registration' target='_blank' class='btn btn-primary'>Registration</a>"
+        "name": "Town Hall Meeting",
+        "description": "<p>Join Project Catalyst team and community for our weekly town hall followed by an open space with break out rooms.</p><a href='https://zoom.us/meeting/register/tJEtduyupzMvHNUczCQwfFJGcXzmw2lDwkIf#/registration' target='_blank' class='btn btn-primary'>Registration</a>"
       }
     },
     "vote-registrations": {
@@ -114,8 +114,8 @@
         "schedule_start_time": 1596793491,
         "schedule_end_time": null,
         "duration": null,
-        "event_name": "Leaderlogs for next epoch",
-        "event_description": "As a stake pool operator, it is possible to run queries to determine whether your pool is scheduled to mint blocks. Leaderlog information for the next epoch is available within 1.5 days from the end of the current epoch."
+        "name": "Leaderlogs for next epoch",
+        "description": "As a stake pool operator, it is possible to run queries to determine whether your pool is scheduled to mint blocks. Leaderlog information for the next epoch is available within 1.5 days from the end of the current epoch."
       }
     }
   },

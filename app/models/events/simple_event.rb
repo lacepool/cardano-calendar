@@ -1,9 +1,12 @@
-class Events::SimpleEvent < OpenStruct
+class Events::SimpleEvent
+  attr_reader :start_time, :end_time, :open_end, :time_format,
+              :name, :description, :category, :subcategory, :extras,
+              :recurring
+
   FILE_PATH = Rails.root.join("config", "simple_events.json").freeze
   ALL = JSON.parse(File.read(FILE_PATH))
 
   include EventCharacteristics
-  extend Filterable
 
   ALL.map do |category, filters|
     filters.each do |f|
@@ -11,76 +14,111 @@ class Events::SimpleEvent < OpenStruct
     end
   end
 
-  def self.all(between:, except: [])
-    all = ALL.values.reduce({}) do |h, subcats|
-      subcats.except(*except).each do |subcat|
-        if subcat[1]["recurring"]
-          h[subcat[0]] = subcat[1]["recurring"]
-        else
-          h[subcat[0]] = subcat[1]["events"]
-        end
+  def initialize(category, subcategory, hsh, start_time: nil)
+    @category = category
+    @subcategory = subcategory
+
+    @start_time = start_time || Time.at(hsh["start_time"]).in_time_zone
+
+    if hsh["duration"]
+      duration = ActiveSupport::Duration.parse(hsh["duration"])
+    else
+      duration = 0.seconds
+    end
+
+    if hsh["end_time"]
+      @end_time = Time.at(hsh["end_time"]).in_time_zone
+    else
+      @end_time = @start_time + duration
+    end
+
+    @open_end = !!hsh["open_end"]
+    @time_format = hsh["time_format"]
+    @name = hsh["name"]
+    @description = hsh["description"]
+
+    @extras = {}
+    @extras.merge("website" => hsh["website"]) if hsh["website"]
+  end
+
+  def self.find(id)
+    start_time, category, subcategory, name = decode_id_parts(id)
+
+    if event = ALL.dig(category, subcategory, "recurring")
+      start_time = Time.at(start_time.to_i).utc
+      # we know the exact time of this event, so we don't really need a time span
+      return new_series(category, subcategory, event, start_time..start_time).try(:first)
+    else
+      event = ALL.dig(category, subcategory, "events").detect do |e|
+        e["name"] == name.force_encoding('UTF-8') && e["start_time"] == start_time.to_i
       end
-      h
+
+      return new(category, subcategory, event) if event
+    end
+  end
+
+  def self.all(between:, except: [])
+    all = ALL.each_with_object({}) do |category, h|
+      h[category[0]] = category[1].except(*except)
     end
 
     between_dates(all, between)
   end
 
+  def self.decode_id_parts(id)
+    Base64.decode64(id).split("/", 4)
+  end
+
   def id
-    Digest::MD5.hexdigest(name)
+    Base64.encode64("#{start_time.to_i}/#{category}/#{subcategory}/#{name}")
+  end
+
+  def open_end?
+    @open_end == true
   end
 
   private
 
-    def self.between_dates(data, date_range)
+    def self.between_dates(data=ALL, date_range)
       arr = []
 
-      data.each do |category, events|
-        if events.is_a?(Hash) && events["frequency"]
-          frequency = ActiveSupport::Duration.parse(events["frequency"])
-          first_at = Time.at(events["schedule_start_time"]).in_time_zone
+      data.each do |category, subcategories|
+        subcategories.each do |subcategory, v|
+          if events = v["events"]
+            events.map do |event|
+              start_time = Time.at(event["start_time"]).in_time_zone
+              end_time = Time.at(event["end_time"]).in_time_zone
 
-          if events["schedule_end_time"]
-            last_at = Time.at(events["schedule_end_time"]).in_time_zone
-          else
-            last_at = Time.current.in_time_zone + 1.year
-          end
-
-          if events["duration"]
-            duration = ActiveSupport::Duration.parse(events["duration"])
-          else
-            duration = 0.seconds
-          end
-
-          recurrence = Montrose.every(frequency, starts: first_at, until: last_at).events.each do |date|
-            if date_range.include?(date)
-              arr << new(
-                start_time: date,
-                end_time: date + duration,
-                name: events["event_name"],
-                description: events["event_description"],
-                category: category
-              )
+              if date_range.overlaps?(start_time..end_time)
+                arr << new(category, subcategory, event)
+              end
             end
+          elsif event = v["recurring"]
+            arr.concat(new_series(category, subcategory, event, date_range))
+          else
+            next
           end
-        else
-          events.map do |event|
-            start_time = Time.at(event["start_time"]).in_time_zone
-            end_time = Time.at(event["end_time"]).in_time_zone
+        end
+      end
 
-            if date_range.overlaps?(start_time..end_time)
-              arr << new(
-                start_time: start_time,
-                end_time: end_time,
-                open_end: !!event["open_end"],
-                time_format: event["time_format"],
-                name: event["name"],
-                website: event["website"],
-                description: event["description"],
-                category: category
-              )
-            end
-          end
+      arr
+    end
+
+    def self.new_series(category, subcategory, event, date_range)
+      frequency = ActiveSupport::Duration.parse(event["frequency"])
+      first_at = Time.at(event["schedule_start_time"]).in_time_zone
+
+      if event["schedule_end_time"]
+        last_at = Time.at(event["schedule_end_time"]).in_time_zone
+      else
+        last_at = Time.current.in_time_zone + 1.year
+      end
+
+      arr = []
+
+      recurrence = Montrose.every(frequency, starts: first_at, until: last_at).events.each do |date|
+        if date_range.include?(date)
+          arr << new(category, subcategory, event, start_time: date)
         end
       end
 

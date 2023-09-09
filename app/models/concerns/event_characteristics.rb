@@ -1,5 +1,6 @@
 module EventCharacteristics
   extend ActiveSupport::Concern
+  include Filterable
 
   def time_range
     start_time..end_time
@@ -21,5 +22,13 @@ module EventCharacteristics
       title: name,
       timezone: Time.zone.tzinfo.identifier
     )
+  end
+
+  def website
+    extras.try(:[], "website")
+  end
+
+  def urlname
+    name.parameterize
   end
 end

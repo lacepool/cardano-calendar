@@ -2,7 +2,25 @@ import { Controller } from "@hotwired/stimulus"
 import * as bootstrap from "bootstrap"
 
 export default class extends Controller {
-  static targets = [ 'filter', 'view', 'offcanvasBody', 'subscribe' ]
+  static targets = [ 'filter', 'view', 'offcanvasBody', 'subscribe', 'show' ]
+
+  showTargetConnected(element) {
+    if (element.dataset["format"] == "html") {
+      element.addEventListener('hide.bs.modal', event => {
+        const url = new URL(document.location)
+        url.pathname = "month"
+        url.searchParams.append("start_date", element.dataset["startDate"])
+
+        if (element.dataset["filterDefault"] == "off") {
+          url.searchParams.append("filter["+element.dataset["filterParam"]+"]", "on")
+        }
+
+        Turbo.visit(url)
+      })
+    }
+
+    new bootstrap.Modal(element, {}).show()
+  }
 
   subscribeTargetConnected(element) {
     document.documentElement.addEventListener("turbo:before-visit", event => {
@@ -32,9 +50,13 @@ export default class extends Controller {
       }, "100")
     })
 
-    document.documentElement.addEventListener("turbo:render", event => {
-      viewLinks.forEach(link => link.classList.remove('disabled'))
-      filterToggle.forEach(toggle => toggle.removeAttribute('disabled'))
+    'turbo:render turbo:before-stream-render'.split(' ').forEach(eventStr => {
+      document.documentElement.addEventListener(eventStr, event => {
+        setTimeout(() => {
+          viewLinks.forEach(link => link.classList.remove('disabled'))
+          filterToggle.forEach(toggle => toggle.removeAttribute('disabled'))
+        }, "100")
+      })
     })
   }
 
