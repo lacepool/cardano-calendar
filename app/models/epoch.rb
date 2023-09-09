@@ -39,15 +39,23 @@ class Epoch < OpenStruct
         e.epoch_number = epoch_from_timestamp(date.to_i)
         e.name = "Epoch #{e.epoch_number}"
         e.start_time = timestamp_from_epoch(e.epoch_number)
-        e.end_time = e.start_time + (SLOTS_PER_EPOCH-1).seconds
+        e.end_time = e.start_time + (SLOTS_PER_EPOCH).seconds
         e.start_slot = slot_from_timestamp(e.start_time)
         e.end_slot = slot_from_timestamp(e.end_time)
+        e.current_slot = slot_from_timestamp(Time.current.utc.to_i)
+
+        progress = [(e.current_slot - e.start_slot).to_f / SLOTS_PER_EPOCH * 100, 0].max
+        e.progress = [progress.to_i, 100].min
 
         e.events = with_events.select do |event|
           (e.start_time..e.end_time).overlaps?(event.start_time..event.end_time)
         end
       end
     end.reverse
+  end
+
+  def self.current_epoch_number
+    epoch_from_timestamp(Time.current.utc.to_i)
   end
 
   def slot_range
@@ -62,8 +70,16 @@ class Epoch < OpenStruct
     Digest::MD5.hexdigest(name)
   end
 
+  def past?
+    epoch_number < self.class.current_epoch_number
+  end
+
   def current?
-    current_slot = self.class.slot_from_timestamp(Time.current.to_i)
+    current_slot = self.class.slot_from_timestamp(Time.current.utc.to_i)
     slot_range.include?(current_slot)
+  end
+
+  def future?
+    not past? and not current?
   end
 end

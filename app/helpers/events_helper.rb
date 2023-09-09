@@ -1,6 +1,30 @@
 module EventsHelper
-  def epoch_description(epoch)
-    "#{l(epoch.start_time, format: :short)} – #{l(epoch.end_time, format: :short)}, Slots: #{epoch.start_slot} – #{epoch.end_slot}"
+  def epoch_description(epoch, time_range: false, slot: true)
+    time = [l(epoch.start_time, format: :short)]
+    time << l(epoch.end_time, format: :short) if time_range
+
+    desc = [tag.time(time.join(" – "))]
+    desc << tag.p("Slot #{epoch.start_slot}", class: "slot") if slot
+    desc << epoch_progress_bar(epoch) unless epoch.future?
+
+    desc.join("")
+  end
+
+  def epoch_progress_bar(epoch)
+    tag.div(class: "progress mt-3", role: "progressbar", aria: { label: "Epoch Progress", valuemin: "0", valuemax: "100" }) do
+      tag.div(class: "progress-bar", style: "width: #{epoch.progress}%") do
+        number_to_percentage(epoch.progress, precision: 0)
+      end
+    end
+  end
+
+  def current_epoch_border_gradient(progress)
+    colors = [
+      "var(--bs-primary) #{progress}%",
+      "var(--bs-border-color) #{100-progress}%"
+    ].join(',')
+
+    "border-color: unset !important; border-image: linear-gradient(180deg, #{colors}) 1"
   end
 
   def event_time(event)

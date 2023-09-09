@@ -3,15 +3,15 @@
 <div class="timeline">
   <% @epochs.reverse.each do |epoch| %>
     <div class="row" id="<%= 'today' if epoch.current? %>">
-      <div class="col-4 col-sm-3 col-md-2 border-primary border-1 border-end py-5 position-relative text-end">
-        <span class="position-absolute start-100 translate-middle-x p-2 mt-1 border border-3 border-primary rounded-circle <%= epoch.current? ? 'bg-primary' : 'bg-light' %>"><span class="visually-hidden"></span></span>
+      <% color_class = epoch.future? ? "tertiary" : "primary" %>
+      <div class="col-4 col-sm-3 col-md-2 border-<%= color_class %> border-1 border-end pb-5 position-relative text-end" style="<%= current_epoch_border_gradient(epoch.progress) if epoch.current? %>">
+        <span class="position-absolute start-100 translate-middle-x p-2 border border-3 border-<%= color_class %> rounded-circle <%= epoch.current? ? 'bg-primary' : 'bg-light' %>"><span class="visually-hidden"></span></span>
         <div class="epoch_time_info d-inline-block pe-3">
-          <time><%= l(epoch.start_time, format: :short) %></time>
-          <p class="slot">Slot <%= epoch.start_slot %></p>
+          <%= epoch_description(epoch).html_safe %>
         </div>
       </div>
 
-      <div class="col event py-5 px-4 px-sm-5">
+      <div class="col event pb-5 px-4 px-sm-5">
         <h4 class="mb-3 <%= 'text-primary' if epoch.current? %>"><%= epoch.name %></h4>
 
         <ul class="list-group list-group-flush mt-2">
