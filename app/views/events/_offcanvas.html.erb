@@ -27,7 +27,7 @@
 
           <p>With our customizable calendar subscription via the iCalendar (<a href="https://en.wikipedia.org/wiki/ICalendar", target="_blank">ICS</a>) format, you can effortlessly integrate and stay up-to-date with Cardano, for free!</p>
 
-          <%= link_to events_url(permitted_params.except(:start_date).merge(protocol: :webcal, format: :ics)), data: { "controller" => "events", "events-target" => "subscribe" }, class: "d-block btn btn-success", target: "_blank" do %>
+          <%= link_to events_url(permitted_params.except(:start_date), protocol: :webcal, format: :ics), data: { "controller" => "events", "events-target" => "subscribe" }, class: "d-block btn btn-success", target: "_blank" do %>
             <i class="bi-calendar2-plus me-1"></i> Subscribe
           <% end %>
         </div>
