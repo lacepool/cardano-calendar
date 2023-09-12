@@ -92,7 +92,7 @@
               <ul class="dropdown-menu tz-dropdown dropdown-menu-end">
                 <% ActiveSupport::TimeZone.all.sort.each do |tz| %>
                   <li>
-                    <%= link_to events_path(permitted_params.merge(tz: tz.tzinfo.identifier)), class: "dropdown-item #{'active' if current_timezone == tz.name}" do %>
+                    <%= link_to events_path(event_params.merge(tz: tz.tzinfo.identifier)), class: "dropdown-item #{'active' if current_timezone == tz.name}" do %>
                       <%= tz %>
                     <% end %>
                   </li>

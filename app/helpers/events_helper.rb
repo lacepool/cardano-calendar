@@ -52,7 +52,7 @@ module EventsHelper
     event_views.map do |view|
       classes = current_view == view ? [default_classes, active_classes].join(" ") : default_classes
 
-      link_to events_path(permitted_params.merge(view: view)), class: classes, data: { view: view } do
+      link_to events_path(event_params.merge(view: view)), class: classes, data: { view: view } do
         tag.i(nil, class: "#{event_view_icon(view)} me-1") + view.upcase_first
       end
     end.join.html_safe
@@ -106,11 +106,16 @@ module EventsHelper
   end
 
   def current_view
-    params.fetch(:view, "month")
+    event_params.fetch(:view, "month")
+  end
+
+  def filter_params
+    event_params.fetch(:filter, {}).merge(
+      stake_address: event_params[:stake_address])
   end
 
   def start_date
-    params.fetch(:start_date, Date.current).to_date
+    event_params.fetch(:start_date, Date.current).to_date
   end
 
   def date_range
@@ -118,20 +123,20 @@ module EventsHelper
   end
 
   def url_for_previous_view
-    url_for(permitted_params.merge(
+    url_for(event_params.merge(
       :start_date => (date_range.first - 1.day).iso8601
     ).merge(view: current_view))
   end
 
    def url_for_next_view
-    url_for(permitted_params.merge(
+    url_for(event_params.merge(
       :start_date => (date_range.last + 1.day).iso8601
     ).merge(view: current_view))
   end
 
   def url_for_today_view
     url_for(
-      permitted_params.merge(
+      event_params.merge(
         :start_date => Time.current.to_date.iso8601,
         view: current_view,
         anchor: "today"

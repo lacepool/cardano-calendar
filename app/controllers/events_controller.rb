@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  helper_method :permitted_params, :wallet_connected?, :event_param_filters
+  helper_method :event_params, :wallet_connected?, :event_param_filters
 
   def index
     respond_to do |f|
@@ -41,7 +41,7 @@ class EventsController < ApplicationController
 
     if wallet_connected?
       wallet_on_filters = EventFilter.by_class("Events::Wallet").map(&:keys).flatten - filters.off_filters
-      events += Events::Wallet.where(category: wallet_on_filters).with_stake_address(permitted_params[:stake_address]).between(between)
+      events += Events::Wallet.where(category: wallet_on_filters).with_stake_address(params[:stake_address]).between(between)
     end
 
     events += Events::Software.where("extras->'filter_param' ?| array[:repos]", repos: filters.on_filters).between(between)
@@ -52,11 +52,11 @@ class EventsController < ApplicationController
   end
 
   def wallet_connected?
-    @wallet_connected ||= permitted_params[:stake_address] && Wallet.where(stake_address: permitted_params[:stake_address]).exists?
+    @wallet_connected ||= params[:stake_address] && Wallet.where(stake_address: params[:stake_address]).exists?
   end
 
   def start_date
-    permitted_params.fetch(:start_date, Date.today).to_time
+    params.fetch(:start_date, Date.today).to_time
   end
 
   def ics_date_range
@@ -100,7 +100,7 @@ class EventsController < ApplicationController
   end
 
   def date_range
-    if permitted_params[:view] == "list"
+    if params[:view] == "list"
       start_date.beginning_of_month..start_date.end_of_month
     else
       start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week.end_of_day
@@ -108,11 +108,13 @@ class EventsController < ApplicationController
   end
 
   def filters
-    @filters ||= EventParamFilters.new(permitted_params.fetch(:filter, {}))
+    @filters ||= EventParamFilters.new(params.fetch(:filter, {}))
   end
   alias_method :event_param_filters, :filters
 
-  def permitted_params
-    params.permit!.to_h.with_indifferent_access
+  def event_params
+    @event_params ||= params.permit(
+      :format, :view, :start_date, :tz, :stake_address, filter: {}
+    ).to_h.with_indifferent_access.symbolize_keys
   end
 end
