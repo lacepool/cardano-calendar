@@ -84,7 +84,7 @@ class EventsController < ApplicationController
           epoch.events.each do |event|
             cal.event do |ce|
               ce.summary = event.name
-              ce.description = nil
+              ce.description = event_url(name: event.urlname, id: event.id)
               ce.dtstart = event.start_time.utc
               ce.categories = event.category
               ce.dtend = event.end_time.utc
