@@ -67,7 +67,7 @@ class EventsController < ApplicationController
     current_timestamp = Time.current.utc.to_i
 
     Icalendar::Calendar.new.tap do |cal|
-      cal.ip_name = "cardano-calendar.com"
+      cal.x_wr_calname = "cardano-calendar.com"
       cal.description = "My Customized Cardano Events"
       cal.refresh_interval = "P4H"
 
