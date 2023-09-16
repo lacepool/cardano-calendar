@@ -62,5 +62,7 @@
   "blockfrost/blockfrost-swift",
   "blockfrost/blockfrost-kotlin",
   "CardanoSolutions/kupo",
-  "CardanoSolutions/ogmios"
+  "CardanoSolutions/ogmios",
+  "gitmachtl/scripts",
+  "gitmachtl/cardano-signer"
 ]
