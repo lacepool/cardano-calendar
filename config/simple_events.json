@@ -457,7 +457,21 @@
           "website": "https://crypto.iacr.org/2023/"
         }
       ]
-
+    },
+    "asiacrypt": {
+      "filter_label": "Asiacrypt",
+      "filter_default_value": "on",
+      "events": [
+        {
+          "name": "Asiacrypt 2023",
+          "description": "<p>The Asiacrypt conference is an international conference on all aspects of cryptology. The Asiacrypt conference has been sponsored by IACR since 2000, and it is now held annually in a different venue in the Asia-Pacific region.</p>",
+          "start_time": 1701648000,
+          "end_time": 1702079999,
+          "time_format": "date",
+          "location": "Guangzhou, China",
+          "website": "https://crypto.iacr.org/2023/"
+        }
+      ]
     },
     "rareevo": {
       "filter_label": "Rare Evo",
