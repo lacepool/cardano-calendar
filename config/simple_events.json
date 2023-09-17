@@ -469,7 +469,31 @@
           "end_time": 1702079999,
           "time_format": "date",
           "location": "Guangzhou, China",
-          "website": "https://crypto.iacr.org/2023/"
+          "website": "https://asiacrypt.iacr.org/2023/"
+        }
+      ]
+    },
+    "eurocrypt": {
+      "filter_label": "Eurocrypt",
+      "filter_default_value": "on",
+      "events": [
+        {
+          "name": "Eurocrypt 2023",
+          "description": "<p>The Eurocrypt conference is an international conference on all aspects of cryptology. The Eurocrypt conference has been held every year since 1987, and is held in a different location in Europe every year.</p>",
+          "start_time": 1682208000,
+          "end_time": 1682639999,
+          "time_format": "date",
+          "location": "Lyon, France",
+          "website": "https://eurocrypt.iacr.org/2023/"
+        },
+        {
+          "name": "Eurocrypt 2024",
+          "description": "<p>The Eurocrypt conference is an international conference on all aspects of cryptology. The Eurocrypt conference has been held every year since 1987, and is held in a different location in Europe every year.</p>",
+          "start_time": 1716681600,
+          "end_time": 1717113599,
+          "time_format": "date",
+          "location": "Zurich, Switzerland",
+          "website": "https://eurocrypt.iacr.org/2024/"
         }
       ]
     },
