@@ -443,6 +443,22 @@
     }
   },
   "Conferences & Hackathons": {
+    "crypto": {
+      "filter_label": "Crypto",
+      "filter_default_value": "on",
+      "events": [
+        {
+          "name": "Crypto 2023",
+          "description": "<p>The Crypto conference is an international conference on all aspects of cryptology. The Crypto conference has been held every year since 1981 in Santa Barbara, California, USA.</p><p>Crypto 2023 is the 43rd International Cryptology Conference and will take place in Santa Barbara, USA on August 19-24, 2023. The academic program covers all aspects of cryptology. Crypto 2023 is organized by the International Association for Cryptologic Research (IACR).</p>",
+          "start_time": 1692403200,
+          "end_time": 1692921599,
+          "time_format": "date",
+          "location": "Santa Barbara, USA",
+          "website": "https://crypto.iacr.org/2023/"
+        }
+      ]
+
+    },
     "rareevo": {
       "filter_label": "Rare Evo",
       "filter_default_value": "on",
