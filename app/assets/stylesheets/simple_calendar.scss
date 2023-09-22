@@ -1,7 +1,11 @@
 @import 'bootstrap/scss/bootstrap';
 
-.event time {
+.event time, .event .badge {
   font-size: 0.75em;
+}
+
+.event .badge {
+  font-size: 0.67em;
 }
 
 .event .modal time {
