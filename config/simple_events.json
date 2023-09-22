@@ -55,7 +55,7 @@
       ]
     }
   },
-  "Project Catalyst": {
+  "Catalyst": {
     "townhalls": {
       "filter_label": "Town Hall Meetings",
       "filter_default_value": "off",
