@@ -100,7 +100,22 @@
           "name": "Catalyst F10 – Voting",
           "description": null,
           "start_time": 1693440000,
-          "end_time": 1694649600
+          "end_time": 1694649600,
+          "time_format": "date"
+        }
+      ]
+    },
+    "catalyst-results": {
+      "filter_label": "Results",
+      "filter_default_value": "on",
+      "events": [
+        {
+          "name": "Catalyst F10 – Results",
+          "description": "<p>Community participation in this fund has surpassed expectations, with a total number of recorded votes in Fund10 reaching almost 410k votes cast, which is over 45k more votes received than in Fund9, an increase of 12.5% and bringing the total number of votes Catalyst has received close to 2,2 million votes!</p><p>You can view the Fund10 Stats and download a full breakdown of the results <a href='https://projectcatalyst.io/funds/10' target='_blank' class='btn btn-primary'>here</a></p><p>The numbers continue to grow and demonstrate that the community is making its voice heard on what they want to see on Cardano.</p><p></p>",
+          "website": "https://projectcatalyst.io",
+          "start_time": 1695254400,
+          "end_time": 1695254400,
+          "time_format": "date"
         }
       ]
     }
