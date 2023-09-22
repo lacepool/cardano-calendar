@@ -1,4 +1,10 @@
 module EventsHelper
+  def tags(event)
+    event.tags.map do |tag_name|
+      tag.span tag_name, class: "badge text-bg-info"
+    end.join.html_safe
+  end
+
   def epoch_description(epoch, time_range: false, slot: true)
     time = [l(epoch.start_time, format: :short)]
     time << l(epoch.end_time, format: :short) if time_range

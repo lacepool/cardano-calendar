@@ -17,7 +17,7 @@
         <ul class="list-group list-group-flush mt-2">
           <% epoch.events.each do |event| %>
             <li class="list-group-item bg-transparent ps-0 d-relative">
-              <time class="text-muted font-monospace d-block"><%= event_time(event) %></time>
+              <time class="text-muted font-monospace d-block"><%= event_time(event) %> <%= tags(event) %></time>
               <%= event.name %>
               <% unless event.description.blank? %>
                 <%= link_to event_path(name: event.urlname, id: event.id), class: "ps-1", data: { turbo_stream: true } do %>

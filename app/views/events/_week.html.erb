@@ -26,6 +26,7 @@
               <li class="event list-group-item px-0 py-3">
                 <small>
                   <time class="me-2 text-muted font-monospace d-block"><%= event_time(event) %></time>
+                  <%= tags(event) %>
                   <span><%= event.name %></span>
                 </small>
 

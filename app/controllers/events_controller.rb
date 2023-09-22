@@ -44,6 +44,12 @@ class EventsController < ApplicationController
       events += Events::Wallet.where(category: wallet_on_filters).with_stake_address(params[:stake_address]).between(between)
     end
 
+    papers_on_filters = EventFilter.by_class("Events::ResearchPaper").map(&:keys).flatten - filters.off_filters
+    if papers_on_filters.any?
+      papers_on_filters_years = papers_on_filters.map {|f| f.split("-").last }
+      events += Events::ResearchPaper.where("extract(year from start_time) IN (#{papers_on_filters_years.join(',')})").between(between)
+    end
+
     events += Events::Software.where("extras->'filter_param' ?| array[:repos]", repos: filters.on_filters).between(between)
 
     events = events.sort_by(&:start_time) if events_sorted

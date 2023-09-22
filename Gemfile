@@ -53,8 +53,14 @@ gem "bootsnap", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
+gem "mechanize"
+
 gem "gqli"
 gem "octokit", "~> 5.0"
+gem "serrano"
+
+gem "faraday"
+gem "faraday-decode_xml"
 
 gem "sidekiq", "~> 7.1"
 gem 'sinatra', require: nil # for sidekiq web gui

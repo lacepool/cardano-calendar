@@ -24,6 +24,14 @@ module EventCharacteristics
     )
   end
 
+  def tags
+    if self.respond_to?(:model_name)
+      [self.model_name.human]
+    else
+      []
+    end
+  end
+
   def website
     extras.try(:[], "website")
   end
