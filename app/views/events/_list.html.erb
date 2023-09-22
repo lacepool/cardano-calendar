@@ -2,7 +2,7 @@
 
 <div class="timeline">
   <% @epochs.reverse.each do |epoch| %>
-    <div class="row" id="<%= 'today' if epoch.current? %>">
+    <div class="row" id="<%= Date.current if epoch.current? %>">
       <% color_class = epoch.future? ? "tertiary" : "primary" %>
       <div class="col-4 col-sm-3 col-md-2 border-<%= color_class %> border-1 border-end pb-5 position-relative text-end" style="<%= current_epoch_border_gradient(epoch.progress) if epoch.current? %>">
         <span class="position-absolute start-100 translate-middle-x p-2 border border-3 border-<%= color_class %> rounded-circle <%= epoch.current? ? 'bg-primary' : 'bg-light' %>"><span class="visually-hidden"></span></span>

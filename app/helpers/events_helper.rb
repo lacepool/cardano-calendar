@@ -130,22 +130,22 @@ module EventsHelper
 
   def url_for_previous_view
     url_for(event_params.merge(
-      :start_date => (date_range.first - 1.day).iso8601
+      start_date: (date_range.first - 1.day).iso8601
     ).merge(view: current_view))
   end
 
    def url_for_next_view
     url_for(event_params.merge(
-      :start_date => (date_range.last + 1.day).iso8601
+      start_date: (date_range.last + 1.day).iso8601
     ).merge(view: current_view))
   end
 
   def url_for_today_view
     url_for(
       event_params.merge(
-        :start_date => Time.current.to_date.iso8601,
+        start_date: Time.current.to_date.iso8601,
         view: current_view,
-        anchor: "today"
+        anchor: Date.current
       )
     )
   end
