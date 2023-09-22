@@ -77,6 +77,10 @@ class Events::SimpleEvent
     @open_end == true
   end
 
+  def tags
+    [category]
+  end
+
   private
 
     def self.between_dates(data=ALL, date_range)
