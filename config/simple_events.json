@@ -457,7 +457,7 @@
       ]
     }
   },
-  "Conferences & Hackathons": {
+  "Conferences": {
     "crypto": {
       "filter_label": "Crypto",
       "filter_default_value": "on",
