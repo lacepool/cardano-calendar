@@ -2,12 +2,17 @@
   <div class="modal-dialog modal-dialog-centered modal-<%= size %>">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-4"><%= event.name %></h1>
+        <div>
+          <h1 class="modal-title fs-4"><%= event.name %></h1>
+          <time class="text-muted font-monospace me-2"><%= event_time(event) %></time>
+          <%= tags(event) %>
+        </div>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body modal-dialog-scrollable">
-        <time class="text-muted font-monospace d-block mb-3"><%= event_time(event) %></time>
-        <%= event.description.html_safe %>
+        <div class="mt-2">
+          <%= event.description.html_safe %>
+        </div>
       </div>
       <div class="modal-footer">
 

@@ -12,6 +12,10 @@
   font-size: inherit;
 }
 
+.modal-header {
+  align-items: self-start !important;
+}
+
 .calendar.calendar-month.card {
   min-width: 10em;
 }
