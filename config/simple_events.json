@@ -681,6 +681,51 @@
           "website": "https://state-of-crypto.coindesk.com"
         }
       ]
-    }
+    },
+    "blockchainexpo-usa": {
+      "filter_label": "Blockchain Expo North America",
+      "filter_default_value": "on",
+      "events": [
+        {
+          "name": "Blockchain Expo North America",
+          "description": "<p>The Blockchain Expo will take place on June 5-6 2024 at the Santa Clara Convention Center, CA.</p><p>This technology event is for the ambitious Blockchain enthusiast, seeking to explore the latest innovations, implementations and strategies within Blockchain Technology. Network with other attendees, exhibitors and sponsors and discover how to drive forward your business for 2024 and beyond.</p><p>Don’t miss the opportunity to explore this innovative technology and its impact on a range of industries including; manufacturing, transport, supply chain, government, financial services, energy, insurance, healthcare, retail and more!</p><p>Over 7,000 attendees are expected to join from across the globe including CTOs, Heads of Innovation and Technology, IT Directors, Telecom Providers, Developers, Start-Ups, OEMs, Government, Automotive, Operators, Technology Providers, Investors, VCs and many more.</p><p>The Expo will provide insight from over 250 speakers sharing their unparalleled industry knowledge and real-life experiences in the forms of solo presentations, expert panel discussions and in-depth fireside chats.</p>",
+          "start_time": 1717545600,
+          "end_time": 1717632000,
+          "location": "Santa Clara, CA, USA",
+          "time_format": "date",
+          "website": "https://blockchain-expo.com/northamerica/"
+        }
+      ]
+    },
+    "blockchainexpo-europe": {
+      "filter_label": "Blockchain Expo Europe",
+      "filter_default_value": "on",
+      "events": [
+        {
+          "name": "Blockchain Expo Europe",
+          "description": "<p>The world-leading Blockchain Expo series will arrive at the RAI, Amsterdam on 26-27 September 2023 to host its 7th annual event.</p><p>The Expo features keynote speakers, panel discussions, and workshops conducted by industry experts. These sessions can help you gain insights into the latest trends, developments, and use cases in the blockchain space.</p><p>Network with like-minded individuals, industry leaders, investors, and potential partners.</p><p>The Expo will bring together key industries from across the globe for two days of top-level content and discussion across 6 co-located events covering Blockchain, IoT, Cyber Security & Cloud, AI and Big data, Edge Computing and Digital Transformation.</p><p>This event is part of TechEx Europe, which covers IoT, AI & Big Data, Digital Transformation, and Cyber Security & Cloud, so you can learn a variety of key enterprise technology solutions all in one place, under one roof.</p>",
+          "start_time": 1695686400,
+          "end_time": 1695772800,
+          "location": "Amsterdam, NL",
+          "time_format": "date",
+          "website": "https://blockchain-expo.com/europe/"
+        }
+      ]
+    },
+    "blockchainexpo-global": {
+      "filter_label": "Blockchain Expo Gobal",
+      "filter_default_value": "on",
+      "events": [
+        {
+          "name": "Blockchain Expo Gobal",
+          "description": "<p>The world-leading Blockchain Expo series will arrive at the London Olympia on 30th November – 1st December 2023 to host its seventh annual Global event.</p><p>Join us to discover what leading Blockchain companies are offering, learn more about the industry’s current state and where it is going in the future.</p><p>This technology event is for the ambitious Blockchain enthusiast, seeking to explore the latest innovations, implementations and strategies within Blockchain Technology.</p><p>It will bring together key industries from across the globe for two days of top-level content and discussion across 6 co-located events with IoT (Co-Locating 5G), AI & Big Data, Cyber Security & Cloud, Edge Computing and Digital Transformation Week</p><p>6,000 attendees are expected to congregate for the event including CTOs, Heads of Innovation and Technology, IT Directors, Developers, Start-Ups, OEMs, Government, Automotive, Operators, Technology Providers, Investors, VCs and many more.</p><p>The Blockchain Expo will showcase the most cutting-edge technologies from more than 200 exhibitors and provide insight from over 150 speakers sharing their unparalleled industry knowledge and real-life experiences.</p>",
+          "start_time": 1701302400,
+          "end_time": 1701388800,
+          "location": "London, UK",
+          "time_format": "date",
+          "website": "https://blockchain-expo.com/global/"
+        }
+      ]
+    },
   }
 }
