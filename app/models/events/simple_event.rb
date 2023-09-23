@@ -109,7 +109,6 @@ class Events::SimpleEvent
     end
 
     def self.new_series(category, subcategory, event, date_range)
-      frequency = ActiveSupport::Duration.parse(event["frequency"])
       first_at = Time.at(event["schedule_start_time"]).in_time_zone
 
       if event["schedule_end_time"]
@@ -118,9 +117,17 @@ class Events::SimpleEvent
         last_at = Time.current.in_time_zone + 1.year
       end
 
+      interval = ActiveSupport::Duration.parse(event["interval"])
+      recurrence = Montrose.every(interval, starts: first_at, until: last_at)
+
+      if event["on"]
+        r2 = Montrose.on(event["on"].map(&:to_sym))
+        recurrence = recurrence.merge(r2)
+      end
+
       arr = []
 
-      recurrence = Montrose.every(frequency, starts: first_at, until: last_at).events.each do |date|
+      recurrence.events.each do |date|
         if date_range.include?(date)
           arr << new(category, subcategory, event, start_time: date)
         end

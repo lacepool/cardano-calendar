@@ -60,7 +60,7 @@
       "filter_label": "Town Hall Meetings",
       "filter_default_value": "off",
       "recurring": {
-        "frequency": "P7D",
+        "interval": "P7D",
         "schedule_start_time": 1671645600,
         "schedule_end_time": null,
         "duration": "PT1H",
@@ -125,7 +125,7 @@
       "filter_label": "Leaderlogs",
       "filter_default_value": "off",
       "recurring": {
-        "frequency": "P5D",
+        "interval": "P5D",
         "schedule_start_time": 1596793491,
         "schedule_end_time": null,
         "duration": null,
@@ -726,6 +726,45 @@
           "website": "https://blockchain-expo.com/global/"
         }
       ]
+    }
+  },
+  "Twitter Spaces": {
+    "overcoffee": {
+      "filter_label": "Cardano Over Coffee",
+      "filter_default_value": "off",
+      "recurring": {
+        "interval": "P1W",
+        "on": ["monday", "tuesday", "wednesday", "thursday", "friday"],
+        "schedule_start_time": 1690810200,
+        "schedule_end_time": null,
+        "name": "Cardano Over Coffee",
+        "website": "https://twitter.com/coc_space",
+        "description": "<p>M-F 1:30PM UTC // Interviewing influential people & projects in Cardano // Schedule a spot // Past Episodes -Podcast follow link tree</p>"
+      }
+    },
+    "epochsecio": {
+      "filter_label": "EpochSec",
+      "filter_default_value": "off",
+      "recurring": {
+        "interval": "P7D",
+        "schedule_start_time": 1691359200,
+        "schedule_end_time": null,
+        "name": "EpochSec | Protect Yourself",
+        "website": "https://twitter.com/epochsec_io",
+        "description": "<p>SPACES SUNDAYS 6pm EST / 10pm UTC</p><p>Providing support - Cardano & Crypto Communities</p>"
+      }
+    },
+    "epochsend": {
+      "filter_label": "Epochs End",
+      "filter_default_value": "off",
+      "recurring": {
+        "interval": "P5D",
+        "schedule_start_time": 1619817300,
+        "schedule_end_time": null,
+        "name": "Epochs End",
+        "website": "https://twitter.com/EpochsEnd",
+        "description": "<p>Cardano Every Five Days, at EpochsEnd. Still cheaper than therapy | Hosts @CardanoGuru & @CardanoWeed | Est. Epoch 263</p>"
+      }
     }
   }
 }
