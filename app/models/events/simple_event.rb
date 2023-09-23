@@ -114,7 +114,7 @@ class Events::SimpleEvent
       if event["schedule_end_time"]
         last_at = Time.at(event["schedule_end_time"]).in_time_zone
       else
-        last_at = Time.current.in_time_zone + 1.year
+        last_at = Time.current.in_time_zone + date_range.last
       end
 
       interval = ActiveSupport::Duration.parse(event["interval"])
