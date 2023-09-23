@@ -3,7 +3,6 @@
 <div class="table-responsive-xxl">
   <table class="table table-borderless">
     <thead class="sticky-top">
-
       <tr>
         <% date_range.slice(0, 7).each do |day| %>
           <th><%= t('date.abbr_day_names')[day.wday] %></th>
@@ -11,11 +10,11 @@
       </tr>
     </thead>
 
-    <tbody>
+    <tbody data-controller="events">
       <% date_range.each_slice(7) do |week| %>
         <tr>
           <% week.each do |day| %>
-            <%= content_tag :td, id: day, class: calendar.td_classes_for(day) do %>
+            <%= content_tag :td, data: { action: "click->events#selectDay" }, id: day, class: calendar.td_classes_for(day) do %>
               <% instance_exec(day, calendar.sorted_events_for(day), &passed_block) %>
             <% end %>
           <% end %>

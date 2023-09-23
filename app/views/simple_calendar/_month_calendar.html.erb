@@ -10,7 +10,7 @@
       </tr>
     </thead>
 
-    <tbody>
+    <tbody data-controller="events" data-events-target="days">
       <% date_range.each_slice(7) do |week| %>
         <tr>
           <% week.each do |day| %>

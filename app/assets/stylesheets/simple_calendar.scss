@@ -24,13 +24,16 @@ td.day {
   scroll-margin-top: 2em;
 }
 
-td.today .card {
-  border-color: $primary;
+td.active {
+  .card { border-color: var(--bs-info) }
 }
 
-td.today .card .card-header {
-  background: $primary !important;
-  color: $light;
+td.today {
+  .card { border-color: $primary }
+  .card .card-header {
+    background: $primary !important;
+    color: $light;
+  }
 }
 
 td.current-month .date {

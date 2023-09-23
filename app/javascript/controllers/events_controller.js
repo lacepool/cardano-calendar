@@ -2,7 +2,18 @@ import { Controller } from "@hotwired/stimulus"
 import * as bootstrap from "bootstrap"
 
 export default class extends Controller {
-  static targets = [ 'filter', 'view', 'offcanvasBody', 'subscribe', 'show' ]
+  static targets = [ 'days', 'filter', 'view', 'offcanvasBody', 'subscribe', 'show' ]
+
+  daysTargetConnected(element) {
+    const days = [...element.querySelectorAll('td')]
+
+    days.forEach(day => {
+      day.addEventListener('click', event => {
+        days.filter(d => d !== day).forEach(d => d.classList.remove("active"))
+        day.classList.toggle("active")
+      })
+    })
+  }
 
   showTargetConnected(element) {
     if (element.dataset["format"] == "html") {
