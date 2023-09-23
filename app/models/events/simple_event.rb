@@ -125,9 +125,22 @@ class Events::SimpleEvent
         recurrence = recurrence.merge(r2)
       end
 
+      if event["at"]
+        r3 = Montrose.at(event["at"])
+        recurrence = recurrence.merge(r3)
+      end
+
       arr = []
 
       recurrence.events.each do |date|
+        if event["tz"]
+          # if an event always takes place at a fixed time in a specific timezone with daylight savings
+          # (e.g. 9:30pm in EST and sticks to 9:30pm when switched to EDT)
+          # we swap the event's zone without touching the time, then convert the time to match with
+          # the user's time zone.
+          date = date.change(zone: event["tz"]).in_time_zone
+        end
+
         if date_range.include?(date)
           arr << new(category, subcategory, event, start_time: date)
         end

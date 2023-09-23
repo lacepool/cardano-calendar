@@ -778,6 +778,21 @@
         "website": "https://twitter.com/EpochsEnd",
         "description": "<p>Cardano Every Five Days, at EpochsEnd. Still cheaper than therapy | Hosts @CardanoGuru & @CardanoWeed | Est. Epoch 263</p>"
       }
+    },
+    "tagteamcrypto": {
+      "filter_label": "Tag Team Crypto",
+      "filter_default_value": "off",
+      "recurring": {
+        "interval": "P1W",
+        "on": ["tuesday"],
+        "at": "09:30 pm",
+        "tz": "Eastern Time (US & Canada)",
+        "schedule_start_time": 1693362600,
+        "schedule_end_time": null,
+        "name": "Tag Team Crypto",
+        "website": "https://twitter.com/tagteamcrypto",
+        "description": "<p>Come join Hemi, Viva, Chronic & Malibu to discuss macro economics, stock markets, cryptos, nfts or whatever the hell pops up. Come Tag yourself in!!!</p>"
+      }
     }
   }
 }
