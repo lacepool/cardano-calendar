@@ -20,6 +20,10 @@
   min-width: 10em;
 }
 
+td.day {
+  scroll-margin-top: 2em;
+}
+
 td.today .card {
   border-color: $primary;
 }
