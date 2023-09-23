@@ -742,6 +742,19 @@
         "description": "<p>M-F 1:30PM UTC // Interviewing influential people & projects in Cardano // Schedule a spot // Past Episodes -Podcast follow link tree</p>"
       }
     },
+    "calmdano": {
+      "filter_label": "Calmdano",
+      "filter_default_value": "off",
+      "recurring": {
+        "interval": "P1W",
+        "on": ["monday", "wednesday", "friday"],
+        "schedule_start_time": 1678262400,
+        "schedule_end_time": null,
+        "name": "Calmdano",
+        "website": "https://twitter.com/calmdano",
+        "description": "<p>CALMDANO X Space ❇️ Hosted by @s20_bullion ❇️ That calm Space to talk about everything to do with #Cardano, #NFTs & #Crypto ❇️ Email: calmdano@gmail.com</p>"
+      }
+    },
     "epochsecio": {
       "filter_label": "EpochSec",
       "filter_default_value": "off",
