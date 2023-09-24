@@ -70,15 +70,15 @@ module EventsHelper
 
       links = filters.map do |filter_param, filter|
         dataset = {
-          "events-target": "filter",
+          "action": "change->events#toggleFilter",
           "filter-param": filter_param,
           "filter-default": filter[:default]
         }
         checked = event_param_filters.is_on?(filter_param)
         checkbox_name = "filter_#{filter_param}"
 
-        tag.div data: dataset, class: "event_filter form-switch list-group-item" do
-          check_box_tag(checkbox_name, nil, checked, class: "form-check-input me-2 float-none", role: "switch") +
+        tag.div class: "event_filter form-switch list-group-item" do
+          check_box_tag(checkbox_name, nil, checked, data: dataset, class: "form-check-input me-2 float-none", role: "switch") +
             tag.label(filter[:label], class: "form-check-label small", for: checkbox_name)
         end
       end.join.html_safe

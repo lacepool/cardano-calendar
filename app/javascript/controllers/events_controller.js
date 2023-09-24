@@ -2,17 +2,14 @@ import { Controller } from "@hotwired/stimulus"
 import * as bootstrap from "bootstrap"
 
 export default class extends Controller {
-  static targets = [ 'days', 'filter', 'view', 'offcanvasBody', 'subscribe', 'show' ]
+  static targets = [ 'view', 'offcanvasBody', 'show' ]
 
-  daysTargetConnected(element) {
-    const days = [...element.querySelectorAll('td')]
+  selectDay(event) {
+    let day = event.currentTarget
+    let allDays = [...day.parentElement.parentElement.querySelectorAll('td')].filter(child => child !== day)
 
-    days.forEach(day => {
-      day.addEventListener('click', event => {
-        days.filter(d => d !== day).forEach(d => d.classList.remove("active"))
-        day.classList.toggle("active")
-      })
-    })
+    allDays.forEach(d => d.classList.remove("active"))
+    day.classList.toggle("active")
   }
 
   showTargetConnected(element) {
@@ -33,21 +30,20 @@ export default class extends Controller {
     new bootstrap.Modal(element, {}).show()
   }
 
-  subscribeTargetConnected(element) {
-    document.documentElement.addEventListener("turbo:before-visit", event => {
-      const currentUrl = new URL(event.detail.url)
-      const currentSearchParams = currentUrl.searchParams
-      const linkUrl = new URL(element.href)
+  updateSubscribeLink(event) {
+    const linkElement = event.currentTarget
+    const currentUrl = new URL(document.location)
+    const currentSearchParams = currentUrl.searchParams
+    const linkUrl = new URL(linkElement.href)
 
-      // Not required, but removing start_date from params
-      currentSearchParams.delete('start_date')
+    // Not required, but removing start_date from params
+    currentSearchParams.delete('start_date')
 
-      // The link uses webcal protocol.
-      // It seems weird but `linkUrl.origin` is null and pathname contains the url
-      const newUrl = linkUrl.protocol + linkUrl.pathname + currentUrl.search
+    // The link uses webcal protocol.
+    // It seems weird but `linkUrl.origin` is null and pathname contains the url
+    const newUrl = linkUrl.protocol + linkUrl.pathname + currentUrl.search
 
-      element.setAttribute('href', newUrl)
-    })
+    linkElement.setAttribute('href', newUrl)
   }
 
   offcanvasBodyTargetConnected(element) {
@@ -91,24 +87,22 @@ export default class extends Controller {
     })
   }
 
-  filterTargetConnected(element) {
-    element.addEventListener('click', event => {
-      const currentUrl = new URL(document.location)
-      const currentParams = currentUrl.searchParams
-      const filterParam = event.currentTarget.dataset["filterParam"]
-      const defaultValue = event.currentTarget.dataset["filterDefault"]
-      const switchInput = event.currentTarget.children[0]
+  toggleFilter(event) {
+    const switchInput = event.currentTarget
+    const currentUrl = new URL(document.location)
+    const currentParams = currentUrl.searchParams
+    const filterParam = switchInput.dataset["filterParam"]
+    const defaultValue = switchInput.dataset["filterDefault"]
 
-      currentParams.delete("filter["+filterParam+"]")
+    currentParams.delete("filter["+filterParam+"]")
 
-      if(switchInput.checked) {
-        if(defaultValue == "off") currentParams.set("filter["+filterParam+"]", "on")
-      }
-      else {
-        if(defaultValue == "on") currentParams.set("filter["+filterParam+"]", "off")
-      }
+    if(switchInput.checked) {
+      if(defaultValue == "off") currentParams.set("filter["+filterParam+"]", "on")
+    }
+    else {
+      if(defaultValue == "on") currentParams.set("filter["+filterParam+"]", "off")
+    }
 
-      Turbo.visit(currentUrl)
-    })
+    Turbo.visit(currentUrl)
   }
 }

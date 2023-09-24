@@ -10,11 +10,11 @@
       </tr>
     </thead>
 
-    <tbody data-controller="events" data-events-target="days">
+    <tbody data-controller="events">
       <% date_range.each_slice(7) do |week| %>
         <tr>
           <% week.each do |day| %>
-            <%= content_tag :td, id: day, class: calendar.td_classes_for(day) do %>
+            <%= content_tag :td, data: { action: "click->events#selectDay" }, id: day, class: calendar.td_classes_for(day) do %>
               <% instance_exec(day, calendar.sorted_events_for(day), &passed_block) %>
             <% end %>
           <% end %>
