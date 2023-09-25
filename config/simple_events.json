@@ -793,6 +793,21 @@
         "website": "https://twitter.com/tagteamcrypto",
         "description": "<p>Come join Hemi, Viva, Chronic & Malibu to discuss macro economics, stock markets, cryptos, nfts or whatever the hell pops up. Come Tag yourself in!!!</p>"
       }
+    },
+    "shotclock": {
+      "filter_label": "Saturday's Shot Clock",
+      "filter_default_value": "off",
+      "recurring": {
+        "interval": "P1W",
+        "on": ["saturday"],
+        "at": "02:22 pm",
+        "tz": "Eastern Time (US & Canada)",
+        "schedule_start_time": 1693008000,
+        "schedule_end_time": null,
+        "name": "Saturday's Shot Clock",
+        "website": "https://twitter.com/AIlovetru",
+        "description": "<p>Art, Tech, Fashion, Finance, Entertainment</p>"
+      }
     }
   }
 }
