@@ -728,6 +728,34 @@
       ]
     }
   },
+  "Education": {
+    "gimbalabsplayground": {
+      "filter_label": "Gimbalabs Playground, Season 3",
+      "filter_default_value": "off",
+      "recurring": {
+        "interval": "P1W",
+        "on": ["tuesday"],
+        "schedule_start_time": 1694541600,
+        "schedule_end_time": 1716314400,
+        "name": "Gimbalabs Playground, Season 3",
+        "website": "https://gimbalabs.com/playground",
+        "description": "<h6>What is Gimbalabs Playground?</h6><p>Gimbalabs Playground is an open space where anyone can lead a discussion on any topic. In the past, Playground presenters have shared projects they are working on, ideas they want to develop into real projects, and technical workshops about how Cardano works.</p><p>If you are building on Cardano and want to get feedback from our community, you are invited to present at Playground.</p><h6>Playground Principles</h6><p><ol><li>Anyone is welcome to be a Playground Presenter.</li><li>Peer review and feedback make projects better.</li><li>Great collaborations take root when people play. Debating our ideas or tinkering with technology are examples of ways to play!</li></ol></p><h6>Learn + Build in Public</h6><p>We are getting together to learn and build in public. When we do, people make connections between each other and their ideas.</p><p>What do you want to learn about?</p>"
+      }
+    },
+    "pbllivecoding": {
+      "filter_label": "Plutus PBL Live Coding Sessions",
+      "filter_default_value": "off",
+      "recurring": {
+        "interval": "P1W",
+        "on": ["wednesday", "thursday"],
+        "schedule_start_time": 1690810200,
+        "schedule_end_time": 1696521600,
+        "name": "Plutus PBL Live Coding",
+        "website": "https://plutuspbl.io/live-coding",
+        "description": "<p>Plutus Project-Based Learning is a free course from Gimbalabs. The goal of Plutus Project-Based Learning is to support people to become contributors to real projects in the Cardano development ecosystem. The course is self-paced, and anyone can work through course on their own time. We host two Live Coding sessions every week, where students gather to ask questions and to learn together.</p><p>The best way to learn about the course is to Get Started. We invite to jump in, start learning, and participate in our growing community of learners and builders.</p>"
+      }
+    }
+  },
   "Twitter Spaces": {
     "overcoffee": {
       "filter_label": "Cardano Over Coffee",
