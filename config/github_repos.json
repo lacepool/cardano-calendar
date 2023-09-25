@@ -73,6 +73,7 @@
   "input-output-hk/plutus",
   "meshjs/mesh",
   "opshin/opshin",
+  "python-cardano/pycardano",
   "txpipe/dolos",
   "txpipe/oura",
   "txpipe/pallas",
