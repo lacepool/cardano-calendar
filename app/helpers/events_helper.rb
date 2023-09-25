@@ -65,7 +65,7 @@ module EventsHelper
   end
 
   def render_event_filters
-    EventFilterRegistry.registered.map do |category, filters|
+    EventFilterRegistry.registered.sort.to_h.map do |category, filters|
       html_id = category.parameterize
 
       links = filters.map do |filter_param, filter|
