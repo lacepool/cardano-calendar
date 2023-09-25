@@ -103,6 +103,6 @@ export default class extends Controller {
       if(defaultValue == "on") currentParams.set("filter["+filterParam+"]", "off")
     }
 
-    Turbo.visit(currentUrl)
+    Turbo.visit(currentUrl, { action: "restore" })
   }
 }
