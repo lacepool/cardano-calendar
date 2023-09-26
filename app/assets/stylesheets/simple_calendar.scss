@@ -52,3 +52,23 @@ td.prev-month, td.next-month {
   max-height: 80vh;
   overflow-y: auto;
 }
+
+.calendar .card-header {
+  display: flex;
+
+  div:last-child {
+    margin-left: auto;
+  }
+}
+
+.clipboard {
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  a {
+    font-size: 0.75em;
+    text-decoration: none;
+  }
+}

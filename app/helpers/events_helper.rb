@@ -70,7 +70,7 @@ module EventsHelper
 
       links = filters.map do |filter_param, filter|
         dataset = {
-          "action": "change->events#toggleFilter",
+          "action": "change->filters#toggleFilter",
           "filter-param": filter_param,
           "filter-default": filter[:default]
         }
@@ -120,32 +120,51 @@ module EventsHelper
       stake_address: event_params[:stake_address])
   end
 
-  def start_date
+  def current_start_date
     event_params.fetch(:start_date, Date.current).to_date
   end
 
   def date_range
-    (start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week).to_a
+    current_view == "week" ? week_date_range : month_date_range
+  end
+
+  def week_date_range
+    (current_start_date.beginning_of_week..current_start_date.end_of_week).to_a
+  end
+
+  def month_date_range
+    (current_start_date.beginning_of_month..current_start_date.end_of_month).to_a
+  end
+
+  # direction can either be :+ or :- for prev/next
+  def start_date(direction=nil)
+    return Time.current.to_date unless direction
+
+    if current_view == "week"
+      date_range.first.public_send(direction, 1.week)
+    else
+      date_range.first.public_send(direction, 1.month)
+    end
   end
 
   def url_for_previous_view
     url_for(event_params.merge(
-      start_date: (date_range.first - 1.day).iso8601
+      start_date: start_date(:-).iso8601
     ).merge(view: current_view))
   end
 
    def url_for_next_view
     url_for(event_params.merge(
-      start_date: (date_range.last + 1.day).iso8601
+      start_date: start_date(:+).iso8601
     ).merge(view: current_view))
   end
 
   def url_for_today_view
     url_for(
       event_params.merge(
-        start_date: Time.current.to_date.iso8601,
+        start_date: start_date,
         view: current_view,
-        anchor: Date.current
+        anchor: start_date
       )
     )
   end

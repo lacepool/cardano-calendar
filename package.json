@@ -11,7 +11,8 @@
     "esbuild": "^0.18.17",
     "esbuild-rails": "^1.0.7",
     "numeral": "^2.0.6",
-    "sass": "^1.64.2"
+    "sass": "^1.64.2",
+    "stimulus-clipboard": "^4.0.1"
   },
   "scripts": {
     "build": "esbuild app/javascript/application.js --bundle --minify --sourcemap --outdir=app/assets/builds --public-path=assets",

@@ -1,4 +1,4 @@
-<div class="offcanvas offcanvas-end" data-controller="events" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="event_settings" aria-labelledby="event_settings_label" data-turbo-permanent>
+<div class="offcanvas offcanvas-end" data-controller="filters" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="event_settings" aria-labelledby="event_settings_label" data-turbo-permanent>
   <div class="offcanvas-header">
     <h5 class="offcanvas-title" id="event_settings_label"></h5>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -27,7 +27,7 @@
 
           <p>With our customizable calendar subscription via the iCalendar (<a href="https://en.wikipedia.org/wiki/ICalendar", target="_blank">ICS</a>) format, you can effortlessly integrate and stay up-to-date with Cardano, for free!</p>
 
-          <%= link_to ical_url(protocol: :webcal), data: { action: "click->events#updateSubscribeLink" }, class: "d-block btn btn-success", target: "_blank" do %>
+          <%= link_to ical_url(protocol: :webcal), data: { action: "click->filters#updateSubscribeLink" }, class: "d-block btn btn-success", target: "_blank" do %>
             <i class="bi-calendar2-plus me-1"></i> Subscribe
           <% end %>
         </div>
