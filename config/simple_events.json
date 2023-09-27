@@ -744,6 +744,21 @@
           "website": "https://blockchain-expo.com/global/"
         }
       ]
+    },
+    "nftxlv": {
+      "filter_label": "NFTxLV",
+      "filter_default_value": "on",
+      "events": [
+        {
+          "name": "NFTxLV 2023",
+          "description": "<p></p>",
+          "start_time": 1695945600,
+          "end_time": 1696118400,
+          "location": "Las Vegas, NV, USA",
+          "time_format": "date",
+          "website": "https://cnftcon.io"
+        }
+      ]
     }
   },
   "Education": {
