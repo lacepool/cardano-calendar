@@ -124,6 +124,20 @@
     }
   },
   "Stake Pool Operators": {
+    "spocall": {
+      "filter_label": "SPO Call",
+      "filter_default_value": "off",
+      "recurring": {
+        "name": "SPO Call",
+        "interval": "P1M",
+        "day": { "thursday": [1]},
+        "at": "03:00 pm",
+        "duration": "PT45M",
+        "written_interval": "Every first Thursday of the month",
+        "schedule_start_time": 1672930800,
+        "schedule_end_time": null
+      }
+    },
     "leaderlogs": {
       "filter_label": "Leaderlogs",
       "filter_default_value": "off",
