@@ -837,5 +837,20 @@
         "description": "<p>Art, Tech, Fashion, Finance, Entertainment</p>"
       }
     }
+  },
+  "YouTube": {
+    "cardano360": {
+      "filter_label": "Essential Cardano360",
+      "filter_default_value": "on",
+      "events": [
+        {
+          "name": "Essential Cardano360",
+          "description": "<p>Cardano360 is a monthly video podcast covering the latest news and topics from across the Cardano ecosystem.</p><p>Hosted by IOG, Cardano360 is available to be viewed on the IOG YouTube channel and is aired on the last Thursday of every month.</p>",
+          "start_time": 1695918600,
+          "end_time": 1695918600,
+          "website": "https://www.youtube.com/@IohkIo/videos"
+        }
+      ]
+    }
   }
 }
