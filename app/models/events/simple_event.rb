@@ -1,7 +1,7 @@
 class Events::SimpleEvent
   attr_reader :start_time, :end_time, :open_end, :time_format,
               :name, :description, :category, :subcategory, :extras,
-              :recurring
+              :recurring, :written_interval
 
   FILE_PATH = Rails.root.join("config", "simple_events.json").freeze
   ALL = JSON.parse(File.read(FILE_PATH))
@@ -17,8 +17,9 @@ class Events::SimpleEvent
   def initialize(category, subcategory, hsh, start_time: nil)
     @category = category
     @subcategory = subcategory
-
+    @recurring = hsh["schedule_start_time"] ? true : false
     @start_time = start_time || Time.at(hsh["start_time"]).in_time_zone
+    @written_interval = hsh["written_interval"]
 
     if hsh["duration"]
       duration = ActiveSupport::Duration.parse(hsh["duration"])
@@ -45,9 +46,7 @@ class Events::SimpleEvent
     start_time, category, subcategory, name = decode_id_parts(id)
 
     if event = ALL.dig(category, subcategory, "recurring")
-      start_time = Time.at(start_time.to_i).utc
-      # we know the exact time of this event, so we don't really need a time span
-      return new_series(category, subcategory, event, start_time..start_time).try(:first)
+      return new(category, subcategory, event, start_time: Time.at(start_time.to_i).in_time_zone)
     else
       event = ALL.dig(category, subcategory, "events").detect do |e|
         e["name"] == name.force_encoding('UTF-8') && e["start_time"] == start_time.to_i
@@ -109,30 +108,29 @@ class Events::SimpleEvent
     end
 
     def self.new_series(category, subcategory, event, date_range)
-      first_at = Time.at(event["schedule_start_time"]).in_time_zone
+      first_at = date_range.first.in_time_zone
+      last_at = date_range.last.in_time_zone
+
+      if event["schedule_start_time"]
+        schedule_start_time = Time.at(event["schedule_start_time"])
+        first_at = [schedule_start_time, first_at].max
+      end
 
       if event["schedule_end_time"]
-        last_at = Time.at(event["schedule_end_time"]).in_time_zone
-      else
-        last_at = date_range.last.in_time_zone
+        schedule_end_time = Time.at(event["schedule_end_time"]).in_time_zone
+        last_at = [schedule_end_time, last_at].min
       end
 
       interval = ActiveSupport::Duration.parse(event["interval"])
-      recurrence = Montrose.every(interval, starts: first_at, until: last_at)
 
-      if event["on"]
-        r2 = Montrose.on(event["on"].map(&:to_sym))
-        recurrence = recurrence.merge(r2)
-      end
-
-      if event["at"]
-        r3 = Montrose.at(event["at"])
-        recurrence = recurrence.merge(r3)
-      end
+      r = Montrose.every(interval, starts: first_at, until: last_at)
+      r = r.merge(day: event["day"])             if event["day"]
+      r = r.merge(on: event["on"].map(&:to_sym)) if event["on"]
+      r = r.merge(at: event["at"])               if event["at"]
 
       arr = []
 
-      recurrence.events.each do |date|
+      r.events.each do |date|
         if event["tz"]
           # if an event always takes place at a fixed time in a specific timezone with daylight savings
           # (e.g. 9:30pm in EST and sticks to 9:30pm when switched to EDT)

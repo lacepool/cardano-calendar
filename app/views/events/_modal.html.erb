@@ -4,7 +4,11 @@
       <div class="modal-header">
         <div>
           <h1 class="modal-title fs-4"><%= event.name %></h1>
-          <time class="text-muted font-monospace me-2"><%= event_time(event) %></time>
+          <% unless event.recurring %>
+            <time class="text-muted font-monospace me-2"><%= event_time(event) %></time>
+          <% else %>
+            <time class="text-muted font-monospace me-2"><%= event.written_interval %></time>
+          <% end %>
           <%= tags(event) %>
         </div>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
