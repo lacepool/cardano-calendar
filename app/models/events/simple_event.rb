@@ -1,7 +1,7 @@
 class Events::SimpleEvent
   attr_reader :start_time, :end_time, :open_end, :time_format,
               :name, :description, :category, :subcategory, :extras,
-              :recurring, :written_interval
+              :written_interval, :recurring
 
   FILE_PATH = Rails.root.join("config", "simple_events.json").freeze
   ALL = JSON.parse(File.read(FILE_PATH))
@@ -17,7 +17,7 @@ class Events::SimpleEvent
   def initialize(category, subcategory, hsh, start_time: nil)
     @category = category
     @subcategory = subcategory
-    @recurring = hsh["schedule_start_time"] ? true : false
+    @recurring = hsh["schedule_start_time"].present?
     @start_time = start_time || Time.at(hsh["start_time"]).in_time_zone
     @written_interval = hsh["written_interval"]
 

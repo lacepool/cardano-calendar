@@ -2,6 +2,11 @@ module EventCharacteristics
   extend ActiveSupport::Concern
   include Filterable
 
+  # to be overwritten if needed
+  def recurring
+    false
+  end
+
   def time_range
     start_time..end_time
   end
