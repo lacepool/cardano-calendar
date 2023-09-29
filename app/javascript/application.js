@@ -18,4 +18,5 @@ Stimulus.register('clipboard', Clipboard)
 Stimulus.register('filters', FiltersController)
 
 import "./theme";
+import "./maintain_scroll_positions"
 import "./wallet_connect"
