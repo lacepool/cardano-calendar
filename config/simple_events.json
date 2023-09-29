@@ -745,6 +745,21 @@
         }
       ]
     },
+    "blockchain4europe": {
+      "filter_label": "Blockchain for Europe Summit",
+      "filter_default_value": "on",
+      "events": [
+        {
+          "name": "Blockchain for Europe Summit 2023",
+          "description": "<p>The Blockchain for Europe Summit is back for its 5th anniversary!</p><p>Get ready for the prime blockchain policy summit happening on 26-27 September 2023! You can either join us in Brussels, at the Claridge Events venue, or tune in online.</p><p>For the fifth year in a row we are bringing together experts and representatives from the EU institutions, academia, as well as industry players who are shaping the future of blockchain.</p><p>Two days packed with insightful discussions and networking opportunities, diving into hot topics like the future of MiCA and the AML Package, as well as exploring the world of DeFi and smart contracts. This year, we will be placing a strong emphasis on global regulatory coordination as well as on sustainability and the social impact of blockchain, with distinguished guests and invitees coming from all over the world.</p>",
+          "start_time": 1695719700,
+          "end_time": 1695837600,
+          "location": "Brussels, Belgium",
+          "time_format": "date",
+          "website": "https://www.blockchain4europe.eu/event/blockchain-for-europe-summit-2023/"
+        }
+      ]
+    },
     "nftxlv": {
       "filter_label": "NFTxLV",
       "filter_default_value": "on",
