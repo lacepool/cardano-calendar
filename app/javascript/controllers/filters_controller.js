@@ -1,10 +1,9 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = [ 'view', 'offcanvasBody' ]
-
-  initialize() {
-    console.log("FOOO")
+  static targets = [ 'offcanvasBody' ]
+  static values = {
+    view: String
   }
 
   updateSubscribeLink(event) {
@@ -44,24 +43,14 @@ export default class extends Controller {
     })
   }
 
-  viewTargetConnected(element) {
-    const defaultClasses = element.querySelector("a:not(.active)").className
-    const activeClasses = element.querySelector("a.active").className
-    const viewLinks = [...element.children]
+  toggleView(event) {
+    const viewElement = event.currentTarget
+    const siblings = [...viewElement.parentElement.children].filter(child => child !== viewElement)
+    const defaultClasses = viewElement.parentElement.querySelector("a:not(.active)").className
+    const activeClasses = viewElement.parentElement.querySelector("a.active").className
 
-    viewLinks.forEach(link => {
-      link.addEventListener('click', event => {
-        viewLinks.forEach(l => l.setAttribute("class", defaultClasses))
-        event.currentTarget.setAttribute("class", activeClasses)
-
-
-        const currentUrl = new URL(document.location)
-        currentUrl.pathname = event.currentTarget.dataset["view"]
-
-        event.preventDefault()
-        Turbo.visit(currentUrl)
-      })
-    })
+    siblings.forEach(s => s.setAttribute("class", defaultClasses))
+    viewElement.setAttribute("class", activeClasses)
   }
 
   toggleFilter(event) {

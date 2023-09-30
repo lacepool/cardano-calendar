@@ -58,7 +58,7 @@ module EventsHelper
     event_views.map do |view|
       classes = current_view == view ? [default_classes, active_classes].join(" ") : default_classes
 
-      link_to events_path(event_params.merge(view: view)), class: classes, data: { view: view } do
+      link_to events_path(event_params.merge(view: view)), class: classes, data: { action: "click->filters#toggleView", "filters-view-value": view } do
         tag.i(nil, class: "#{event_view_icon(view)} me-1") + view.upcase_first
       end
     end.join.html_safe
