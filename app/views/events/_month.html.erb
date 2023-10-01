@@ -14,18 +14,15 @@
 
     <ul class="list-group list-group-flush">
       <% epochs.each_with_index do |epoch, idx| %>
-        <%= tag.li class: "list-group-item position-relative p-2", data: { start_time: epoch.start_time.to_i, end_time: epoch.end_time.to_i } do %>
+        <%= tag.li class: "list-group-item position-relative p-2 pb-3", data: { start_time: epoch.start_time.to_i, end_time: epoch.end_time.to_i } do %>
           <% if idx > 0 %>
             <i class="bi bi-chevron-double-down epoch-transition position-absolute start-50 top-0 bg-body translate-middle px-3"></i>
           <% end %>
 
-          <div>
+          <div class="<%= "mt-3" if idx > 0 %>">
             <%= epoch.name %>
             <a href="javascript:void()" class="ms-1" data-controller="popper" data-popper-target="popover" data-bs-title="<%= epoch.name %>" data-bs-content="<%= epoch_description(epoch, time_range: true, slot: false) %>">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
-                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
-              </svg>
+              <i class="bi bi-info-circle"></i>
             </a>
           </div>
 
@@ -33,21 +30,28 @@
             <% epoch.events.select { |e| (e.start_time.to_date..e.end_time.to_date).include?(date) }.each do |event| %>
               <li class="event list-group-item px-0 py-3">
                 <small>
-                  <div>
-                    <time class="me-1 text-muted font-monospace"><%= event_time(event) %></time>
-                    <%= tags(event) %>
+                  <div class="d-flex">
+                    <time class="pt-1 me-auto text-muted font-monospace"><%= event_time(event) %></time>
+                    <div><%= tags(event) %></div>
                   </div>
-                  <span><%= event.name %></span>
                 </small>
 
-                <% unless event.description.blank? %>
-                  <%= link_to event_path(name: event.urlname, id: event.id), class: "ps-1", data: { turbo_stream: true } do %>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
-                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                      <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
-                    </svg>
+                <%= tag.div event.name, class: "my-2" %>
+
+                <div class="d-flex">
+                  <% if event.description.present? %>
+                    <%= link_to event_path(name: event.urlname, id: event.id), class: "me-auto", data: { turbo_stream: true } do %>
+                      <i class="bi bi-info-circle"></i>
+                    <% end %>
                   <% end %>
-                <% end %>
+
+                  <% if event.website.present? %>
+                    <%= link_to event.website, target: "_blank" do %>
+                      <i class="bi bi-box-arrow-up-right"></i>
+                    <% end %>
+                  <% end %>
+                </div>
+
               </li>
             <% end %>
           </ul>
