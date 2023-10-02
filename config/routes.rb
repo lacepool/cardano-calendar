@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get "/", to: redirect("/month")
 
   get "/:view", to: "events#index", as: :events
-  get "/ical", to: "events#index", as: :ical, defaults: { format: 'ics' }
+
   get "/events/:name/:id", to: "events#show", as: :event
 
   resources :wallets, only: [:create]
