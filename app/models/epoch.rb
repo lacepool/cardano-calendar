@@ -1,4 +1,5 @@
 class Epoch < OpenStruct
+  SYSTEM_START_TIME = 1506203091
   SHELLY_UNIX = 1596491091
   SHELLY_SLOT = 4924800
   SHELLEY_EPOCH = 209
@@ -13,15 +14,11 @@ class Epoch < OpenStruct
   end
 
   def self.epoch_from_timestamp(timestamp)
-    epoch_from_slot(
-      slot_from_timestamp(timestamp)
-    )
+    (timestamp - SYSTEM_START_TIME) / SLOTS_PER_EPOCH
   end
 
   def self.timestamp_from_epoch(epoch)
-    seconds = (epoch - SHELLEY_EPOCH) * SLOTS_PER_EPOCH
-
-    Time.at(SHELLY_UNIX + seconds).in_time_zone
+    Time.at(epoch * SLOTS_PER_EPOCH + SYSTEM_START_TIME).in_time_zone
   end
 
   # extend the given time range by the time from the beginning of the range
@@ -39,7 +36,7 @@ class Epoch < OpenStruct
         e.epoch_number = epoch_from_timestamp(date.to_i)
         e.name = "Epoch #{e.epoch_number}"
         e.start_time = timestamp_from_epoch(e.epoch_number)
-        e.end_time = e.start_time + (SLOTS_PER_EPOCH).seconds
+        e.end_time = e.start_time + (SLOTS_PER_EPOCH - 1).seconds
         e.start_slot = slot_from_timestamp(e.start_time)
         e.end_slot = slot_from_timestamp(e.end_time)
         e.current_slot = slot_from_timestamp(Time.current.utc.to_i)
