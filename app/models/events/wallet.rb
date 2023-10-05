@@ -6,6 +6,12 @@ class Events::Wallet < ::Event
   filter category: "Stake Pool Operators", param: "pool_rewards", label: "Pool Rewards", default: "off"
   filter category: "Stake Pool Operators", param: "pool_deposit_refund", label: "Pool Deposit Refunds", default: "off"
 
+  def self.count_by_filter(stake_addr, filter, between)
+    where(category: filter).where(
+      "extras->'stake_address' ? :addr", addr: stake_addr
+    ).between(between).count
+  end
+
   def self.last_epoch
     # requires to always store epoch in extras!
     order("start_time DESC").pick(Arel.sql("extras->'epoch'")) || 0

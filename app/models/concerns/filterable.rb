@@ -18,6 +18,11 @@ module Filterable
 
       ::EventFilterRegistry.register(**filter)
     end
+
+    def count_by_filter(filter, between)
+      # to be overwritten by the base class
+      nil
+    end
   end
 
   def filter_param

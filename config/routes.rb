@@ -4,8 +4,10 @@ Rails.application.routes.draw do
   get "/", to: redirect("/month")
 
   get "/:view", to: "events#index", as: :events
-
   get "/events/:name/:id", to: "events#show", as: :event
+
+  get "/events/count", to: "events#count", as: :event_count
+  get "/events/filters", to: "events#filters", as: :event_filters
 
   resources :wallets, only: [:create]
 

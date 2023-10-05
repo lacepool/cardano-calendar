@@ -56,9 +56,18 @@ class Events::SimpleEvent
     end
   end
 
-  def self.all(between:, except: [])
+  def self.count_by_filter(filter, between)
+    all(between: between, only: filter).size
+  end
+
+  def self.all(between:, except: [], only: nil)
     all = ALL.each_with_object({}) do |category, h|
-      h[category[0]] = category[1].except(*except)
+      if only.present?
+        sliced_subcategory = category[1].slice(only)
+        h[category[0]] = sliced_subcategory if sliced_subcategory.present?
+      else
+        h[category[0]] = category[1].except(*except)
+      end
     end
 
     between_dates(all, between)

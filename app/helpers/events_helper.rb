@@ -64,6 +64,27 @@ module EventsHelper
     end.join.html_safe
   end
 
+  def filter_badge(filter_class, filter_param)
+    unless Object.const_defined?(filter_class)
+      # todo: implement error tracking
+      return nil
+    end
+
+    klass = filter_class.constantize
+
+    if klass.respond_to?(:count_by_filter)
+      args = [filter_param, date_range]
+      args.prepend(current_stake_address) if filter_class == "Events::Wallet"
+
+      count = klass.count_by_filter(*args)
+
+      bg_color = count > 0 ? "bg-success" : "bg-secondary"
+      css_classes = "badge position-absolute top-50 end-0 translate-middle rounded-pill #{bg_color}"
+
+      tag.span(count, class: css_classes)
+    end
+  end
+
   def render_event_filters
     EventFilterRegistry.registered.sort.to_h.map do |category, filters|
       html_id = category.parameterize
@@ -77,9 +98,25 @@ module EventsHelper
         checked = event_param_filters.is_on?(filter_param)
         checkbox_name = "filter_#{filter_param}"
 
+        url = event_count_path(
+          view: current_view,
+          start_date: current_start_date,
+          filter_class: filter[:class],
+          filter_param: filter_param,
+          stake_address: current_stake_address
+        )
+
+        frame_id = "#{filter[:class].parameterize}-#{filter_param}"
+
+        badge = turbo_frame_tag(frame_id, class: "turboFrameFilter", loading: "lazy", src: url) do
+          tag.div class: "filter_spinner_container position-absolute top-50 end-0 translate-middle" do
+            tag.div class: "spinner-border spinner-border-sm", role: "status"
+          end
+        end
+
         tag.div class: "event_filter form-switch list-group-item" do
           check_box_tag(checkbox_name, nil, checked, data: dataset, class: "form-check-input me-2 float-none", role: "switch") +
-            tag.label(filter[:label], class: "form-check-label small", for: checkbox_name)
+            tag.label(filter[:label], class: "form-check-label small", for: checkbox_name) + badge
         end
       end.join.html_safe
 
@@ -111,8 +148,21 @@ module EventsHelper
     end
   end
 
+  def filters
+    @filters ||= EventParamFilters.new(params.fetch(:filter, {}))
+  end
+  alias_method :event_param_filters, :filters
+
+  def wallet_connected?
+    @wallet_connected ||= params[:stake_address] && Wallet.where(stake_address: params[:stake_address]).exists?
+  end
+
   def current_view
     event_params.fetch(:view, "month")
+  end
+
+  def current_stake_address
+    params.fetch(:stake_address, nil)
   end
 
   def filter_params
@@ -121,7 +171,11 @@ module EventsHelper
   end
 
   def current_start_date
-    event_params.fetch(:start_date, Date.current).to_date
+    current_start_time.to_date
+  end
+
+  def current_start_time
+    event_params.fetch(:start_date, Time.current).to_time
   end
 
   def date_range
@@ -129,22 +183,26 @@ module EventsHelper
   end
 
   def week_date_range
-    (current_start_date.beginning_of_week..current_start_date.end_of_week).to_a
+    current_start_time.beginning_of_week..current_start_time.end_of_week
   end
 
   def month_date_range
-    (current_start_date.beginning_of_month..current_start_date.end_of_month).to_a
+    current_start_time.beginning_of_month..current_start_time.end_of_month
   end
 
   # direction can either be :+ or :- for prev/next
-  def start_date(direction=nil)
-    return Time.current.to_date unless direction
+  def start_time(direction=nil)
+    return DateTime.current.in_time_zone unless direction
 
     if current_view == "week"
       date_range.first.public_send(direction, 1.week)
     else
       date_range.first.public_send(direction, 1.month)
     end
+  end
+
+  def start_date(direction=nil)
+    start_time(direction).to_date
   end
 
   def url_for_previous_view
@@ -162,10 +220,14 @@ module EventsHelper
   def url_for_today_view
     url_for(
       event_params.merge(
-        start_date: start_date,
+        start_date: start_date.iso8601,
         view: current_view,
-        anchor: start_date
+        anchor: start_date.iso8601
       )
     )
+  end
+
+  def ics_date_range
+    Time.at(Epoch::SHELLY_UNIX).utc..(Time.current.utc + 6.months)
   end
 end

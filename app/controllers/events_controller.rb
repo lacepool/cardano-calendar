@@ -1,14 +1,14 @@
 class EventsController < ApplicationController
-  helper_method :event_params, :wallet_connected?, :event_param_filters
+  helper_method :event_params
 
   def index
     respond_to do |f|
       f.html do
-        @epochs = epochs_with_events(between: date_range, events_sorted: true)
+        @epochs = epochs_with_events(between: helpers.date_range, events_sorted: true)
       end
 
       f.ics do
-        @epochs = epochs_with_events(between: ics_date_range)
+        @epochs = epochs_with_events(between: helpers.ics_date_range)
         render plain: ics_calendar.to_ical
       end
     end
@@ -29,6 +29,8 @@ class EventsController < ApplicationController
     end
   end
 
+  private
+
   def is_active_record_event?(str)
     !!Integer(str)
   rescue ArgumentError, TypeError
@@ -36,37 +38,25 @@ class EventsController < ApplicationController
   end
 
   def epochs_with_events(between:, events_sorted: false)
-    events = Events::SimpleEvent.all(except: filters.off_filters, between: between)
-    events += Events::Meetup.where("extras->'group_urlname' ?| array[:names]", names: filters.on_filters).between(between)
+    events = Events::SimpleEvent.all(except: helpers.filters.off_filters, between: between)
+    events += Events::Meetup.where("extras->'group_urlname' ?| array[:names]", names: helpers.filters.on_filters).between(between)
 
-    if wallet_connected?
-      wallet_on_filters = EventFilter.by_class("Events::Wallet").map(&:keys).flatten - filters.off_filters
+    if helpers.wallet_connected?
+      wallet_on_filters = EventFilter.by_class("Events::Wallet").map(&:keys).flatten - helpers.filters.off_filters
       events += Events::Wallet.where(category: wallet_on_filters).with_stake_address(params[:stake_address]).between(between)
     end
 
-    papers_on_filters = EventFilter.by_class("Events::ResearchPaper").map(&:keys).flatten - filters.off_filters
+    papers_on_filters = EventFilter.by_class("Events::ResearchPaper").map(&:keys).flatten - helpers.filters.off_filters
     if papers_on_filters.any?
       papers_on_filters_years = papers_on_filters.map {|f| f.split("-").last }
       events += Events::ResearchPaper.where("extract(year from start_time) IN (#{papers_on_filters_years.join(',')})").between(between)
     end
 
-    events += Events::Software.where("extras->'filter_param' ?| array[:repos]", repos: filters.on_filters).between(between)
+    events += Events::Software.where("extras->'filter_param' ?| array[:repos]", repos: helpers.filters.on_filters).between(between)
 
     events = events.sort_by(&:start_time) if events_sorted
 
     Epoch.all(between: between, with_events: events)
-  end
-
-  def wallet_connected?
-    @wallet_connected ||= params[:stake_address] && Wallet.where(stake_address: params[:stake_address]).exists?
-  end
-
-  def start_date
-    params.fetch(:start_date, Date.today).to_time
-  end
-
-  def ics_date_range
-    Time.at(Epoch::SHELLY_UNIX).utc..(Time.current.utc + 6.months)
   end
 
   def ics_calendar
@@ -105,21 +95,9 @@ class EventsController < ApplicationController
     end
   end
 
-  def date_range
-    if params[:view] == "list"
-      start_date.beginning_of_month..start_date.end_of_month
-    else
-      start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week.end_of_day
-    end
-  end
-
-  def filters
-    @filters ||= EventParamFilters.new(params.fetch(:filter, {}))
-  end
-  alias_method :event_param_filters, :filters
-
   def event_params
     @event_params ||= params.permit(
+      :filter_param, :filter_class,
       :format, :view, :start_date, :tz, :stake_address, filter: {}
     ).to_h.with_indifferent_access.symbolize_keys
   end

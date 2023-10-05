@@ -3,7 +3,24 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = [ 'offcanvasBody' ]
   static values = {
-    view: String
+    view: String,
+    startDate: String
+  }
+
+  updateCounts(event) {
+    const startDate = this.startDateValue
+    const turboFrames = [...document.querySelectorAll(".turboFrameFilter")]
+    const currentUrl = new URL(document.location)
+    const view = currentUrl.pathname.replace("/", "")
+
+    turboFrames.forEach(frame => {
+      let currentSrc = new URLSearchParams(frame.src)
+      currentSrc.set("start_date", startDate) // in case it has changed
+      currentSrc.set("view", view) // in case it has changed
+
+      frame.setAttribute("src", decodeURIComponent(currentSrc))
+      frame.reload()
+    })
   }
 
   updateSubscribeLink(event) {
@@ -49,8 +66,13 @@ export default class extends Controller {
     const defaultClasses = viewElement.parentElement.querySelector("a:not(.active)").className
     const activeClasses = viewElement.parentElement.querySelector("a.active").className
 
+    let view = new URL(viewElement.href).pathname
+    let currentUrl = new URL(document.location)
+    currentUrl.pathname = view
+
     siblings.forEach(s => s.setAttribute("class", defaultClasses))
     viewElement.setAttribute("class", activeClasses)
+    viewElement.setAttribute("href", currentUrl)
   }
 
   toggleFilter(event) {

@@ -2,12 +2,14 @@
   <time datetime="<%= current_start_date.strftime('%Y-%m') %>" class="calendar-title px-3"><%= t('date.month_names')[current_start_date.month] %> <%= current_start_date.year %></time>
 
   <nav class="btn-group" role="group">
-    <%= link_to t('simple_calendar.previous', default: 'Previous'), url_for_previous_view, class: "btn btn-md btn-primary" %>
-    <%= link_to t('simple_calendar.today', default: 'Today'), url_for_today_view, class: "btn btn-md btn-primary" %>
-    <%= link_to t('simple_calendar.next', default: 'Next'), url_for_next_view, class: "btn btn-md btn-primary" %>
+    <%= link_to t('simple_calendar.previous', default: 'Previous'), url_for_previous_view, class: "btn btn-md btn-primary", data: { "controller": "filters", "action": "click->filters#updateCounts", "filters-start-date-value": start_date(:-).iso8601 } %>
+    <%= link_to t('simple_calendar.today', default: 'Today'), url_for_today_view, class: "btn btn-md btn-primary", data: { "controller": "filters", "action": "click->filters#updateCounts", "filters-start-date-value": start_date } %>
+    <%= link_to t('simple_calendar.next', default: 'Next'), url_for_next_view, class: "btn btn-md btn-primary", data: { "controller": "filters", "action": "click->filters#updateCounts", "filters-start-date-value": start_date(:+).iso8601 } %>
+  </nav>
 
-    <button class="btn btn-primary" type="button" data-controller="filters" data-filters-target="events" data-bs-toggle="offcanvas" data-bs-target="#event_settings" aria-controls="event_settings">
-      <i class="bi bi-sliders"></i>
+  <nav class="btn-group" role="group">
+    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#event_settings" aria-controls="event_settings">
+      Filter & Settings
     </button>
   </nav>
 </div>

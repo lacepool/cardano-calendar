@@ -1,0 +1,5 @@
+<% frame_id = "#{event_params[:filter_class].parameterize}-#{event_params[:filter_param]}" %>
+
+<%= turbo_frame_tag frame_id do %>
+  <%= filter_badge(event_params[:filter_class], event_params[:filter_param]) %>
+<% end %>

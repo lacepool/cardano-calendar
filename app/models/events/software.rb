@@ -5,6 +5,10 @@ class Events::Software < ::Event
     filter category: "Open Source Software", param: name.parameterize, label: name, default: "off"
   end
 
+  def self.count_by_filter(filter_param, between)
+    where("extras->'filter_param' ? :param", param: filter_param).between(between).count
+  end
+
   def self.release_exists?(repo, published_at)
     where("extras->'repo_name' ? :repo", repo: repo).where(start_time: published_at).exists?
   end
