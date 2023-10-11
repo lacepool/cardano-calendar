@@ -807,6 +807,19 @@
     }
   },
   "Twitter Spaces": {
+    "iog": {
+      "filter_label": "Input Output",
+      "filter_default_value": "on",
+      "events": [
+        {
+          "name": "Introducing Midnight - A new data protection blockchain",
+          "description": null,
+          "start_time": 1696964400,
+          "end_time": 1696964400,
+          "website": "https://twitter.com/i/spaces/1nAJEamDyvgJL"
+        }
+      ]
+    },
     "bookio": {
       "filter_label": "Book.io",
       "filter_default_value": "off",
