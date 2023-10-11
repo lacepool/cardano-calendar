@@ -59,7 +59,7 @@ class EventsController < ApplicationController
 
     events += Events::Software.where("extras->'filter_param' ?| array[:repos]", repos: helpers.filters.on_filters).between(between)
 
-    ama_on_filters = (EventFilter.by_class("Events::Ama").map(&:values).flatten.map(&:keys).flatten - helpers.filters.off_filters).uniq!
+    ama_on_filters = (EventFilter.by_class("Events::Ama").map(&:values).flatten.map(&:keys).flatten - helpers.filters.off_filters).uniq
     events += Events::Ama.by_category(ama_on_filters).between(between) if ama_on_filters.any?
 
     events = events.sort_by(&:start_time) if events_sorted
