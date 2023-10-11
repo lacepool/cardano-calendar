@@ -9,7 +9,12 @@ class EventsController < ApplicationController
 
       f.ics do
         @epochs = epochs_with_events(between: helpers.ics_date_range)
-        render plain: ics_calendar.to_ical
+
+        if request.protocol.start_with?("http")
+          send_data ics_calendar.to_ical, type: 'text/calendar', disposition: 'attachment', filename: "cardano-events.ics"
+        else
+          render plain: ics_calendar.to_ical
+        end
       end
     end
   end
