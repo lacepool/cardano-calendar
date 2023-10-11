@@ -32,7 +32,7 @@
                 <small>
                   <div class="d-flex">
                     <time class="pt-1 me-auto text-muted font-monospace"><%= event_time(event) %></time>
-                    <div><%= tags(event) %></div>
+                    <div class="text-end"><%= tags(event) %></div>
                   </div>
                 </small>
 
@@ -45,7 +45,9 @@
                     <% end %>
                   <% end %>
 
-                  <% if event.website.present? %>
+                  <% if event.footer_links.present? %>
+                    <%= footer_links(event.footer_links, button: false).last.html_safe %>
+                  <% elsif event.website.present? %>
                     <%= link_to event.website, target: "_blank" do %>
                       <i class="bi bi-box-arrow-up-right"></i>
                     <% end %>

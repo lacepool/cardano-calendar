@@ -1,7 +1,25 @@
 module EventsHelper
+  def footer_links(links, button: true)
+    links.map do |link|
+      label = tag.i(nil, class: "bi bi-box-arrow-up-right ms-2")
+
+      link_css_classes = "btn btn-secondary" if button
+      label = link["label"] + label if button
+
+      link_to label.html_safe, link["url"], class: link_css_classes, target: "_blank"
+    end
+  end
+
+  def render_footer_links(links, button: true)
+    footer_links(links).join.html_safe
+  end
+
   def tags(event)
-    event.tags.map do |tag_name|
-      tag.span tag_name, class: "badge text-bg-info"
+    event.tags.each_with_index.map do |tag_name, idx|
+      css_classes = "badge text-bg-info"
+      css_classes += " ms-1" if idx > 0
+
+      tag.span tag_name, class: css_classes
     end.join.html_safe
   end
 

@@ -47,17 +47,20 @@ class EventsController < ApplicationController
     events += Events::Meetup.where("extras->'group_urlname' ?| array[:names]", names: helpers.filters.on_filters).between(between)
 
     if helpers.wallet_connected?
-      wallet_on_filters = EventFilter.by_class("Events::Wallet").map(&:keys).flatten - helpers.filters.off_filters
-      events += Events::Wallet.where(category: wallet_on_filters).with_stake_address(params[:stake_address]).between(between)
+      wallet_on_filters = EventFilter.by_class("Events::Wallet").map(&:values).flatten.map(&:keys).flatten - helpers.filters.off_filters
+      events += Events::Wallet.by_category(wallet_on_filters).with_stake_address(params[:stake_address]).between(between)
     end
 
-    papers_on_filters = EventFilter.by_class("Events::ResearchPaper").map(&:keys).flatten - helpers.filters.off_filters
+    papers_on_filters = EventFilter.by_class("Events::ResearchPaper").map(&:values).flatten.map(&:keys).flatten - helpers.filters.off_filters
     if papers_on_filters.any?
       papers_on_filters_years = papers_on_filters.map {|f| f.split("-").last }
       events += Events::ResearchPaper.where("extract(year from start_time) IN (#{papers_on_filters_years.join(',')})").between(between)
     end
 
     events += Events::Software.where("extras->'filter_param' ?| array[:repos]", repos: helpers.filters.on_filters).between(between)
+
+    ama_on_filters = (EventFilter.by_class("Events::Ama").map(&:values).flatten.map(&:keys).flatten - helpers.filters.off_filters).uniq!
+    events += Events::Ama.by_category(ama_on_filters).between(between) if ama_on_filters.any?
 
     events = events.sort_by(&:start_time) if events_sorted
 

@@ -8,9 +8,9 @@ class EventFilter
   end
 
   def self.by_class(klass)
-    all.values.reduce([]) do |arr, filters|
-      matching = filters.select { |_, v| v[:class] == klass }
-      arr << matching if matching.any?
+    all.reduce([]) do |arr, category|
+      matching = category[1].select { |_, v| v[:class] == klass }
+      arr << { category[0] => matching } if matching.any?
       arr
     end
   end

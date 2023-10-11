@@ -20,9 +20,11 @@
       </div>
       <div class="modal-footer">
 
-        <% if event.website %>
-          <%= link_to event.website, target: "_blank", class: "btn btn-secondary" do %>
-            <i class="bi bi-box-arrow-up-right me-2"></i> Website
+        <% if event.footer_links.present? %>
+          <%= render_footer_links(event.footer_links) %>
+        <% elsif event.website.present? %>
+          <%= link_to event.website, target: "_blank" do %>
+            <i class="bi bi-box-arrow-up-right"></i>
           <% end %>
         <% end %>
 

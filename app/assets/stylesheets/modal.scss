@@ -1,5 +1,8 @@
 .modal-body {
-  h1, h2, h3, h4, h5 { font-size: 1.5rem }
+  h1, h2, h3, h4, h5 {
+    font-size: 1.25rem;
+    font-weight: normal;
+  }
   ul, table { margin-bottom: 1em }
   td > td, th > th { padding-left: 1em }
 }

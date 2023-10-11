@@ -31,7 +31,7 @@ module EventCharacteristics
 
   def tags
     if self.respond_to?(:model_name)
-      [self.model_name.human]
+      EventFilter.by_class(self.model_name).map(&:keys).flatten
     else
       []
     end
@@ -39,6 +39,10 @@ module EventCharacteristics
 
   def website
     extras.try(:[], "website")
+  end
+
+  def footer_links
+    extras.try(:[], "footer_links")
   end
 
   def urlname

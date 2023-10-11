@@ -807,18 +807,6 @@
     }
   },
   "Twitter Spaces": {
-    "amacharles": {
-      "filter_label": "AMA with Charles Hoskinson",
-      "filter_default_value": "off",
-      "events": [
-        {
-          "name": "@NFTxLV LIVE AMA with @IOHK_Charles & @TamaraHaasen",
-          "start_time": 1696188300,
-          "end_time": 1696191900,
-          "website": "https://twitter.com/i/spaces/1OdKrjEBpgpKX"
-        }
-      ]
-    },
     "bookio": {
       "filter_label": "Book.io",
       "filter_default_value": "off",
