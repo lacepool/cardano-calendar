@@ -19,24 +19,9 @@ class Events::Software < ::Event
       password: ENV['GITHUB_TOKEN']
     )
 
-    continue_from, last_created = self.order("created_at DESC").pick(
-      Arel.sql("extras->>'repo_name'"),
-      :start_time
-    )
-
-    # if last created event belongs to last repo in the list => don't continue but start from beginning
-    continue_from = nil if continue_from == GITHUB_REPOS.last
-
-    # if last created event belongs to deleted repo => start from the beginning
-    continue_from = nil if GITHUB_REPOS.exclude?(continue_from)
+    # last_created = self.order("created_at DESC").pick(:start_time)
 
     GITHUB_REPOS.each do |repo_name|
-      if continue_from
-        # if we find our entry point remove continuation marker and jump to the next repo
-        continue_from = nil if continue_from == repo_name
-        next
-      end
-
       client.repository(repo_name)
       repo = client.last_response.data
 
