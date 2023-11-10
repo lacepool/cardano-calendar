@@ -606,6 +606,21 @@
         }
       ]
     },
+    "aft": {
+      "filter_label": "Advances in Financial Technologies - AFT",
+      "filter_default_value": "on",
+      "events": [
+        {
+          "name": "Advances in Financial Technologies 2023",
+          "description": "<p>The fifth international conference on Advances in Financial Technologies (AFT’23) is a premier venue for presenting the latest developments in technologies related to novel financial infrastructure such as cryptocurrencies and their applications, blockchains, and exchanges. The AFT 2023 conference is currently planned as an in-person meeting held from October 23-25, 2023 at Princeton University in Princeton, NJ, USA</p>",
+          "time_format": "date",
+          "location": "Princeton, NJ, USA",
+          "website": "https://aftconf.github.io/aft23",
+          "start_time": 1698033600,
+          "end_time": 1698292799
+        }
+      ]
+    },
     "wine": {
       "filter_label": "WINE",
       "filter_default_value": "on",
