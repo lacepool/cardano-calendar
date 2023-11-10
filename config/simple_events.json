@@ -606,6 +606,21 @@
         }
       ]
     },
+    "wine": {
+      "filter_label": "WINE",
+      "filter_default_value": "on",
+      "events": [
+        {
+          "name": "WINE 2023",
+          "description": "<p>The 19th Conference On Web And InterNet Economics.</p><p>Over the past decade, research in theoretical computer science, artificial intelligence, operations research, and economics has joined forces to tackle problems involving incentives and computation. These problems are of particular importance in application areas like the Web and the Internet that involve large and diverse populations. The Conference on Web and Internet Economics (WINE) is an interdisciplinary forum for the exchange of ideas and results on incentives and computation arising from these various fields. WINE 2023 will take place on December 04 - 08, 2023, in Shanghai, China, hosted by ShanghaiTech University.</p>",
+          "time_format": "date",
+          "location": "Shanghai, CH",
+          "website": "https://wine2023.shanghaitech.edu.cn",
+          "start_time": 1701619200,
+          "end_time": 1701964799
+        }
+      ]
+    },
     "sbc": {
       "filter_label": "The Science of Blockchain Conference",
       "filter_default_value": "on",
