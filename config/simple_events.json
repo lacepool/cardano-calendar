@@ -476,6 +476,21 @@
     }
   },
   "Conferences": {
+    "blockchain-genesis": {
+      "filter_label": "Blockchain Genesis",
+      "filter_default_value": "on",
+      "events": [
+        {
+          "name": "Blockchain Genesis Thailand Blockchain Week 2023",
+          "description": "<p>For the first time ever, Thailand’s largest blockchain conference brings to you over 60 sessions and 150 speakers from Thailand and all over the world to come share their valuable insights and experiences. Learn from both local and international experts in various formats including live panel, keynote, fireside chat and face-to-face workshop.</p>",
+          "start_time": 1699686000,
+          "end_time": 1699808399,
+          "time_format": "date",
+          "location": "Bangkok, Th",
+          "website": "https://www.blockchain-th.com"
+        }
+      ]
+    },
     "crypto": {
       "filter_label": "Crypto",
       "filter_default_value": "on",
