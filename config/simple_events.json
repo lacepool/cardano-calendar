@@ -789,6 +789,21 @@
           "website": "https://cnftcon.io"
         }
       ]
+    },
+    "tcc": {
+      "filter_label": "TCC",
+      "filter_default_value": "on",
+      "events": [
+        {
+          "name": "TCC 2023",
+          "description": "<p>TCC 2023 will take place in Taipei, Taiwan on November 29 - December 2, 2023. TCC 2023 is organized by the International Association for Cryptologic Research (IACR).</p>",
+          "start_time": 1701187200,
+          "end_time": 1701532799,
+          "location": "Teipei, CH",
+          "time_format": "date",
+          "website": "https://tcc.iacr.org/2023"
+        }
+      ]
     }
   },
   "Education": {
