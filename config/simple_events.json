@@ -591,6 +591,21 @@
         }
       ]
     },
+    "acmccs": {
+      "filter_label": "ACM CCS",
+      "filter_default_value": "on",
+      "events": [
+        {
+          "name": "ACM CCS 2023",
+          "description": "<p></p>",
+          "time_format": "date",
+          "location": "Copenhagen, DK",
+          "website": "https://www.sigsac.org/ccs/CCS2023",
+          "start_time": 1700953200,
+          "end_time": 1701385199
+        }
+      ]
+    },
     "sbc": {
       "filter_label": "The Science of Blockchain Conference",
       "filter_default_value": "on",
