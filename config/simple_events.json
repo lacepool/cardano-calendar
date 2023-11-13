@@ -71,6 +71,19 @@
         "description": "<p>Join Project Catalyst team and community for our weekly town hall followed by an open space with break out rooms.</p><a href='https://zoom.us/meeting/register/tJEtduyupzMvHNUczCQwfFJGcXzmw2lDwkIf#/registration' target='_blank' class='btn btn-primary'>Registration</a>"
       }
     },
+    "proposal-submission": {
+      "filter_label": "Proposal Submission",
+      "filter_default_value": "on",
+      "events": [
+        {
+          "name": "Fund11 – Proposal Submission",
+          "description": null,
+          "start_time": 1700143200,
+          "end_time": 1701485999
+1701485999
+        }
+      ]
+    },
     "vote-registrations": {
       "filter_label": "Vote Registrations",
       "filter_default_value": "on",
