@@ -83,6 +83,18 @@
         }
       ]
     },
+    "proposal-finalization": {
+      "filter_label": "Proposal Finalization",
+      "filter_default_value": "on",
+      "events": [
+        {
+          "name": "Fund11 – Proposal Finalization",
+          "description": null,
+          "start_time": 1701342000,
+          "end_time": 1701946800
+        }
+      ]
+    },
     "vote-registrations": {
       "filter_label": "Vote Registrations",
       "filter_default_value": "on",
