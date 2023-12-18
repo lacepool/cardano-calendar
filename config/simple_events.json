@@ -876,6 +876,20 @@
     }
   },
   "Education": {
+    "cardano-foundation-lets-talk-cardano": {
+      "filter_label": "Let's Talk Cardano",
+      "filter_default_value": "on",
+      "events": [
+        {
+          "name": "Switzerland for UNHCR: One Year with the Cardano Community, Looking forward to What's Next",
+          "description": "<p>Registration required!</p><p>Join the \"Let's Talk Cardano\" webinar on the 18th of December at 4:00 PM CET for an insightful presentation titled \"Switzerland for UNHCR: One Year with the Cardano Community, Looking Forward to What's Next.\" This session, led by Alvaro Cosi, Head of Innovation, and Ruxanda Cornescu, Communications & Innovation Associate, will be a critical reflection on UNHCR's year-long engagement with the Cardano community. It stands as a testament to the transformative interplay between humanitarian initiatives and advanced blockchain technology. The presentation aims to unravel the intricacies of this partnership, emphasizing how it has aligned with UNHCR’s mission through innovative approaches to fundraising and the integration of blockchain and Web3 technologies into their operations.</p><p>This webinar is meticulously curated to offer a comprehensive exploration of the evolving role of blockchain in the humanitarian sector. Alvaro and Ruxanda will share valuable insights and experiences from their collaboration within the Cardano ecosystem, focusing on the challenges and lessons learned. As the session progresses, attendees will gain a deeper understanding of the growing importance of innovative technologies in reshaping traditional fundraising and operational strategies within the humanitarian sector. Looking towards the future, the presentation will also outline UNHCR's strategic aspirations within the Web3 domain, highlighting their plans for expanding initiatives, engaging with financial institutions, and forging influential partnerships in the blockchain community. This \"Let's Talk Cardano\" webinar is not just an informative session; it's a strategic discourse on the confluence of digital innovation and social impact, offering a unique perspective on the future of humanitarian efforts in the digital age.</p>",
+          "start_time": 1702911600,
+          "end_time": 1702915200,
+          "location": "Zoom",
+          "website": "https://zoom.us/webinar/register/WN_tzL4ORQmR6q4wP9OMguRSw?hss_channel=lcp-11195856#/registration"
+        }
+      ]
+    },
     "gimbalabsplayground": {
       "filter_label": "Gimbalabs Playground, Season 3",
       "filter_default_value": "off",
