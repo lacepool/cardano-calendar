@@ -895,6 +895,22 @@
           "end_time": 1703012400,
           "location": "Zoom",
           "website": "https://zoom.us/webinar/register/WN_-f_lhuevRr-QVuUWTKEOFg?utm_content=275562391&utm_medium=social&utm_source=cardano-calendar&hss_channel=lcp-11195856#/registration"
+        },
+        {
+          "name": "Using Orcfax's decentralized oracle feeds",
+          "description": "<p>Registration required!</p><p></p>",
+          "start_time": 1703098800,
+          "end_time": 1703102400,
+          "location": "Zoom",
+          "website": "https://zoom.us/webinar/register/WN_E64gQTYVRNW27UGJ9XnjlQ?utm_content=275566704&utm_medium=social&utm_source=cardano-calendar&hss_channel=lcp-11195856#/registration"
+        },
+        {
+          "name": "Genius Yield’s DEX Launch: The Cardano Community DEX",
+          "description": "<p>Registration required!</p><p>Join the \"Let's Talk Cardano\" webinar on the 21st of December at 7:00 PM CET, where Marvin Bertin, Chief Scientific Officer, and Dr. Lars Brünjes, Chief Technology Officer at Genius Yield, will introduce \"Genius Yield's DEX Launch: The Cardano Community DEX.\" This session is poised to offer an in-depth exploration of Genius Yield's latest innovation in decentralized finance — a cutting-edge order book decentralized exchange (DEX) specifically crafted for the Cardano ecosystem. As a beacon of fairness and decentralization, this DEX stands out with its strategic open-source components, enhancing the ecosystem's growth, and an innovative Fees Sharing Program that aligns the platform’s growth with that of its community members.</p><p>The webinar will provide a comprehensive breakdown of the DEXs core functionalities and how these translate to real-life trading advantages. Marvin Bertin will enrich the session by performing a live example trade on the Genius Yield’s DEX, showcasing the platform's user experience and interface. Meanwhile, Dr. Lars Brünjes will delve into the technical intricacies of Smart Order Routers, providing insights into their role in decentralized order matching. Beginning with a background introduction of our esteemed speakers, the presentation will trace the evolution of the Genius Yield project, leading to the pivotal launch of their order-book DEX on Cardano. This segment will contrast the operational dynamics of order book DEXs with automated market maker (AMM) models, emphasizing the critical role of decentralization in this landscape. Additionally, the session will explore why Genius Yield's DEX is integral to the Cardano community and what this symbiosis entails for the future of blockchain finance. The discussion will culminate with a forward-looking perspective, revealing Genius Yield's strategic roadmap for early 2024 and beyond.</p>",
+          "start_time": 1703188800,
+          "end_time": 1703192400,
+          "location": "Zoom",
+          "website": "https://zoom.us/webinar/register/WN_aelu_Y7aRaCQ8btvWHnTrw?utm_content=275566704&utm_medium=social&utm_source=cardano-calendar&hss_channel=lcp-11195856#/registration"
         }
       ]
     },
