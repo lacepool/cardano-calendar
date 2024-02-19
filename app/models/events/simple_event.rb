@@ -48,7 +48,7 @@ class Events::SimpleEvent
     if event = ALL.dig(category, subcategory, "recurring")
       return new(category, subcategory, event, start_time: Time.at(start_time.to_i).in_time_zone)
     else
-      event = ALL.dig(category, subcategory, "events").detect do |e|
+      event = ALL.dig(category, subcategory, "events")&.detect do |e|
         e["name"] == name.force_encoding('UTF-8') && e["start_time"] == start_time.to_i
       end
 

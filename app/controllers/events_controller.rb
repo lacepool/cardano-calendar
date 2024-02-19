@@ -28,6 +28,8 @@ class EventsController < ApplicationController
       @event = Events::SimpleEvent.find(id)
     end
 
+    raise ActionController::RoutingError.new('Not Found') unless @event
+
     respond_to do |f|
       f.turbo_stream
       f.html
