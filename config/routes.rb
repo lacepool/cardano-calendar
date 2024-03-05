@@ -1,7 +1,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  get "/", to: redirect("/month")
+  get "/", to: redirect("/list")
 
   get "/:view", to: "events#index", as: :events
   get "/events/:name/:id", to: "events#show", as: :event
