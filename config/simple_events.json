@@ -500,7 +500,21 @@
     }
   },
   "Conferences": {
-    "blockchain-genesis": {
+    "cardano-buidler-fest": {
+      "filter_label": "Cardano Buidler Fest",
+      "filter_default_value": "on",
+      "events": [
+        {
+          "name": "Cardano Buidler Fest #1",
+          "description": "<p>A 2-day event for tech-savvy Cardano builders to connect, showcase and share.</p><h5>Day 1 :: Presentations</h5><p>Focused on demos, project presentations and techniques. No keynotes, no vendor booths. Only builders living the moment and many opportunities for the Cardano community to showcase its amazing work.</p><p>Are you a developer who enjoys writing code? Want to learn or share some coding techniques? Want to discuss the latest smart-contract development trends? Do you prefer fiddling with infrastructure? Are you designing user interfaces for DApps?</p><h5>Day 2 :: Open Space</h5><p>Hands-on! We’ll start the day with a big Open Space and co-create the track for the day.</p><p>Feel like hacking on something for a day?</p><p>Or perhaps, contributing to some open-source project(s) of the ecosystem?</p><p>This will be ours to decide and to collectively design the day. Three working spaces will be available to let the magic happen. Make sure to bring your gears.</p>",
+          "start_time": 1713855600,
+          "end_time": 1713974400,
+          "time_format": "date",
+          "location": "Toulouse, Fr",
+          "website": "https://buidl.2024.cardano.org"
+        }
+      ]
+    },"blockchain-genesis": {
       "filter_label": "Blockchain Genesis",
       "filter_default_value": "on",
       "events": [
