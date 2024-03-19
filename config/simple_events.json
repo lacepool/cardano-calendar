@@ -995,19 +995,6 @@
         }
       ]
     },
-    "bookio": {
-      "filter_label": "Book.io",
-      "filter_default_value": "off",
-      "events": [
-        {
-          "name": "Chuck D x Book.io",
-          "description": null,
-          "start_time": 1696943700,
-          "end_time": 1696947300,
-          "website": "https://twitter.com/i/spaces/1ynJOyLodNZKR"
-        }
-      ]
-    },
     "overcoffee": {
       "filter_label": "Cardano Over Coffee",
       "filter_default_value": "off",
