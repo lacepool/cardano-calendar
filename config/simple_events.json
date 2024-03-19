@@ -1001,6 +1001,7 @@
       "recurring": {
         "interval": "P1W",
         "on": ["monday", "tuesday", "wednesday", "thursday", "friday"],
+        "at": "1:30 pm UTC",
         "written_interval": "Every day from Monday - Friday",
         "schedule_start_time": 1690810200,
         "schedule_end_time": null,
@@ -1015,6 +1016,7 @@
       "recurring": {
         "interval": "P1W",
         "on": ["monday", "wednesday", "friday"],
+        "at": "08:00 am UTC",
         "written_interval": "Every Monday, Wednesday and Friday",
         "schedule_start_time": 1678262400,
         "schedule_end_time": null,
@@ -1042,6 +1044,7 @@
       "filter_default_value": "off",
       "recurring": {
         "interval": "P5D",
+        "at": "09:15 pm UTC",
         "written_interval": "Every 5 days at Epochs end",
         "schedule_start_time": 1619817300,
         "schedule_end_time": null,
