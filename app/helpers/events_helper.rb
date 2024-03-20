@@ -52,12 +52,15 @@ module EventsHelper
   end
 
   def event_time(event)
+    start_time = event.start_time.to_time
+    end_time = event.end_time.to_time
+
     if event.momentary? || event.open_end?
-      l(event.start_time.to_time, format: event.time_format&.to_sym || :short)
+      l(start_time, format: event.time_format&.to_sym || :short)
     elsif event.one_day?
-      "#{l(event.start_time.to_time, format: :short)} – #{l(event.end_time.to_time, format: :time)}"
+      "#{l(start_time, format: :short)} – #{l(end_time, format: :time)}"
     else
-      "#{l(event.start_time.to_time, format: event.time_format&.to_sym || :short)} – #{l(event.end_time.to_time, format: event.time_format&.to_sym || :short)}"
+      "#{l(start_time, format: event.time_format&.to_sym || :short)} – #{l(end_time, format: event.time_format&.to_sym || :short)}"
     end
   end
 
