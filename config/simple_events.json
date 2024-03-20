@@ -59,17 +59,19 @@
     "townhalls": {
       "filter_label": "Town Hall Meetings",
       "filter_default_value": "off",
-      "recurring": {
-        "interval": "P1W",
-        "on": ["wednesday"],
-        "at": "05:00 pm",
-        "written_interval": "Every Wednesday from 05:00 to 06:00pm UTC",
-        "schedule_start_time": 1671645600,
-        "schedule_end_time": null,
-        "duration": "PT1H",
-        "name": "Town Hall Meeting",
-        "description": "<p>Join Project Catalyst team and community for our weekly town hall followed by an open space with break out rooms.</p><a href='https://zoom.us/meeting/register/tJEtduyupzMvHNUczCQwfFJGcXzmw2lDwkIf#/registration' target='_blank' class='btn btn-primary'>Registration</a>"
-      }
+      "recurring": [
+        {
+          "interval": "P1W",
+          "on": ["wednesday"],
+          "at": "05:00 pm",
+          "written_interval": "Every Wednesday from 05:00 to 06:00pm UTC",
+          "schedule_start_time": 1671645600,
+          "schedule_end_time": null,
+          "duration": "PT1H",
+          "name": "Town Hall Meeting",
+          "description": "<p>Join Project Catalyst team and community for our weekly town hall followed by an open space with break out rooms.</p><a href='https://zoom.us/meeting/register/tJEtduyupzMvHNUczCQwfFJGcXzmw2lDwkIf#/registration' target='_blank' class='btn btn-primary'>Registration</a>"
+        }
+      ]
     },
     "proposal-submission": {
       "filter_label": "Proposal Submission",
@@ -151,29 +153,33 @@
     "spocall": {
       "filter_label": "SPO Call",
       "filter_default_value": "off",
-      "recurring": {
-        "name": "SPO Call",
-        "interval": "P1M",
-        "day": { "thursday": [1]},
-        "at": "03:00 pm",
-        "duration": "PT45M",
-        "written_interval": "Every first Thursday of the month",
-        "schedule_start_time": 1672930800,
-        "schedule_end_time": null
-      }
+      "recurring": [
+        {
+          "name": "SPO Call",
+          "interval": "P1M",
+          "day": { "thursday": [1]},
+          "at": "03:00 pm",
+          "duration": "PT45M",
+          "written_interval": "Every first Thursday of the month",
+          "schedule_start_time": 1672930800,
+          "schedule_end_time": null
+        }
+      ]
     },
     "leaderlogs": {
       "filter_label": "Leaderlogs",
       "filter_default_value": "off",
-      "recurring": {
-        "interval": "P5D",
-        "written_interval": "Every 5 days",
-        "schedule_start_time": 1596793491,
-        "schedule_end_time": null,
-        "duration": null,
-        "name": "Leaderlogs for next epoch",
-        "description": "As a stake pool operator, it is possible to run queries to determine whether your pool is scheduled to mint blocks. Leaderlog information for the next epoch is available within 1.5 days from the end of the current epoch."
-      }
+      "recurring": [
+        {
+          "interval": "P5D",
+          "written_interval": "Every 5 days",
+          "schedule_start_time": 1596793491,
+          "schedule_end_time": null,
+          "duration": null,
+          "name": "Leaderlogs for next epoch",
+          "description": "As a stake pool operator, it is possible to run queries to determine whether your pool is scheduled to mint blocks. Leaderlog information for the next epoch is available within 1.5 days from the end of the current epoch."
+        }
+      ]
     }
   },
   "Cardano Summit": {
@@ -955,138 +961,184 @@
     "gimbalabsplayground": {
       "filter_label": "Gimbalabs Playground, Season 3",
       "filter_default_value": "off",
-      "recurring": {
-        "interval": "P1W",
-        "on": ["tuesday"],
-        "written_interval": "Every Tuesday",
-        "schedule_start_time": 1694541600,
-        "schedule_end_time": 1716314400,
-        "name": "Gimbalabs Playground, Season 3",
-        "website": "https://gimbalabs.com/playground",
-        "description": "<h6>What is Gimbalabs Playground?</h6><p>Gimbalabs Playground is an open space where anyone can lead a discussion on any topic. In the past, Playground presenters have shared projects they are working on, ideas they want to develop into real projects, and technical workshops about how Cardano works.</p><p>If you are building on Cardano and want to get feedback from our community, you are invited to present at Playground.</p><h6>Playground Principles</h6><p><ol><li>Anyone is welcome to be a Playground Presenter.</li><li>Peer review and feedback make projects better.</li><li>Great collaborations take root when people play. Debating our ideas or tinkering with technology are examples of ways to play!</li></ol></p><h6>Learn + Build in Public</h6><p>We are getting together to learn and build in public. When we do, people make connections between each other and their ideas.</p><p>What do you want to learn about?</p>"
-      }
+      "recurring": [
+        {
+          "interval": "P1W",
+          "on": ["tuesday"],
+          "written_interval": "Every Tuesday",
+          "schedule_start_time": 1694541600,
+          "schedule_end_time": 1716314400,
+          "name": "Gimbalabs Playground, Season 3",
+          "website": "https://gimbalabs.com/playground",
+          "description": "<h6>What is Gimbalabs Playground?</h6><p>Gimbalabs Playground is an open space where anyone can lead a discussion on any topic. In the past, Playground presenters have shared projects they are working on, ideas they want to develop into real projects, and technical workshops about how Cardano works.</p><p>If you are building on Cardano and want to get feedback from our community, you are invited to present at Playground.</p><h6>Playground Principles</h6><p><ol><li>Anyone is welcome to be a Playground Presenter.</li><li>Peer review and feedback make projects better.</li><li>Great collaborations take root when people play. Debating our ideas or tinkering with technology are examples of ways to play!</li></ol></p><h6>Learn + Build in Public</h6><p>We are getting together to learn and build in public. When we do, people make connections between each other and their ideas.</p><p>What do you want to learn about?</p>"
+        }
+      ]
     },
     "pbllivecoding": {
       "filter_label": "Plutus PBL Live Coding Sessions",
       "filter_default_value": "off",
-      "recurring": {
-        "interval": "P1W",
-        "on": ["wednesday", "thursday"],
-        "written_interval": "Every Wednesday and Thursday",
-        "schedule_start_time": 1690810200,
-        "schedule_end_time": 1696521600,
-        "name": "Plutus PBL Live Coding",
-        "website": "https://plutuspbl.io/live-coding",
-        "description": "<p>Plutus Project-Based Learning is a free course from Gimbalabs. The goal of Plutus Project-Based Learning is to support people to become contributors to real projects in the Cardano development ecosystem. The course is self-paced, and anyone can work through course on their own time. We host two Live Coding sessions every week, where students gather to ask questions and to learn together.</p><p>The best way to learn about the course is to Get Started. We invite to jump in, start learning, and participate in our growing community of learners and builders.</p>"
-      }
+      "recurring": [
+        {
+          "interval": "P1W",
+          "on": ["wednesday", "thursday"],
+          "written_interval": "Every Wednesday and Thursday",
+          "schedule_start_time": 1690810200,
+          "schedule_end_time": 1696521600,
+          "name": "Plutus PBL Live Coding",
+          "website": "https://plutuspbl.io/live-coding",
+          "description": "<p>Plutus Project-Based Learning is a free course from Gimbalabs. The goal of Plutus Project-Based Learning is to support people to become contributors to real projects in the Cardano development ecosystem. The course is self-paced, and anyone can work through course on their own time. We host two Live Coding sessions every week, where students gather to ask questions and to learn together.</p><p>The best way to learn about the course is to Get Started. We invite to jump in, start learning, and participate in our growing community of learners and builders.</p>"
+        }
+      ]
     }
   },
   "Twitter Spaces": {
     "overcoffee": {
       "filter_label": "Cardano Over Coffee",
       "filter_default_value": "off",
-      "recurring": {
-        "interval": "P1W",
-        "on": ["monday", "tuesday", "wednesday", "thursday", "friday"],
-        "at": "1:30 pm UTC",
-        "written_interval": "Every day from Monday - Friday",
-        "schedule_start_time": 1690810200,
-        "schedule_end_time": null,
-        "name": "Cardano Over Coffee",
-        "website": "https://twitter.com/coc_space",
-        "description": "<p>M-F 1:30PM UTC // Interviewing influential people & projects in Cardano // Schedule a spot // Past Episodes -Podcast follow link tree</p>"
-      }
+      "recurring": [
+        {
+          "interval": "P1W",
+          "on": ["monday", "tuesday", "wednesday", "thursday", "friday"],
+          "at": "1:30 pm UTC",
+          "written_interval": "Every day from Monday - Friday",
+          "schedule_start_time": 1690810200,
+          "schedule_end_time": null,
+          "name": "Cardano Over Coffee",
+          "website": "https://twitter.com/coc_space",
+          "description": "<p>M-F 1:30PM UTC // Interviewing influential people & projects in Cardano // Schedule a spot // Past Episodes -Podcast follow link tree</p>"
+        }
+      ]
     },
     "calmdano": {
       "filter_label": "Calmdano",
       "filter_default_value": "off",
-      "recurring": {
-        "interval": "P1W",
-        "on": ["monday", "wednesday", "friday"],
-        "at": "08:00 am UTC",
-        "written_interval": "Every Monday, Wednesday and Friday",
-        "schedule_start_time": 1678262400,
-        "schedule_end_time": null,
-        "name": "Calmdano",
-        "website": "https://twitter.com/calmdano",
-        "description": "<p>CALMDANO X Space ❇️ Hosted by @s20_bullion ❇️ That calm Space to talk about everything to do with #Cardano, #NFTs & #Crypto ❇️ Email: calmdano@gmail.com</p>"
-      }
+      "recurring": [
+        {
+          "interval": "P1W",
+          "on": ["monday", "wednesday", "friday"],
+          "at": "08:00 am UTC",
+          "written_interval": "Every Monday, Wednesday and Friday",
+          "schedule_start_time": 1678262400,
+          "schedule_end_time": null,
+          "name": "Calmdano",
+          "website": "https://twitter.com/calmdano",
+          "description": "<p>CALMDANO X Space ❇️ Hosted by @s20_bullion ❇️ That calm Space to talk about everything to do with #Cardano, #NFTs & #Crypto ❇️ Email: calmdano@gmail.com</p>"
+        }
+      ]
+    },
+    "officehour": {
+      "filter_label": "Governance Office Hour",
+      "filter_default_value": "off",
+      "recurring": [
+        {
+          "interval": "P2W",
+          "on": ["tuesday"],
+          "at": "05:00 pm UTC",
+          "written_interval": "Every second Tuesday",
+          "schedule_start_time": 1710867600,
+          "schedule_end_time": null,
+          "name": "Cardano Governance Office Hour #1",
+          "website": "https://twitter.com/NicolasC3rny",
+          "description": "<h5>Cardano Governance Talk</h5><p>Dive into the heart of Cardano's governance and unravel the intricacies of decentralized decision-making.</p><p>Whether you're a seasoned stakeholder or a curious newcomer, this interactive session is your gateway to understanding how Cardano's governance mechanisms shape its future. Explore, inquire, and engage with our experts and community members as we navigate through the governance landscape of one of the most innovative blockchain platforms out there. Don't miss this opportunity to be part of the conversation shaping the future of Cardano!</p>"
+        },
+        {
+          "interval": "P2W",
+          "on": ["tuesday"],
+          "at": "10:00 am UTC",
+          "written_interval": "Every second Tuesday",
+          "schedule_start_time": 1711447200,
+          "schedule_end_time": null,
+          "name": "Cardano Governance Office Hour #2",
+          "website": "https://twitter.com/NicolasC3rny",
+          "description": "<h5>Cardano Governance Talk</h5><p>Dive into the heart of Cardano's governance and unravel the intricacies of decentralized decision-making.</p><p>Whether you're a seasoned stakeholder or a curious newcomer, this interactive session is your gateway to understanding how Cardano's governance mechanisms shape its future. Explore, inquire, and engage with our experts and community members as we navigate through the governance landscape of one of the most innovative blockchain platforms out there. Don't miss this opportunity to be part of the conversation shaping the future of Cardano!</p>"
+        }
+      ]
     },
     "epochsecio": {
       "filter_label": "EpochSec",
       "filter_default_value": "off",
-      "recurring": {
-        "interval": "P1W",
-        "on": ["sunday"],
-        "written_interval": "Every Sunday",
-        "schedule_start_time": 1691359200,
-        "schedule_end_time": null,
-        "name": "EpochSec | Protect Yourself",
-        "website": "https://twitter.com/epochsec_io",
-        "description": "<p>SPACES SUNDAYS 6pm EST / 10pm UTC</p><p>Providing support - Cardano & Crypto Communities</p>"
-      }
+      "recurring": [
+        {
+          "interval": "P1W",
+          "on": ["sunday"],
+          "written_interval": "Every Sunday",
+          "schedule_start_time": 1691359200,
+          "schedule_end_time": null,
+          "name": "EpochSec | Protect Yourself",
+          "website": "https://twitter.com/epochsec_io",
+          "description": "<p>SPACES SUNDAYS 6pm EST / 10pm UTC</p><p>Providing support - Cardano & Crypto Communities</p>"
+        }
+      ]
     },
     "epochsend": {
       "filter_label": "Epochs End",
       "filter_default_value": "off",
-      "recurring": {
-        "interval": "P5D",
-        "at": "09:15 pm UTC",
-        "written_interval": "Every 5 days at Epochs end",
-        "schedule_start_time": 1619817300,
-        "schedule_end_time": null,
-        "name": "Epochs End",
-        "website": "https://twitter.com/EpochsEnd",
-        "description": "<p>Cardano Every Five Days, at EpochsEnd. Still cheaper than therapy | Hosts @CardanoGuru & @CardanoWeed | Est. Epoch 263</p>"
-      }
+      "recurring": [
+        {
+          "interval": "P5D",
+          "at": "09:15 pm UTC",
+          "written_interval": "Every 5 days at Epochs end",
+          "schedule_start_time": 1619817300,
+          "schedule_end_time": null,
+          "name": "Epochs End",
+          "website": "https://twitter.com/EpochsEnd",
+          "description": "<p>Cardano Every Five Days, at EpochsEnd. Still cheaper than therapy | Hosts @CardanoGuru & @CardanoWeed | Est. Epoch 263</p>"
+        }
+      ]
     },
     "tagteamcrypto": {
       "filter_label": "Tag Team Crypto",
       "filter_default_value": "off",
-      "recurring": {
-        "interval": "P1W",
-        "on": ["tuesday"],
-        "at": "09:30 pm",
-        "tz": "Eastern Time (US & Canada)",
-        "written_interval": "Every Tuesday",
-        "schedule_start_time": 1693362600,
-        "schedule_end_time": null,
-        "name": "Tag Team Crypto",
-        "website": "https://twitter.com/tagteamcrypto",
-        "description": "<p>Come join Hemi, Viva, Chronic & Malibu to discuss macro economics, stock markets, cryptos, nfts or whatever the hell pops up. Come Tag yourself in!!!</p>"
-      }
+      "recurring": [
+        {
+          "interval": "P1W",
+          "on": ["tuesday"],
+          "at": "09:30 pm",
+          "tz": "Eastern Time (US & Canada)",
+          "written_interval": "Every Tuesday",
+          "schedule_start_time": 1693362600,
+          "schedule_end_time": null,
+          "name": "Tag Team Crypto",
+          "website": "https://twitter.com/tagteamcrypto",
+          "description": "<p>Come join Hemi, Viva, Chronic & Malibu to discuss macro economics, stock markets, cryptos, nfts or whatever the hell pops up. Come Tag yourself in!!!</p>"
+        }
+      ]
     },
     "shotclock": {
       "filter_label": "Saturday's Shot Clock",
       "filter_default_value": "off",
-      "recurring": {
-        "interval": "P1W",
-        "on": ["saturday"],
-        "at": "02:22 pm",
-        "tz": "Eastern Time (US & Canada)",
-        "written_interval": "Every Saturday",
-        "schedule_start_time": 1693008000,
-        "schedule_end_time": null,
-        "name": "Saturday's Shot Clock",
-        "website": "https://twitter.com/AIlovetru",
-        "description": "<p>Art, Tech, Fashion, Finance, Entertainment</p>"
-      }
+      "recurring": [
+        {
+          "interval": "P1W",
+          "on": ["saturday"],
+          "at": "02:22 pm",
+          "tz": "Eastern Time (US & Canada)",
+          "written_interval": "Every Saturday",
+          "schedule_start_time": 1693008000,
+          "schedule_end_time": null,
+          "name": "Saturday's Shot Clock",
+          "website": "https://twitter.com/AIlovetru",
+          "description": "<p>Art, Tech, Fashion, Finance, Entertainment</p>"
+        }
+      ]
     }
   },
   "YouTube": {
     "cardano360": {
       "filter_label": "Essential Cardano360",
       "filter_default_value": "on",
-      "recurring": {
-        "interval": "P1M",
-        "day": { "thursday": [-1]},
-        "written_interval": "Every last thursday of the month",
-        "name": "Essential Cardano360",
-        "schedule_start_time": 1609459200,
-        "schedule_end_time": null,
-        "description": "<p>Cardano360 is a monthly video podcast covering the latest news and topics from across the Cardano ecosystem.</p><p>Hosted by IOG, Cardano360 is available to be viewed on the IOG YouTube channel and is aired on the last Thursday of every month.</p>",
-        "website": "https://www.youtube.com/@IohkIo/videos"
-      }
+      "recurring": [
+        {
+          "interval": "P1M",
+          "day": { "thursday": [-1]},
+          "written_interval": "Every last thursday of the month",
+          "name": "Essential Cardano360",
+          "schedule_start_time": 1609459200,
+          "schedule_end_time": null,
+          "description": "<p>Cardano360 is a monthly video podcast covering the latest news and topics from across the Cardano ecosystem.</p><p>Hosted by IOG, Cardano360 is available to be viewed on the IOG YouTube channel and is aired on the last Thursday of every month.</p>",
+          "website": "https://www.youtube.com/@IohkIo/videos"
+        }
+      ]
     }
   }
 }

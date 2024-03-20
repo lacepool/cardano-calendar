@@ -7,7 +7,7 @@
           <% unless event.recurring %>
             <time class="text-muted font-monospace me-2"><%= event_time(event) %></time>
           <% else %>
-            <time class="text-muted font-monospace me-2"><%= event.written_interval %></time>
+            <time class="text-muted font-monospace me-2"><%= event_time(event) %> (<%= event.written_interval %>)</time>
           <% end %>
           <%= tags(event) %>
         </div>
