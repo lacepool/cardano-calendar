@@ -1,3 +1,4 @@
+# remove file after upgrading to rails 7.1
 class HealthController < ActionController::Base
   rescue_from(Exception) { render_down }
 
