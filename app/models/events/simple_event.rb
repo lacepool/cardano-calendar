@@ -44,15 +44,12 @@ class Events::SimpleEvent
 
   def self.find(id)
     start_time, category, subcategory, name = decode_id_parts(id)
-    name = name.force_encoding('UTF-8')
-    start_time = Time.at(start_time.to_i)
 
-    if events = ALL.dig(category, subcategory, "recurring")
-      event = events.detect {|e| e["name"] == name }
-      return new(category, subcategory, event, start_time: start_time.in_time_zone)
+    if event = ALL.dig(category, subcategory, "recurring")
+      return new(category, subcategory, event, start_time: Time.at(start_time.to_i).in_time_zone)
     else
       event = ALL.dig(category, subcategory, "events")&.detect do |e|
-        e["name"] == name && e["start_time"] == start_time.to_i
+        e["name"] == name.force_encoding('UTF-8') && e["start_time"] == start_time.to_i
       end
 
       return new(category, subcategory, event) if event
@@ -108,8 +105,8 @@ class Events::SimpleEvent
                 arr << new(category, subcategory, event)
               end
             end
-          elsif event_series = v["recurring"]
-            arr.concat(new_series(category, subcategory, event_series, date_range))
+          elsif event = v["recurring"]
+            arr.concat(new_series(category, subcategory, event, date_range))
           else
             next
           end
@@ -119,40 +116,43 @@ class Events::SimpleEvent
       arr
     end
 
-    def self.new_series(category, subcategory, event_series, date_range)
-      events = []
+    def self.new_series(category, subcategory, event, date_range)
+      first_at = date_range.first.in_time_zone
+      last_at = date_range.last.in_time_zone
 
-      event_series.each do |event|
-        first_at = Time.at(event["schedule_start_time"]).in_time_zone
-        last_at = date_range.last.in_time_zone
+      if event["schedule_start_time"]
+        schedule_start_time = Time.at(event["schedule_start_time"])
+        first_at = [schedule_start_time, first_at].max
+      end
 
-        if event["schedule_end_time"]
-          schedule_end_time = Time.at(event["schedule_end_time"]).in_time_zone
-          last_at = [schedule_end_time, last_at].min
+      if event["schedule_end_time"]
+        schedule_end_time = Time.at(event["schedule_end_time"]).in_time_zone
+        last_at = [schedule_end_time, last_at].min
+      end
+
+      interval = ActiveSupport::Duration.parse(event["interval"])
+
+      r = Montrose.every(interval, starts: first_at, until: last_at)
+      r = r.merge(day: event["day"])             if event["day"]
+      r = r.merge(on: event["on"].map(&:to_sym)) if event["on"]
+      r = r.merge(at: event["at"])               if event["at"]
+
+      arr = []
+
+      r.events.each do |date|
+        if event["tz"]
+          # if an event always takes place at a fixed time in a specific timezone with daylight savings
+          # (e.g. 9:30pm in EST and sticks to 9:30pm when switched to EDT)
+          # we swap the event's zone without touching the time, then convert the time to match with
+          # the user's time zone.
+          date = date.change(zone: event["tz"]).in_time_zone
         end
 
-        interval = ActiveSupport::Duration.parse(event["interval"])
-
-        r = Montrose.every(interval, starts: first_at, until: last_at)
-        r = r.merge(day: event["day"])             if event["day"]
-        r = r.merge(on: event["on"].map(&:to_sym)) if event["on"]
-        r = r.merge(at: event["at"])               if event["at"]
-
-        r.events.each do |date|
-          if event["tz"]
-            # if an event always takes place at a fixed time in a specific timezone with daylight savings
-            # (e.g. 9:30pm in EST and sticks to 9:30pm when switched to EDT)
-            # we swap the event's zone without touching the time, then convert the time to match with
-            # the user's time zone.
-            date = date.change(zone: event["tz"]).in_time_zone
-          end
-
-          if date_range.include?(date)
-            events << new(category, subcategory, event, start_time: date)
-          end
+        if date_range.include?(date)
+          arr << new(category, subcategory, event, start_time: date)
         end
       end
 
-      events
+      arr
     end
 end
