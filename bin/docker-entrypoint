@@ -1,0 +1,11 @@
+#!/bin/bash -e
+
+# pass env vars for cron
+env >> /etc/environment
+
+# If running the rails server then create or migrate existing database
+if [ "${1}" == "./bin/rails" ] && [ "${2}" == "server" ]; then
+  ./bin/rails db:prepare
+fi
+
+exec "${@}"

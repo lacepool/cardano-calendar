@@ -1,0 +1,162 @@
+# Name of your application. Used to uniquely configure containers.
+service: cardano-calendar
+
+# Name of the container image.
+image: cardanocalendar/web
+
+# Deploy to these servers.
+servers:
+  web:
+    hosts:
+      - <%= ENV['PRODUCTION_SERVER_IP'] %>
+    labels:
+      traefik.http.routers.mynewapp.rule: 'Host(`cardano-calendar.com`)'
+      traefik.http.routers.mynewapp.entrypoints: websecure
+      traefik.http.routers.mynewapp_secure.rule: 'Host(`cardano-calendar.com`)'
+      traefik.http.routers.mynewapp_secure.tls: true
+      traefik.http.routers.mynewapp_secure.tls.certresolver: letsencrypt
+    options:
+      network: "private"
+  job:
+    hosts:
+      - <%= ENV['PRODUCTION_SERVER_IP'] %>
+    cmd: bundle exec sidekiq -q default -q mailers
+    healthcheck:
+      cmd: bin/check_health
+    options:
+      network: "private"
+  cron:
+    hosts:
+      - <%= ENV['PRODUCTION_SERVER_IP'] %>
+    cmd: bash -c "cron -f -L 2"
+    healthcheck:
+      cmd: bin/check_health
+    options:
+      network: "private"
+
+# Credentials for your image host.
+registry:
+  # Specify the registry server, if you're not using Docker Hub
+  # server: registry.digitalocean.com / ghcr.io / ...
+  username: cardanocalendar
+
+  # Always use an access token rather than real password when possible.
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+
+# Inject ENV variables into containers (secrets come from .env).
+# Remember to run `kamal env push` after making changes!
+env:
+  clear:
+    RAILS_ENV: production
+    RACK_ENV: production
+    RAILS_LOG_TO_STDOUT: true
+    RAILS_SERVE_STATIC_FILES: true
+    BLOCKFROST_BASE_URL: https://cardano-mainnet.blockfrost.io/api/v0
+    CARDANO_NETWORK: MAINNET
+    PUBLIC_BLOCKFROST_PROJECT_ID: mainnetHDeEXhbjB6gUtVQL0HjDMSWuyBkDnef3
+
+  secret:
+    - RAILS_MASTER_KEY
+    - DATABASE_URL
+    - REDIS_URL
+    - SECRET_KEY_BASE
+    - BLOCKFROST_PROJECT_ID
+    - ADMIN_USERNAME
+    - ADMIN_PASSWORD
+    - GITHUB_TOKEN
+    - GITHUB_USERNAME
+    - SPRINGERNATURE_API_KEY
+
+
+# Use a different ssh user than root
+# ssh:
+#   user: app
+
+# Configure builder setup.
+builder:
+  multiarch: false
+  cache:
+    type: registry
+#   args:
+#     RUBY_VERSION: 3.2.0
+#   secrets:
+#     - GITHUB_TOKEN
+#   remote:
+#     arch: amd64
+#     host: ssh://app@192.168.0.1
+
+# Use accessory services (secrets come from .env).
+accessories:
+  db:
+    image: postgres:16.0
+    host: <%= ENV['PRODUCTION_SERVER_IP'] %>
+    env:
+      clear:
+        POSTGRES_USER: "cardano-calendar"
+        POSTGRES_DB: 'cardano-calendar_production'
+      secret:
+        - POSTGRES_PASSWORD
+    files:
+      - config/init.sql:/docker-entrypoint-initdb.d/setup.sql
+    directories:
+      - data:/var/lib/postgresql/data
+    options:
+      network: "private"
+      publish:
+        - 5432:5432
+  redis:
+    image: redis:latest
+    roles:
+      - web
+    cmd: "redis-server"
+    volumes:
+      - /var/lib/redis:/data
+    options:
+      network: "private"
+
+# Configure custom arguments for Traefik
+traefik:
+  options:
+    publish:
+      - 443:443
+    volume:
+      - "/letsencrypt/acme.json:/letsencrypt/acme.json"
+    network: "private"
+  args:
+    entryPoints.web.address: ":80"
+    entryPoints.websecure.address: ":443"
+    entryPoints.web.http.redirections.entryPoint.to: websecure
+    entryPoints.web.http.redirections.entryPoint.scheme: https
+    entryPoints.web.http.redirections.entrypoint.permanent: true
+    certificatesResolvers.letsencrypt.acme.email: "lacepool@proton.me"
+    certificatesResolvers.letsencrypt.acme.storage: "/letsencrypt/acme.json"
+    certificatesResolvers.letsencrypt.acme.httpchallenge: true
+    certificatesResolvers.letsencrypt.acme.httpchallenge.entrypoint: web
+
+# Configure a custom healthcheck (default is /up on port 3000)
+# healthcheck:
+#   path: /healthz
+#   port: 4000
+
+# Bridge fingerprinted assets, like JS and CSS, between versions to avoid
+# hitting 404 on in-flight requests. Combines all files from new and old
+# version inside the asset_path.
+asset_path: /rails/public/assets
+
+# Configure rolling deploys by setting a wait time between batches of restarts.
+# boot:
+#   limit: 10 # Can also specify as a percentage of total hosts, such as "25%"
+#   wait: 2
+
+# Configure the role used to determine the primary_host. This host takes
+# deploy locks, runs health checks during the deploy, and follow logs, etc.
+#
+# Caution: there's no support for role renaming yet, so be careful to cleanup
+#          the previous role on the deployed hosts.
+# primary_role: web
+
+# Controls if we abort when see a role with no hosts. Disabling this may be
+# useful for more complex deploy configurations.
+#
+# allow_empty_roles: false

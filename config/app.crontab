@@ -1,0 +1,4 @@
+0 */2 * * * /rails/bin/cron-executor.sh bundle exec rake software:sync
+0 */2 * * * /rails/bin/cron-executor.sh bundle exec rake meetups:sync
+0 */2 * * * /rails/bin/cron-executor.sh bundle exec rake amas:sync
+0 */2 * * * /rails/bin/cron-executor.sh bundle exec rake research_papers:sync
