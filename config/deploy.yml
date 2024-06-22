@@ -105,6 +105,24 @@ accessories:
       network: "private"
       publish:
         - 5432:5432
+  db_backup:
+    image: eeshugerman/postgres-backup-s3:16
+    host: <%= ENV.fetch('PRODUCTION_SERVER_IP') %>
+    env:
+      clear:
+        SCHEDULE: '@daily'
+        BACKUP_KEEP_DAYS: 30
+        S3_REGION: <%= ENV.fetch('AWS_REGION') %>
+        S3_BUCKET: "cardano-calendar-db-backups-production"
+        POSTGRES_HOST: "cardano-calendar-db"
+        POSTGRES_DATABASE: "cardano-calendar_production"
+        POSTGRES_USER: "cardano-calendar"
+      secret:
+        - POSTGRES_PASSWORD
+        - S3_ACCESS_KEY_ID
+        - S3_SECRET_ACCESS_KEY
+    options:
+      network: "private"
   redis:
     image: redis:latest
     roles:
