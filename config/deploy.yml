@@ -55,6 +55,7 @@ env:
     BLOCKFROST_BASE_URL: https://cardano-mainnet.blockfrost.io/api/v0
     CARDANO_NETWORK: MAINNET
     PUBLIC_BLOCKFROST_PROJECT_ID: mainnetHDeEXhbjB6gUtVQL0HjDMSWuyBkDnef3
+    DATABASE_URL: "postgres://cardano-calendar:<%= ENV.fetch('POSTGRES_PASSWORD') %>@<%= ENV.fetch('PRODUCTION_SERVER_IP') %>:5432/cardano-calendar_production"
 
   secret:
     - DATABASE_URL
