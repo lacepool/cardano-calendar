@@ -57,7 +57,6 @@ env:
     PUBLIC_BLOCKFROST_PROJECT_ID: mainnetHDeEXhbjB6gUtVQL0HjDMSWuyBkDnef3
 
   secret:
-    - RAILS_MASTER_KEY
     - DATABASE_URL
     - REDIS_URL
     - SECRET_KEY_BASE
