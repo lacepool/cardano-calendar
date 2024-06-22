@@ -1,8 +1,6 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  get "up" => "health#show" # remove after upgrading to rails 7.1
-
   get "/", to: redirect("/list")
 
   get "/:view", to: "events#index", as: :events
