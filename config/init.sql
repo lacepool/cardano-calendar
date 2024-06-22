@@ -1,1 +1,1 @@
-CREATE DATABASE cardano-calendar_production;
+CREATE DATABASE "cardano-calendar_production";

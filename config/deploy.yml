@@ -113,7 +113,8 @@ accessories:
         BACKUP_KEEP_DAYS: 30
         S3_REGION: <%= ENV.fetch('AWS_REGION') %>
         S3_BUCKET: "cardano-calendar-db-backups-production"
-        POSTGRES_HOST: "cardano-calendar-db"
+        S3_PREFIX: backup
+        POSTGRES_HOST: <%= ENV['PRODUCTION_SERVER_IP'] %>
         POSTGRES_DATABASE: "cardano-calendar_production"
         POSTGRES_USER: "cardano-calendar"
       secret:
