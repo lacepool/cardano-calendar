@@ -10,11 +10,11 @@ servers:
     hosts:
       - <%= ENV['PRODUCTION_SERVER_IP'] %>
     labels:
-      traefik.http.routers.mynewapp.rule: 'Host(`cardano-calendar.com`)'
-      traefik.http.routers.mynewapp.entrypoints: websecure
-      traefik.http.routers.mynewapp_secure.rule: 'Host(`cardano-calendar.com`)'
-      traefik.http.routers.mynewapp_secure.tls: true
-      traefik.http.routers.mynewapp_secure.tls.certresolver: letsencrypt
+      traefik.http.routers.cardanocalendar.rule: 'Host(`cardano-calendar.com`)'
+      traefik.http.routers.cardanocalendar.entrypoints: websecure
+      traefik.http.routers.cardanocalendar_secure.rule: 'Host(`cardano-calendar.com`)'
+      traefik.http.routers.cardanocalendar_secure.tls: true
+      traefik.http.routers.cardanocalendar_secure.tls.certresolver: letsencrypt
     options:
       network: "private"
   job:
